@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PLANTILLA: este archivo documenta las claves de configuración que necesita la UI.
+     El App.config REAL (con las contraseñas de desarrollo) NO se versiona:
+     se genera localmente con  PPDD/tools/write_smoke_config.py  -->
+<configuration>
+  <connectionStrings>
+    <add name="ServicesDB"
+         connectionString="Server=localhost;Database=OpenRIN_Services;User Id=usr_services;Password=TU_PASSWORD;TrustServerCertificate=True;"
+         providerName="Microsoft.Data.SqlClient" />
+    <add name="NegocioDB"
+         connectionString="Server=localhost;Database=OpenRIN_Negocio;User Id=usr_negocio;Password=TU_PASSWORD;TrustServerCertificate=True;"
+         providerName="Microsoft.Data.SqlClient" />
+    <add name="BackupString"
+         connectionString="Server=localhost;Database=master;User Id=usr_backup;Password=TU_PASSWORD;TrustServerCertificate=True;"
+         providerName="Microsoft.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <!-- Nivel mínimo de bitácora: Debug | Info | Warning | Error | Fatal -->
+    <add key="MinimalLogLevel" value="Info" />
+  </appSettings>
+</configuration>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Integral de Alertas - Frutiger Aero</title>
+    <!-- Fuente estilo retro/redondeada -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================= RESET & BASE ================= */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Gradiente Frutiger Aero / Agua - Cielo */
+            background: linear-gradient(135deg, #a0e1ff 0%, #4da8da 50%, #2a6f97 100%);
+            position: relative;
+        }
+
+        /* ================= ISLA Y BURBUJAS SVG (Frutiger Aero) ================= */
+        #background-scene {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permite hacer clic a través del fondo */
+            z-index: 0;
+        }
+        
+        .bubble {
+            animation: floatUp linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* ================= CONTENEDOR DE PANTALLAS ================= */
+        #screen-container {
+            position: relative;
+            z-index: 10;
+            width: 900px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), inset 0 0 20px rgba(255,255,255,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ================= ESTILOS DE LAS PANTALLAS ================= */
+        .screen {
+            display: none; /* Oculta todas por defecto */
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .screen.active {
+            display: flex; /* Muestra solo la que tenga la clase active */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 { color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 2rem; margin-bottom: 20px; }
+        
+        /* Estilo de los controles y botones */
+        .input-group {
+            background: rgba(255,255,255,0.7);
+            border-radius: 30px;
+            padding: 10px 20px;
+            margin-bottom: 15px;
+            width: 80%;
+            max-width: 350px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .input-group input, .input-group select {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .btn-frutiger {
+            background: linear-gradient(180deg, #ffffff 0%, #d0eaff 100%);
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 40px;
+            padding: 12px 30px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 700;
+            color: #1a4d6b;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1), inset 0 -2px 0 rgba(0,0,0,0.05);
+            transition: all 0.2s;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+            margin: 5px;
+        }
+        .btn-frutiger:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Mini grid para listados */
+        .grid-list {
+            background: rgba(255,255,255,0.6);
+            border-radius: 20px;
+            padding: 15px;
+            width: 80%;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+
+        .nav-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; justify-content: center;}
+    </style>
+</head>
+<body>
+
+    <!-- ===== FONDO SVG (ISLA, PALMERA, BURBUJAS) ===== -->
+    <svg id="background-scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <linearGradient id="waterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#78c6d4" stop-opacity="0.8"/>
+                <stop offset="100%" stop-color="#2a6f97" stop-opacity="0.9"/>
+            </linearGradient>
+        </defs>
+        <!-- Isla -->
+        <ellipse cx="850" cy="650" rx="200" ry="60" fill="#d4b48c" opacity="0.8"/>
+        <ellipse cx="850" cy="630" rx="150" ry="40" fill="#7ec850" opacity="0.9"/>
+        <!-- Palmera -->
+        <path d="M 830 630 Q 820 500 800 400" stroke="#5a3a1b" stroke-width="12" fill="none"/>
+        <path d="M 770 420 Q 720 380 680 400 Q 750 390 790 430 Z" fill="#3a7c2e"/>
+        <path d="M 830 410 Q 880 370 920 390 Q 860 380 820 420 Z" fill="#3a7c2e"/>
+        <path d="M 790 380 Q 780 330 750 320 Q 780 340 800 390 Z" fill="#4a9c3e"/>
+        
+        <!-- Burubujas (animadas con CSS) -->
+        <circle cx="200" cy="600" r="12" fill="white" class="bubble" style="animation-duration: 12s;"/>
+        <circle cx="350" cy="600" r="8" fill="white" class="bubble" style="animation-duration: 15s;"/>
+        <circle cx="500" cy="600" r="15" fill="white" class="bubble" style="animation-duration: 18s;"/>
+        <circle cx="650" cy="600" r="10" fill="white" class="bubble" style="animation-duration: 13s;"/>
+        <circle cx="100" cy="600" r="6" fill="white" class="bubble" style="animation-duration: 20s;"/>
+        <circle cx="450" cy="600" r="18" fill="white" class="bubble" style="animation-duration: 14s;"/>
+        <circle cx="750" cy="600" r="7" fill="white" class="bubble" style="animation-duration: 11s;"/>
+        <circle cx="300" cy="600" r="11" fill="white" class="bubble" style="animation-duration: 16s;"/>
+    </svg>
+
+    <!-- ===== CONTENEDOR PRINCIPAL ===== -->
+    <div id="screen-container">
+        
+        <!-- PANTALLA 1: LOGIN -->
+        <div id="login-screen" class="screen active">
+            <h2>🏥 Iniciar Sesión</h2>
+            <div class="input-group"><input type="text" placeholder="Usuario (ej: sysadmin)"></div>
+            <div class="input-group"><input type="password" placeholder="Contraseña"></div>
+            <button class="btn-frutiger" onclick="navigateTo('panel-screen')">🔓 Entrar al Sistema</button>
+        </div>
+
+        <!-- PANTALLA 2: PANEL DE MONITOREO -->
+        <div id="panel-screen" class="screen">
+            <h2>📊 Panel de Monitoreo</h2>
+            <div class="grid-list">
+                <p><strong>🔴 ALTA:</strong> Juan Pérez (RIN: 4.8)</p>
+                <p><strong>🟡 MEDIA:</strong> María Gómez (RIN: 2.1)</p>
+                <p><strong>🟢 BAJA:</strong> Carlos López (RIN: 2.5)</p>
+            </div>
+            <div class="nav-row">
+                <button class="btn-frutiger" onclick="navigateTo('pacientes-screen')">Gestionar Pacientes</button>
+                <button class="btn-frutiger" onclick="navigateTo('hc-screen')">Configurar HC</button>
+                <button class="btn-frutiger" onclick="navigateTo('rin-screen')">Reportar RIN</button>
+                <button class="btn-frutiger" onclick="navigateTo('agenda-screen')">Gestionar Agenda</button>
+                <button class="btn-frutiger" onclick="navigateTo('login-screen')">Cerrar Sesión</button>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: GESTIÓN DE PACIENTES -->
+        <div id="pacientes-screen" class="screen">
+            <h2>👤 Gestión de Pacientes</h2>
+            <div class="input-group"><input type="text" placeholder="Nombre y Apellido"></div>
+            <div class="input-group"><input type="text" placeholder="Documento (DNI)"></div>
+            <button class="btn-frutiger">Registrar Paciente</button>
+            <div class="nav-row"><button class="btn-frutiger" onclick="navigateTo('panel-screen')">⬅ Volver al Panel</button></div>
+        </div>
+
+        <!-- PANTALLA 4: CONFIGURAR HC -->
+        <div id="hc-screen" class="screen">
+            <h2>📋 Configurar HC</h2>
+            <div class="input-group"><input type="text" placeholder="Rango Inferior (ej. 2.0)"></div>
+            <div class="input-group"><input type="text" placeholder="Rango Superior (ej. 3.0)"></div>
+            <button class="btn-frutiger">Guardar Configuración</button>
+            <div class="nav-row"><button class="btn-frutiger" onclick="navigateTo('panel-screen')">⬅ Volver al Panel</button></div>
+        </div>
+
+        <!-- PANTALLA 5: REPORTAR RIN -->
+        <div id="rin-screen" class="screen">
+            <h2>🧪 Reportar Valor de RIN</h2>
+            <div class="input-group"><input type="text" placeholder="Valor de RIN (ej. 2.5)"></div>
+            <button class="btn-frutiger">Enviar Reporte</button>
+            <div class="nav-row"><button class="btn-frutiger" onclick="navigateTo('panel-screen')">⬅ Volver al Panel</button></div>
+        </div>
+
+        <!-- PANTALLA 6: GESTIÓN DE AGENDA -->
+        <div id="agenda-screen" class="screen">
+            <h2>📅 Gestión de Agenda</h2>
+            <div class="grid-list">
+                <p><strong>Turno libre:</strong> Paciente Estable -> Reasignar a Crítico</p>
+                <button class="btn-frutiger" style="font-size:0.8rem; padding:5px 10px;">✅ Aceptar sugerencia</button>
+            </div>
+            <div class="nav-row"><button class="btn-frutiger" onclick="navigateTo('panel-screen')">⬅ Volver al Panel</button></div>
+        </div>
+
+    </div>
+
+    <!-- Cargar el script de navegación -->
+    <script src="script.js"></script>
+</body>
+</html>

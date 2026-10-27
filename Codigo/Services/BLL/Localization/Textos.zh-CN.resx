@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="app.nombre" xml:space="preserve"><value>OpenRIN</value></data>
+  <data name="app.titulo" xml:space="preserve"><value>警报与监测综合平台</value></data>
+  <data name="idioma.es" xml:space="preserve"><value>Español (Latinoamérica)</value></data>
+  <data name="idioma.en" xml:space="preserve"><value>English (United States)</value></data>
+  <data name="idioma.zh-CN" xml:space="preserve"><value>中文（简体）</value></data>
+  <data name="comun.aceptar" xml:space="preserve"><value>确定</value></data>
+  <data name="comun.cancelar" xml:space="preserve"><value>取消</value></data>
+  <data name="comun.guardar" xml:space="preserve"><value>保存</value></data>
+  <data name="comun.cerrar" xml:space="preserve"><value>关闭</value></data>
+  <data name="comun.si" xml:space="preserve"><value>是</value></data>
+  <data name="comun.no" xml:space="preserve"><value>否</value></data>
+  <data name="comun.salir" xml:space="preserve"><value>退出</value></data>
+  <data name="comun.buscar" xml:space="preserve"><value>搜索</value></data>
+  <data name="comun.nuevo" xml:space="preserve"><value>新建</value></data>
+  <data name="comun.modificar" xml:space="preserve"><value>修改</value></data>
+  <data name="comun.eliminar" xml:space="preserve"><value>删除</value></data>
+  <data name="comun.volver" xml:space="preserve"><value>返回</value></data>
+  <data name="comun.cargando" xml:space="preserve"><value>加载中……</value></data>
+  <data name="login.titulo" xml:space="preserve"><value>登录</value></data>
+  <data name="login.usuario" xml:space="preserve"><value>用户名</value></data>
+  <data name="login.contrasena" xml:space="preserve"><value>密码</value></data>
+  <data name="login.ingresar" xml:space="preserve"><value>登录</value></data>
+  <data name="login.olvidoContrasena" xml:space="preserve"><value>忘记密码？</value></data>
+  <data name="login.recuperar.titulo" xml:space="preserve"><value>找回密码</value></data>
+  <data name="login.recuperar.respuesta" xml:space="preserve"><value>安全问题答案</value></data>
+  <data name="login.recuperar.enviar" xml:space="preserve"><value>验证答案</value></data>
+  <data name="login.errorCredenciales" xml:space="preserve"><value>用户名或密码错误。</value></data>
+  <data name="login.errorBloqueado" xml:space="preserve"><value>账户因安全原因已被临时锁定。</value></data>
+  <data name="login.errorInhabilitado" xml:space="preserve"><value>该用户已被停用，请联系管理员。</value></data>
+  <data name="login.bienvenida" xml:space="preserve"><value>欢迎</value></data>
+  <data name="login.idioma" xml:space="preserve"><value>语言</value></data>
+  <data name="login.campoObligatorio" xml:space="preserve"><value>请输入用户名和密码。</value></data>
+  <data name="shell.titulo" xml:space="preserve"><value>主面板</value></data>
+  <data name="shell.sesion" xml:space="preserve"><value>会话：</value></data>
+  <data name="shell.cerrarSesion" xml:space="preserve"><value>退出登录</value></data>
+  <data name="shell.confirmarCerrar" xml:space="preserve"><value>您确定要退出当前登录吗？</value></data>
+  <data name="shell.modulos" xml:space="preserve"><value>模块</value></data>
+  <data name="shell.seleccione" xml:space="preserve"><value>请从侧边菜单选择模块开始使用。</value></data>
+  <data name="shell.enConstruccion" xml:space="preserve"><value>模块建设中，将在下一步更新中提供。</value></data>
+  <data name="mod.pacientes" xml:space="preserve"><value>患者与病历</value></data>
+  <data name="mod.rin" xml:space="preserve"><value>INR 接收</value></data>
+  <data name="mod.agenda" xml:space="preserve"><value>日程与预约</value></data>
+  <data name="mod.seguimiento" xml:space="preserve"><value>临床随访</value></data>
+  <data name="mod.eventos" xml:space="preserve"><value>不良事件</value></data>
+  <data name="mod.reportes" xml:space="preserve"><value>报告</value></data>
+  <data name="mod.portal" xml:space="preserve"><value>患者门户</value></data>
+  <data name="mod.sistema" xml:space="preserve"><value>系统与日志</value></data>
+  <data name="panel.titulo" xml:space="preserve"><value>监控面板</value></data>
+  <data name="panel.criticidadAlta" xml:space="preserve"><value>高危</value></data>
+  <data name="panel.criticidadMedia" xml:space="preserve"><value>中危</value></data>
+  <data name="panel.criticidadBaja" xml:space="preserve"><value>低危</value></data>
+  <data name="panel.columna.paciente" xml:space="preserve"><value>患者</value></data>
+  <data name="panel.columna.documento" xml:space="preserve"><value>证件</value></data>
+  <data name="panel.columna.ultimoRin" xml:space="preserve"><value>最新 INR</value></data>
+  <data name="panel.columna.fecha" xml:space="preserve"><value>最近报告</value></data>
+  <data name="panel.columna.dias" xml:space="preserve"><value>距上次报告天数</value></data>
+  <data name="panel.columna.criticidad" xml:space="preserve"><value>危急程度</value></data>
+  <data name="panel.columna.alerta" xml:space="preserve"><value>警报</value></data>
+  <data name="panel.sinDatos" xml:space="preserve"><value>无数据</value></data>
+  <data name="panel.actualizar" xml:space="preserve"><value>刷新</value></data>
+  <data name="panel.leyenda" xml:space="preserve"><value>图例：</value></data>
+  <data name="panel.refresco" xml:space="preserve"><value>已更新：</value></data>
+  <data name="pacientes.titulo" xml:space="preserve"><value>患者管理</value></data>
+  <data name="pacientes.alta" xml:space="preserve"><value>新增患者</value></data>
+  <data name="pacientes.nombre" xml:space="preserve"><value>姓名</value></data>
+  <data name="pacientes.documento" xml:space="preserve"><value>证件号码（DNI）</value></data>
+  <data name="pacientes.telefono" xml:space="preserve"><value>电话</value></data>
+  <data name="pacientes.email" xml:space="preserve"><value>电子邮箱</value></data>
+  <data name="rec.titulo" xml:space="preserve"><value>密码找回</value></data>
+  <data name="rec.verPregunta" xml:space="preserve"><value>查看安全问题</value></data>
+  <data name="rec.pregunta" xml:space="preserve"><value>安全问题：</value></data>
+  <data name="rec.sinPregunta" xml:space="preserve"><value>无法获取该用户的安全问题，请联系管理员。</value></data>
+  <data name="rec.respuesta" xml:space="preserve"><value>答案</value></data>
+  <data name="rec.nuevaContrasena" xml:space="preserve"><value>新密码</value></data>
+  <data name="rec.cambiar" xml:space="preserve"><value>更改密码</value></data>
+  <data name="rec.ok" xml:space="preserve"><value>完成！密码已更新，请使用新密码登录。</value></data>
+  <data name="rec.pregunta1" xml:space="preserve"><value>您成长的城市？</value></data>
+  <data name="rec.pregunta2" xml:space="preserve"><value>您第一只宠物的名字？</value></data>
+  <data name="rec.pregunta3" xml:space="preserve"><value>您小学的名字？</value></data>
+  <data name="integridad.ok" xml:space="preserve"><value>🛡️ 完整性正常</value></data>
+  <data name="integridad.alerta" xml:space="preserve"><value>⚠ 完整性：</value></data>
+  <data name="integridad.titulo" xml:space="preserve"><value>数据完整性</value></data>
+  <data name="integridad.mensaje" xml:space="preserve"><value>检测到数据库完整性问题：</value></data>
+  <data name="sistema.usuarios" xml:space="preserve"><value>用户</value></data>
+  <data name="sistema.bitacora" xml:space="preserve"><value>日志</value></data>
+  <data name="sistema.nuevoUsuario" xml:space="preserve"><value>新建用户</value></data>
+  <data name="sistema.habilitar" xml:space="preserve"><value>启用</value></data>
+  <data name="sistema.deshabilitar" xml:space="preserve"><value>禁用</value></data>
+  <data name="sistema.actualizar" xml:space="preserve"><value>刷新</value></data>
+  <data name="sistema.nivel" xml:space="preserve"><value>最低级别：</value></data>
+  <data name="sistema.nivel.todos" xml:space="preserve"><value>全部</value></data>
+  <data name="sistema.columna.usuario" xml:space="preserve"><value>用户名</value></data>
+  <data name="sistema.columna.nombre" xml:space="preserve"><value>姓名</value></data>
+  <data name="sistema.columna.perfil" xml:space="preserve"><value>角色</value></data>
+  <data name="sistema.columna.activo" xml:space="preserve"><value>启用状态</value></data>
+  <data name="sistema.columna.intentos" xml:space="preserve"><value>尝试次数</value></data>
+  <data name="sistema.columna.bloqueado" xml:space="preserve"><value>锁定至</value></data>
+  <data name="sistema.columna.nivel" xml:space="preserve"><value>级别</value></data>
+  <data name="sistema.columna.capa" xml:space="preserve"><value>层</value></data>
+  <data name="sistema.columna.mensaje" xml:space="preserve"><value>消息</value></data>
+  <data name="sistema.usuarioRegistrado" xml:space="preserve"><value>用户创建成功。</value></data>
+  <data name="sistema.confirmarHabilitar" xml:space="preserve"><value>是否启用所选用户的凭据？</value></data>
+  <data name="sistema.confirmarDeshabilitar" xml:space="preserve"><value>是否停用所选用户的凭据？</value></data>
+  <data name="sistema.selUsuario" xml:space="preserve"><value>请从列表中选择用户。</value></data>
+  <data name="sistema.si" xml:space="preserve"><value>是</value></data>
+  <data name="sistema.no" xml:space="preserve"><value>否</value></data>
+  <data name="portal.bienvenida" xml:space="preserve"><value>你好，</value></data>
+  <data name="portal.reportar" xml:space="preserve"><value>报告我的 INR</value></data>
+  <data name="portal.enviar" xml:space="preserve"><value>提交报告</value></data>
+  <data name="portal.gracias" xml:space="preserve"><value>谢谢！您的报告已登记。</value></data>
+  <data name="portal.notificado" xml:space="preserve"><value>医疗团队已收到通知并将审核您的情况。</value></data>
+  <data name="portal.historial" xml:space="preserve"><value>我的病历</value></data>
+  <data name="portal.sinVinculo" xml:space="preserve"><value>您的账户尚未关联患者档案，请联系管理人员。</value></data>
+  <data name="eventos.recientes" xml:space="preserve"><value>最近事件</value></data>
+  <data name="eventos.selPaciente" xml:space="preserve"><value>请先搜索患者再登记事件。</value></data>
+  <data name="eventos.registrar" xml:space="preserve"><value>登记不良事件</value></data>
+  <data name="eventos.columna.tipo" xml:space="preserve"><value>事件类型</value></data>
+  <data name="eventos.columna.gravedad" xml:space="preserve"><value>严重程度</value></data>
+  <data name="eventos.columna.accion" xml:space="preserve"><value>已采取措施</value></data>
+  <data name="eventos.tipo.hemorragia" xml:space="preserve"><value>出血</value></data>
+  <data name="eventos.tipo.trombosis" xml:space="preserve"><value>血栓形成</value></data>
+  <data name="eventos.tipo.reaccion" xml:space="preserve"><value>不良反应</value></data>
+  <data name="eventos.tipo.otro" xml:space="preserve"><value>其他</value></data>
+  <data name="eventos.gravedad.leve" xml:space="preserve"><value>轻度</value></data>
+  <data name="eventos.gravedad.moderada" xml:space="preserve"><value>中度</value></data>
+  <data name="eventos.gravedad.grave" xml:space="preserve"><value>重度</value></data>
+  <data name="eventos.sinEventos" xml:space="preserve"><value>暂无已登记事件。</value></data>
+  <data name="eventos.fechaEvento" xml:space="preserve"><value>事件日期</value></data>
+  <data name="reportes.mensual" xml:space="preserve"><value>月度报告</value></data>
+  <data name="reportes.diagnostico" xml:space="preserve"><value>按诊断</value></data>
+  <data name="reportes.historial" xml:space="preserve"><value>患者病史</value></data>
+  <data name="reportes.periodo" xml:space="preserve"><value>期间：</value></data>
+  <data name="reportes.generar" xml:space="preserve"><value>查看月度报告</value></data>
+  <data name="reportes.generarDiag" xml:space="preserve"><value>生成报告</value></data>
+  <data name="reportes.indicadorGlobal" xml:space="preserve"><value>总体疗效指标</value></data>
+  <data name="reportes.pacientesDatos" xml:space="preserve"><value>有数据患者：</value></data>
+  <data name="reportes.sinMediciones" xml:space="preserve"><value>无测量：</value></data>
+  <data name="reportes.clas.optimo" xml:space="preserve"><value>最优</value></data>
+  <data name="reportes.clas.suboptimo" xml:space="preserve"><value>次优</value></data>
+  <data name="reportes.clas.deficiente" xml:space="preserve"><value>欠佳</value></data>
+  <data name="reportes.columna.mediciones" xml:space="preserve"><value>测量次数</value></data>
+  <data name="reportes.columna.porcentaje" xml:space="preserve"><value>范围内占比</value></data>
+  <data name="reportes.columna.clasificacion" xml:space="preserve"><value>分类</value></data>
+  <data name="reportes.columna.diagnostico" xml:space="preserve"><value>诊断</value></data>
+  <data name="reportes.columna.pacientes" xml:space="preserve"><value>患者数</value></data>
+  <data name="reportes.columna.indicador" xml:space="preserve"><value>平均指标（%）</value></data>
+  <data name="reportes.bajoDesempeno" xml:space="preserve"><value>⚠ 表现不足</value></data>
+  <data name="reportes.sinReporte" xml:space="preserve"><value>请先生成月度报告以查看指标。</value></data>
+  <data name="reportes.formato" xml:space="preserve"><value>格式：</value></data>
+  <data name="reportes.exportar" xml:space="preserve"><value>导出病史</value></data>
+  <data name="reportes.exportadoOk" xml:space="preserve"><value>导出已记录。文件已生成：</value></data>
+  <data name="reportes.historialVacio" xml:space="preserve"><value>请搜索患者以查看统一病史。</value></data>
+  <data name="reportes.sinItems" xml:space="preserve"><value>暂无记录</value></data>
+  <data name="reportes.columna.tipo" xml:space="preserve"><value>类型</value></data>
+  <data name="reportes.columna.descripcion" xml:space="preserve"><value>描述</value></data>
+  <data name="seguimiento.detectar" xml:space="preserve"><value>检测逾期病例</value></data>
+  <data name="seguimiento.deteccion" xml:space="preserve"><value>检测完成。新病例：</value></data>
+  <data name="seguimiento.sinPendientes" xml:space="preserve"><value>暂无待处理的随访。使用「检测逾期」查找新病例。</value></data>
+  <data name="seguimiento.columna.ultimoReporte" xml:space="preserve"><value>最近报告</value></data>
+  <data name="seguimiento.columna.diasVencido" xml:space="preserve"><value>逾期天数</value></data>
+  <data name="seguimiento.columna.intentos" xml:space="preserve"><value>尝试次数</value></data>
+  <data name="seguimiento.columna.protocolo" xml:space="preserve"><value>随访状态</value></data>
+  <data name="seguimiento.protocolo.enCurso" xml:space="preserve"><value>进行中</value></data>
+  <data name="seguimiento.protocolo.escalada" xml:space="preserve"><value>已上报医生</value></data>
+  <data name="seguimiento.contacto" xml:space="preserve"><value>登记联系尝试</value></data>
+  <data name="seguimiento.tipoContacto" xml:space="preserve"><value>联系方式</value></data>
+  <data name="seguimiento.contacto.llamado" xml:space="preserve"><value>电话</value></data>
+  <data name="seguimiento.contacto.mensaje" xml:space="preserve"><value>短信</value></data>
+  <data name="seguimiento.contacto.correo" xml:space="preserve"><value>电子邮件</value></data>
+  <data name="seguimiento.contacto.otro" xml:space="preserve"><value>其他</value></data>
+  <data name="seguimiento.resultado" xml:space="preserve"><value>结果</value></data>
+  <data name="seguimiento.resultado.exitoso" xml:space="preserve"><value>成功（关闭警报）</value></data>
+  <data name="seguimiento.resultado.fallido" xml:space="preserve"><value>失败（计为尝试）</value></data>
+  <data name="seguimiento.registrarIntento" xml:space="preserve"><value>登记尝试</value></data>
+  <data name="seguimiento.intentoRegistrado" xml:space="preserve"><value>尝试已登记。</value></data>
+  <data name="seguimiento.contactoOk" xml:space="preserve"><value>联系成功：缺勤警报已关闭。</value></data>
+  <data name="seguimiento.escalada" xml:space="preserve"><value>上报医生</value></data>
+  <data name="seguimiento.escaladaMsg" xml:space="preserve"><value>已达到 3 次失败尝试的阈值：病例已上报医生等待临床决定。</value></data>
+  <data name="seguimiento.decision" xml:space="preserve"><value>临床决定</value></data>
+  <data name="seguimiento.dec.contactar" xml:space="preserve"><value>亲自联系</value></data>
+  <data name="seguimiento.dec.visita" xml:space="preserve"><value>安排家访</value></data>
+  <data name="seguimiento.dec.periodicidad" xml:space="preserve"><value>更改报告周期</value></data>
+  <data name="seguimiento.dec.nocontactable" xml:space="preserve"><value>宣布无法联系</value></data>
+  <data name="seguimiento.nuevaPeriodicidad" xml:space="preserve"><value>新周期（天）</value></data>
+  <data name="seguimiento.detalleDecision" xml:space="preserve"><value>决定详情</value></data>
+  <data name="seguimiento.registrarDecision" xml:space="preserve"><value>登记决定</value></data>
+  <data name="seguimiento.decisionOk" xml:space="preserve"><value>决定已登记；缺勤警报已解决。</value></data>
+  <data name="seguimiento.historial" xml:space="preserve"><value>病例历史</value></data>
+  <data name="seguimiento.columna.decision" xml:space="preserve"><value>决定</value></data>
+  <data name="seguimiento.detalleVacio" xml:space="preserve"><value>请从列表中选择病例。</value></data>
+  <data name="seguimiento.decSinIntentos" xml:space="preserve"><value>临床决定需要至少一次已登记的联系尝试。</value></data>
+  <data name="agenda.desde" xml:space="preserve"><value>从：</value></data>
+  <data name="agenda.hasta" xml:space="preserve"><value>至：</value></data>
+  <data name="agenda.actualizar" xml:space="preserve"><value>刷新日程</value></data>
+  <data name="agenda.agendar" xml:space="preserve"><value>预约挂号</value></data>
+  <data name="agenda.columna.fechaHora" xml:space="preserve"><value>日期时间</value></data>
+  <data name="agenda.columna.medico" xml:space="preserve"><value>医生</value></data>
+  <data name="agenda.columna.observaciones" xml:space="preserve"><value>备注</value></data>
+  <data name="agenda.sinTurnos" xml:space="preserve"><value>所选时段内暂无预约。</value></data>
+  <data name="agenda.sugerencias" xml:space="preserve"><value>重新分配建议</value></data>
+  <data name="agenda.sugerenciasVacias" xml:space="preserve"><value>暂无建议。</value></data>
+  <data name="agenda.sug.columna.de" xml:space="preserve"><value>来自（稳定）</value></data>
+  <data name="agenda.sug.columna.a" xml:space="preserve"><value>转给（高危）</value></data>
+  <data name="agenda.rechazar" xml:space="preserve"><value>拒绝</value></data>
+  <data name="agenda.motivoRechazo" xml:space="preserve"><value>拒绝原因</value></data>
+  <data name="agenda.escalar" xml:space="preserve"><value>是否将决定上报给医生？（因临床疑虑拒绝）</value></data>
+  <data name="agenda.reasignacionOk" xml:space="preserve"><value>重新分配完成。已记录通知：</value></data>
+  <data name="agenda.selSugerencia" xml:space="preserve"><value>请从列表中选择一条建议。</value></data>
+  <data name="agenda.hora" xml:space="preserve"><value>时间</value></data>
+  <data name="agenda.sinMedicos" xml:space="preserve"><value>没有可用的医生，请联系管理员。</value></data>
+  <data name="agenda.estado.pendiente" xml:space="preserve"><value>待定</value></data>
+  <data name="agenda.estado.confirmado" xml:space="preserve"><value>已确认</value></data>
+  <data name="agenda.estado.cancelado" xml:space="preserve"><value>已取消</value></data>
+  <data name="agenda.estado.atendido" xml:space="preserve"><value>已就诊</value></data>
+  <data name="agenda.estado.reasignacion" xml:space="preserve"><value>重新分配中</value></data>
+  <data name="pacientes.buscar" xml:space="preserve"><value>搜索：</value></data>
+  <data name="pacientes.buscarPlaceholder" xml:space="preserve"><value>姓名或证件…</value></data>
+  <data name="pacientes.verInactivos" xml:space="preserve"><value>显示已停用</value></data>
+  <data name="pacientes.baja" xml:space="preserve"><value>停用患者</value></data>
+  <data name="pacientes.historia" xml:space="preserve"><value>病历</value></data>
+  <data name="pacientes.estado" xml:space="preserve"><value>状态</value></data>
+  <data name="pacientes.estadoActivo" xml:space="preserve"><value>已启用</value></data>
+  <data name="pacientes.estadoInactivo" xml:space="preserve"><value>已停用</value></data>
+  <data name="pacientes.obraSocial" xml:space="preserve"><value>医疗保险</value></data>
+  <data name="pacientes.numeroAfiliado" xml:space="preserve"><value>参保编号</value></data>
+  <data name="pacientes.fechaAlta" xml:space="preserve"><value>登记日期</value></data>
+  <data name="pacientes.sinObraSocial" xml:space="preserve"><value>（无医保）</value></data>
+  <data name="pacientes.sinSeleccion" xml:space="preserve"><value>请先从列表中选择患者。</value></data>
+  <data name="pacientes.resultados" xml:space="preserve"><value>找到 {0} 位患者</value></data>
+  <data name="pacientes.cred.titulo" xml:space="preserve"><value>门户凭据已生成</value></data>
+  <data name="pacientes.cred.aviso" xml:space="preserve"><value>请将凭据交给患者。临时密码不会再次显示。</value></data>
+  <data name="pacientes.cred.copiar" xml:space="preserve"><value>复制密码</value></data>
+  <data name="pacientes.cred.copiado" xml:space="preserve"><value>密码已复制到剪贴板。</value></data>
+  <data name="pacientes.baja.motivo" xml:space="preserve"><value>停用原因</value></data>
+  <data name="pacientes.baja.confirmar" xml:space="preserve"><value>确认停用“{0}”？其门户凭据将被禁用（病历将保留）。</value></data>
+  <data name="hc.titulo" xml:space="preserve"><value>血液科病历</value></data>
+  <data name="hc.diagnostico" xml:space="preserve"><value>诊断/适应症</value></data>
+  <data name="hc.sinDiagnostico" xml:space="preserve"><value>（无诊断）</value></data>
+  <data name="hc.limiteInferior" xml:space="preserve"><value>INR 下限</value></data>
+  <data name="hc.limiteSuperior" xml:space="preserve"><value>INR 上限</value></data>
+  <data name="hc.medicamento" xml:space="preserve"><value>药物</value></data>
+  <data name="hc.dosis" xml:space="preserve"><value>剂量</value></data>
+  <data name="hc.periodicidad" xml:space="preserve"><value>报告周期（天）</value></data>
+  <data name="hc.proximoControl" xml:space="preserve"><value>安排下次复诊</value></data>
+  <data name="hc.sinConfigurar" xml:space="preserve"><value>该患者尚未配置病历。</value></data>
+  <data name="hc.soloLectura" xml:space="preserve"><value>只读视图：您的角色无法修改病历。</value></data>
+  <data name="rin.identificacion" xml:space="preserve"><value>患者身份（证件号码）：</value></data>
+  <data name="rin.pacienteNoEncontrado" xml:space="preserve"><value>未找到该证件号码的患者。</value></data>
+  <data name="rin.pacienteInactivo" xml:space="preserve"><value>患者已停用，无法新增报告。</value></data>
+  <data name="rin.sinHistoria" xml:space="preserve"><value>患者尚未配置病历（分级所需）。</value></data>
+  <data name="rin.ultimaMedicion" xml:space="preserve"><value>最近测量</value></data>
+  <data name="rin.sinMediciones" xml:space="preserve"><value>暂无历史测量。</value></data>
+  <data name="rin.canal" xml:space="preserve"><value>报告渠道</value></data>
+  <data name="rin.canal.digital" xml:space="preserve"><value>数字（门户）</value></data>
+  <data name="rin.canal.telefonico" xml:space="preserve"><value>电话（人工录入）</value></data>
+  <data name="rin.resultado" xml:space="preserve"><value>分级结果</value></data>
+  <data name="rin.resultadoSinDatos" xml:space="preserve"><value>请先搜索患者并输入 INR 数值。</value></data>
+  <data name="rin.alertaGenerada" xml:space="preserve"><value>🔔 已生成并通知紧急警报（医生与管理员）。</value></data>
+  <data name="rin.tendencia" xml:space="preserve"><value>⚠ 因危险趋势重新分级（连续两次报告处于 ±0.1 边界）。</value></data>
+  <data name="rin.historial" xml:space="preserve"><value>最近测量记录</value></data>
+  <data name="rin.columna.fecha" xml:space="preserve"><value>日期</value></data>
+  <data name="rin.columna.valor" xml:space="preserve"><value>数值</value></data>
+  <data name="rin.columna.canal" xml:space="preserve"><value>渠道</value></data>
+  <data name="rin.rango" xml:space="preserve"><value>治疗范围</value></data>
+  <data name="rin.reportar" xml:space="preserve"><value>报告 INR</value></data>
+  <data name="rin.valor" xml:space="preserve"><value>INR 数值</value></data>
+  <data name="rin.fecha" xml:space="preserve"><value>测量日期</value></data>
+  <data name="rin.enviado" xml:space="preserve"><value>您的 INR 已成功上报。</value></data>
+  <data name="error.titulo" xml:space="preserve"><value>错误</value></data>
+  <data name="error.generico" xml:space="preserve"><value>发生意外错误，操作未能完成。</value></data>
+  <data name="error.contacto" xml:space="preserve"><value>如果问题持续存在，请联系系统管理员。</value></data>
+  <data name="integridad.vulnerada.titulo" xml:space="preserve"><value>数据库已被篡改</value></data>
+  <data name="integridad.vulnerada.mensaje" xml:space="preserve"><value>完整性校验检测到数据库被系统外部修改。访问已被阻止，请紧急联系管理员。</value></data>
+  <data name="integridad.vulnerada.detalle" xml:space="preserve"><value>校验技术详情：</value></data>
+  <data name="integridad.vulnerada.salir" xml:space="preserve"><value>退出</value></data>
+  <data name="integridad.vulnerada.sinConexion" xml:space="preserve"><value>无法执行完整性校验（数据库不可访问？）。请联系管理员。</value></data>
+  <data name="sistema.cambios" xml:space="preserve"><value>变更控制</value></data>
+  <data name="sistema.cambios.todas" xml:space="preserve"><value>所有实体</value></data>
+  <data name="sistema.cambios.entidad" xml:space="preserve"><value>实体：</value></data>
+  <data name="sistema.cambios.idRegistro" xml:space="preserve"><value>记录编号：</value></data>
+  <data name="sistema.cambios.buscar" xml:space="preserve"><value>查询历史</value></data>
+  <data name="sistema.cambios.columna.tipo" xml:space="preserve"><value>类型</value></data>
+  <data name="sistema.cambios.columna.entidad" xml:space="preserve"><value>实体</value></data>
+  <data name="sistema.cambios.columna.registro" xml:space="preserve"><value>记录</value></data>
+  <data name="sistema.cambios.anterior" xml:space="preserve"><value>原状态（JSON）</value></data>
+  <data name="sistema.cambios.nuevo" xml:space="preserve"><value>新状态（JSON）</value></data>
+  <data name="sistema.cambios.restaurar" xml:space="preserve"><value>恢复原状态</value></data>
+  <data name="sistema.cambios.selCambio" xml:space="preserve"><value>请从历史中选择一条变更。</value></data>
+  <data name="sistema.cambios.confirmar" xml:space="preserve"><value>是否恢复所选记录的原状态？</value></data>
+  <data name="sistema.cambios.sinId" xml:space="preserve"><value>记录编号必须为数字。</value></data>
+  <data name="sistema.idiomas" xml:space="preserve"><value>语言</value></data>
+  <data name="idiomas.nuevo" xml:space="preserve"><value>新建语言</value></data>
+  <data name="idiomas.eliminar" xml:space="preserve"><value>删除语言</value></data>
+  <data name="idiomas.codigo" xml:space="preserve"><value>代码：</value></data>
+  <data name="idiomas.nombre" xml:space="preserve"><value>名称：</value></data>
+  <data name="idiomas.guardar" xml:space="preserve"><value>保存更改</value></data>
+  <data name="idiomas.agregar" xml:space="preserve"><value>添加词条</value></data>
+  <data name="idiomas.clave" xml:space="preserve"><value>键</value></data>
+  <data name="idiomas.valor" xml:space="preserve"><value>值</value></data>
+  <data name="idiomas.confirmarEliminar" xml:space="preserve"><value>是否删除所选语言及其全部词条？</value></data>
+  <data name="idiomas.guardadoOk" xml:space="preserve"><value>更改已保存，视图已实时更新。</value></data>
+  <data name="idiomas.sinSeleccion" xml:space="preserve"><value>请选择语言。</value></data>
+  <data name="idiomas.claveObligatoria" xml:space="preserve"><value>请输入词条键。</value></data>
+  <data name="sistema.perfiles" xml:space="preserve"><value>配置与权限</value></data>
+  <data name="perfiles.guardar" xml:space="preserve"><value>保存权限</value></data>
+  <data name="perfiles.marcarTodo" xml:space="preserve"><value>全部勾选</value></data>
+  <data name="perfiles.desmarcarTodo" xml:space="preserve"><value>全部取消</value></data>
+  <data name="perfiles.sinPerfil" xml:space="preserve"><value>请选择配置。</value></data>
+  <data name="perfiles.guardado" xml:space="preserve"><value>权限已成功保存。</value></data>
+</root>

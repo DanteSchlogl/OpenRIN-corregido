@@ -1,0 +1,26 @@
+## .NET / Visual Studio
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+[Dd]ebug/
+[Rr]elease/
+TestResults/
+*.tlog
+
+## Paquetes / artefactos
+packages/
+*.nupkg
+*.snupkg
+
+## Windows
+Thumbs.db
+Desktop.ini
+
+## Locales / secretos (nunca subir)
+*.local
+SECRETS*
+appsettings.*.local.json
+Codigo/Negocio.UI/App.config

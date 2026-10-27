@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="app.nombre" xml:space="preserve"><value>OpenRIN</value></data>
+  <data name="app.titulo" xml:space="preserve"><value>Integrated Alerts and Monitoring Platform</value></data>
+  <data name="idioma.es" xml:space="preserve"><value>Español (Latinoamérica)</value></data>
+  <data name="idioma.en" xml:space="preserve"><value>English (United States)</value></data>
+  <data name="idioma.zh-CN" xml:space="preserve"><value>中文（简体）</value></data>
+  <data name="comun.aceptar" xml:space="preserve"><value>OK</value></data>
+  <data name="comun.cancelar" xml:space="preserve"><value>Cancel</value></data>
+  <data name="comun.guardar" xml:space="preserve"><value>Save</value></data>
+  <data name="comun.cerrar" xml:space="preserve"><value>Close</value></data>
+  <data name="comun.si" xml:space="preserve"><value>Yes</value></data>
+  <data name="comun.no" xml:space="preserve"><value>No</value></data>
+  <data name="comun.salir" xml:space="preserve"><value>Exit</value></data>
+  <data name="comun.buscar" xml:space="preserve"><value>Search</value></data>
+  <data name="comun.nuevo" xml:space="preserve"><value>New</value></data>
+  <data name="comun.modificar" xml:space="preserve"><value>Edit</value></data>
+  <data name="comun.eliminar" xml:space="preserve"><value>Delete</value></data>
+  <data name="comun.volver" xml:space="preserve"><value>Back</value></data>
+  <data name="comun.cargando" xml:space="preserve"><value>Loading...</value></data>
+  <data name="login.titulo" xml:space="preserve"><value>Sign In</value></data>
+  <data name="login.usuario" xml:space="preserve"><value>Username</value></data>
+  <data name="login.contrasena" xml:space="preserve"><value>Password</value></data>
+  <data name="login.ingresar" xml:space="preserve"><value>Sign In</value></data>
+  <data name="login.olvidoContrasena" xml:space="preserve"><value>Forgot your password?</value></data>
+  <data name="login.recuperar.titulo" xml:space="preserve"><value>Recover Password</value></data>
+  <data name="login.recuperar.respuesta" xml:space="preserve"><value>Security answer</value></data>
+  <data name="login.recuperar.enviar" xml:space="preserve"><value>Validate answer</value></data>
+  <data name="login.errorCredenciales" xml:space="preserve"><value>Incorrect username or password.</value></data>
+  <data name="login.errorBloqueado" xml:space="preserve"><value>Account temporarily locked for security.</value></data>
+  <data name="login.errorInhabilitado" xml:space="preserve"><value>This user is disabled. Contact your administrator.</value></data>
+  <data name="login.bienvenida" xml:space="preserve"><value>Welcome</value></data>
+  <data name="login.idioma" xml:space="preserve"><value>Language</value></data>
+  <data name="login.campoObligatorio" xml:space="preserve"><value>Please enter your username and password.</value></data>
+  <data name="shell.titulo" xml:space="preserve"><value>Main Panel</value></data>
+  <data name="shell.sesion" xml:space="preserve"><value>Session:</value></data>
+  <data name="shell.cerrarSesion" xml:space="preserve"><value>Sign out</value></data>
+  <data name="shell.confirmarCerrar" xml:space="preserve"><value>Do you want to sign out?</value></data>
+  <data name="shell.modulos" xml:space="preserve"><value>Modules</value></data>
+  <data name="shell.seleccione" xml:space="preserve"><value>Select a module from the side menu to begin.</value></data>
+  <data name="shell.enConstruccion" xml:space="preserve"><value>Module under construction; it will be available in the next milestone.</value></data>
+  <data name="mod.pacientes" xml:space="preserve"><value>Patients &amp; Clinical Records</value></data>
+  <data name="mod.rin" xml:space="preserve"><value>INR Intake</value></data>
+  <data name="mod.agenda" xml:space="preserve"><value>Schedule &amp; Appointments</value></data>
+  <data name="mod.seguimiento" xml:space="preserve"><value>Clinical Follow-up</value></data>
+  <data name="mod.eventos" xml:space="preserve"><value>Adverse Events</value></data>
+  <data name="mod.reportes" xml:space="preserve"><value>Reports</value></data>
+  <data name="mod.portal" xml:space="preserve"><value>Patient Portal</value></data>
+  <data name="mod.sistema" xml:space="preserve"><value>System &amp; Audit Log</value></data>
+  <data name="panel.titulo" xml:space="preserve"><value>Monitoring Dashboard</value></data>
+  <data name="panel.criticidadAlta" xml:space="preserve"><value>Critical (High)</value></data>
+  <data name="panel.criticidadMedia" xml:space="preserve"><value>Moderate (Medium)</value></data>
+  <data name="panel.criticidadBaja" xml:space="preserve"><value>Stable (Low)</value></data>
+  <data name="panel.columna.paciente" xml:space="preserve"><value>Patient</value></data>
+  <data name="panel.columna.documento" xml:space="preserve"><value>ID Document</value></data>
+  <data name="panel.columna.ultimoRin" xml:space="preserve"><value>Latest INR</value></data>
+  <data name="panel.columna.fecha" xml:space="preserve"><value>Last report</value></data>
+  <data name="panel.columna.dias" xml:space="preserve"><value>Days since report</value></data>
+  <data name="panel.columna.criticidad" xml:space="preserve"><value>Criticality</value></data>
+  <data name="panel.columna.alerta" xml:space="preserve"><value>Alert</value></data>
+  <data name="panel.sinDatos" xml:space="preserve"><value>No data</value></data>
+  <data name="panel.actualizar" xml:space="preserve"><value>Refresh</value></data>
+  <data name="panel.leyenda" xml:space="preserve"><value>Legend:</value></data>
+  <data name="panel.refresco" xml:space="preserve"><value>Updated:</value></data>
+  <data name="pacientes.titulo" xml:space="preserve"><value>Patient Management</value></data>
+  <data name="pacientes.alta" xml:space="preserve"><value>New Patient</value></data>
+  <data name="pacientes.nombre" xml:space="preserve"><value>Full name</value></data>
+  <data name="pacientes.documento" xml:space="preserve"><value>ID Document (DNI)</value></data>
+  <data name="pacientes.telefono" xml:space="preserve"><value>Phone</value></data>
+  <data name="pacientes.email" xml:space="preserve"><value>Email</value></data>
+  <data name="rec.titulo" xml:space="preserve"><value>Password recovery</value></data>
+  <data name="rec.verPregunta" xml:space="preserve"><value>Show security question</value></data>
+  <data name="rec.pregunta" xml:space="preserve"><value>Security question:</value></data>
+  <data name="rec.sinPregunta" xml:space="preserve"><value>A security question could not be retrieved for that user. Please contact the administrator.</value></data>
+  <data name="rec.respuesta" xml:space="preserve"><value>Answer</value></data>
+  <data name="rec.nuevaContrasena" xml:space="preserve"><value>New password</value></data>
+  <data name="rec.cambiar" xml:space="preserve"><value>Change password</value></data>
+  <data name="rec.ok" xml:space="preserve"><value>Done! The password was updated. You can now sign in with the new one.</value></data>
+  <data name="rec.pregunta1" xml:space="preserve"><value>Which city did you grow up in?</value></data>
+  <data name="rec.pregunta2" xml:space="preserve"><value>Name of your first pet?</value></data>
+  <data name="rec.pregunta3" xml:space="preserve"><value>Name of your primary school?</value></data>
+  <data name="integridad.ok" xml:space="preserve"><value>🛡️ Integrity OK</value></data>
+  <data name="integridad.alerta" xml:space="preserve"><value>⚠ Integrity:</value></data>
+  <data name="integridad.titulo" xml:space="preserve"><value>Data integrity</value></data>
+  <data name="integridad.mensaje" xml:space="preserve"><value>Data integrity problems were detected in the database:</value></data>
+  <data name="sistema.usuarios" xml:space="preserve"><value>Users</value></data>
+  <data name="sistema.bitacora" xml:space="preserve"><value>Activity log</value></data>
+  <data name="sistema.nuevoUsuario" xml:space="preserve"><value>New user</value></data>
+  <data name="sistema.habilitar" xml:space="preserve"><value>Enable</value></data>
+  <data name="sistema.deshabilitar" xml:space="preserve"><value>Disable</value></data>
+  <data name="sistema.actualizar" xml:space="preserve"><value>Refresh</value></data>
+  <data name="sistema.nivel" xml:space="preserve"><value>Minimum level:</value></data>
+  <data name="sistema.nivel.todos" xml:space="preserve"><value>All</value></data>
+  <data name="sistema.columna.usuario" xml:space="preserve"><value>Username</value></data>
+  <data name="sistema.columna.nombre" xml:space="preserve"><value>Full name</value></data>
+  <data name="sistema.columna.perfil" xml:space="preserve"><value>Profile</value></data>
+  <data name="sistema.columna.activo" xml:space="preserve"><value>Active</value></data>
+  <data name="sistema.columna.intentos" xml:space="preserve"><value>Attempts</value></data>
+  <data name="sistema.columna.bloqueado" xml:space="preserve"><value>Locked until</value></data>
+  <data name="sistema.columna.nivel" xml:space="preserve"><value>Level</value></data>
+  <data name="sistema.columna.capa" xml:space="preserve"><value>Layer</value></data>
+  <data name="sistema.columna.mensaje" xml:space="preserve"><value>Message</value></data>
+  <data name="sistema.usuarioRegistrado" xml:space="preserve"><value>User created successfully.</value></data>
+  <data name="sistema.confirmarHabilitar" xml:space="preserve"><value>Enable the selected user's credentials?</value></data>
+  <data name="sistema.confirmarDeshabilitar" xml:space="preserve"><value>Disable the selected user's credentials?</value></data>
+  <data name="sistema.selUsuario" xml:space="preserve"><value>Select a user from the list.</value></data>
+  <data name="sistema.si" xml:space="preserve"><value>Yes</value></data>
+  <data name="sistema.no" xml:space="preserve"><value>No</value></data>
+  <data name="portal.bienvenida" xml:space="preserve"><value>Hello,</value></data>
+  <data name="portal.reportar" xml:space="preserve"><value>Report my INR</value></data>
+  <data name="portal.enviar" xml:space="preserve"><value>Send report</value></data>
+  <data name="portal.gracias" xml:space="preserve"><value>Thank you! Your report has been recorded.</value></data>
+  <data name="portal.notificado" xml:space="preserve"><value>The medical team has been notified and will review your case.</value></data>
+  <data name="portal.historial" xml:space="preserve"><value>My clinical history</value></data>
+  <data name="portal.sinVinculo" xml:space="preserve"><value>Your account is not linked to a patient record. Please contact the administration.</value></data>
+  <data name="eventos.recientes" xml:space="preserve"><value>Recent events</value></data>
+  <data name="eventos.selPaciente" xml:space="preserve"><value>Search for a patient to log an event.</value></data>
+  <data name="eventos.registrar" xml:space="preserve"><value>Log adverse event</value></data>
+  <data name="eventos.columna.tipo" xml:space="preserve"><value>Event type</value></data>
+  <data name="eventos.columna.gravedad" xml:space="preserve"><value>Severity</value></data>
+  <data name="eventos.columna.accion" xml:space="preserve"><value>Action taken</value></data>
+  <data name="eventos.tipo.hemorragia" xml:space="preserve"><value>Bleeding</value></data>
+  <data name="eventos.tipo.trombosis" xml:space="preserve"><value>Thrombosis</value></data>
+  <data name="eventos.tipo.reaccion" xml:space="preserve"><value>Adverse reaction</value></data>
+  <data name="eventos.tipo.otro" xml:space="preserve"><value>Other</value></data>
+  <data name="eventos.gravedad.leve" xml:space="preserve"><value>Mild</value></data>
+  <data name="eventos.gravedad.moderada" xml:space="preserve"><value>Moderate</value></data>
+  <data name="eventos.gravedad.grave" xml:space="preserve"><value>Severe</value></data>
+  <data name="eventos.sinEventos" xml:space="preserve"><value>No events recorded.</value></data>
+  <data name="eventos.fechaEvento" xml:space="preserve"><value>Event date</value></data>
+  <data name="reportes.mensual" xml:space="preserve"><value>Monthly report</value></data>
+  <data name="reportes.diagnostico" xml:space="preserve"><value>By diagnosis</value></data>
+  <data name="reportes.historial" xml:space="preserve"><value>Patient history</value></data>
+  <data name="reportes.periodo" xml:space="preserve"><value>Period:</value></data>
+  <data name="reportes.generar" xml:space="preserve"><value>View monthly report</value></data>
+  <data name="reportes.generarDiag" xml:space="preserve"><value>Generate report</value></data>
+  <data name="reportes.indicadorGlobal" xml:space="preserve"><value>Global efficacy indicator</value></data>
+  <data name="reportes.pacientesDatos" xml:space="preserve"><value>Patients with data:</value></data>
+  <data name="reportes.sinMediciones" xml:space="preserve"><value>No measurements:</value></data>
+  <data name="reportes.clas.optimo" xml:space="preserve"><value>Optimal</value></data>
+  <data name="reportes.clas.suboptimo" xml:space="preserve"><value>Suboptimal</value></data>
+  <data name="reportes.clas.deficiente" xml:space="preserve"><value>Deficient</value></data>
+  <data name="reportes.columna.mediciones" xml:space="preserve"><value>Measurements</value></data>
+  <data name="reportes.columna.porcentaje" xml:space="preserve"><value>% in range</value></data>
+  <data name="reportes.columna.clasificacion" xml:space="preserve"><value>Classification</value></data>
+  <data name="reportes.columna.diagnostico" xml:space="preserve"><value>Diagnosis</value></data>
+  <data name="reportes.columna.pacientes" xml:space="preserve"><value>Patients</value></data>
+  <data name="reportes.columna.indicador" xml:space="preserve"><value>Avg. indicator (%)</value></data>
+  <data name="reportes.bajoDesempeno" xml:space="preserve"><value>⚠ LOW PERFORMANCE</value></data>
+  <data name="reportes.sinReporte" xml:space="preserve"><value>Generate the monthly report to see the indicators.</value></data>
+  <data name="reportes.formato" xml:space="preserve"><value>Format:</value></data>
+  <data name="reportes.exportar" xml:space="preserve"><value>Export history</value></data>
+  <data name="reportes.exportadoOk" xml:space="preserve"><value>Export logged. File generated:</value></data>
+  <data name="reportes.historialVacio" xml:space="preserve"><value>Search for a patient to view their unified history.</value></data>
+  <data name="reportes.sinItems" xml:space="preserve"><value>no records yet</value></data>
+  <data name="reportes.columna.tipo" xml:space="preserve"><value>Type</value></data>
+  <data name="reportes.columna.descripcion" xml:space="preserve"><value>Description</value></data>
+  <data name="seguimiento.detectar" xml:space="preserve"><value>Detect overdue cases</value></data>
+  <data name="seguimiento.deteccion" xml:space="preserve"><value>Detection completed. New cases:</value></data>
+  <data name="seguimiento.sinPendientes" xml:space="preserve"><value>No pending follow-ups. Use “Detect overdue cases” to scan for new ones.</value></data>
+  <data name="seguimiento.columna.ultimoReporte" xml:space="preserve"><value>Last report</value></data>
+  <data name="seguimiento.columna.diasVencido" xml:space="preserve"><value>Days overdue</value></data>
+  <data name="seguimiento.columna.intentos" xml:space="preserve"><value>Attempts</value></data>
+  <data name="seguimiento.columna.protocolo" xml:space="preserve"><value>Protocol</value></data>
+  <data name="seguimiento.protocolo.enCurso" xml:space="preserve"><value>In progress</value></data>
+  <data name="seguimiento.protocolo.escalada" xml:space="preserve"><value>ESCALATED TO PHYSICIAN</value></data>
+  <data name="seguimiento.contacto" xml:space="preserve"><value>Log contact attempt</value></data>
+  <data name="seguimiento.tipoContacto" xml:space="preserve"><value>Contact type</value></data>
+  <data name="seguimiento.contacto.llamado" xml:space="preserve"><value>Phone call</value></data>
+  <data name="seguimiento.contacto.mensaje" xml:space="preserve"><value>Text message</value></data>
+  <data name="seguimiento.contacto.correo" xml:space="preserve"><value>Email</value></data>
+  <data name="seguimiento.contacto.otro" xml:space="preserve"><value>Other</value></data>
+  <data name="seguimiento.resultado" xml:space="preserve"><value>Result</value></data>
+  <data name="seguimiento.resultado.exitoso" xml:space="preserve"><value>Successful (closes the alert)</value></data>
+  <data name="seguimiento.resultado.fallido" xml:space="preserve"><value>Failed (counts attempt)</value></data>
+  <data name="seguimiento.registrarIntento" xml:space="preserve"><value>Log attempt</value></data>
+  <data name="seguimiento.intentoRegistrado" xml:space="preserve"><value>Attempt logged.</value></data>
+  <data name="seguimiento.contactoOk" xml:space="preserve"><value>Successful contact: the absence alert was closed.</value></data>
+  <data name="seguimiento.escalada" xml:space="preserve"><value>Escalated to physician</value></data>
+  <data name="seguimiento.escaladaMsg" xml:space="preserve"><value>The threshold of 3 failed attempts was reached: the case was ESCALATED to the physician for a clinical decision.</value></data>
+  <data name="seguimiento.decision" xml:space="preserve"><value>Clinical decision</value></data>
+  <data name="seguimiento.dec.contactar" xml:space="preserve"><value>Contact personally</value></data>
+  <data name="seguimiento.dec.visita" xml:space="preserve"><value>Schedule home visit</value></data>
+  <data name="seguimiento.dec.periodicidad" xml:space="preserve"><value>Change reporting frequency</value></data>
+  <data name="seguimiento.dec.nocontactable" xml:space="preserve"><value>Declare unreachable</value></data>
+  <data name="seguimiento.nuevaPeriodicidad" xml:space="preserve"><value>New frequency (days)</value></data>
+  <data name="seguimiento.detalleDecision" xml:space="preserve"><value>Decision detail</value></data>
+  <data name="seguimiento.registrarDecision" xml:space="preserve"><value>Log decision</value></data>
+  <data name="seguimiento.decisionOk" xml:space="preserve"><value>Decision logged; the absence alert was resolved.</value></data>
+  <data name="seguimiento.historial" xml:space="preserve"><value>Case history</value></data>
+  <data name="seguimiento.columna.decision" xml:space="preserve"><value>Decision</value></data>
+  <data name="seguimiento.detalleVacio" xml:space="preserve"><value>Select a case from the list.</value></data>
+  <data name="seguimiento.decSinIntentos" xml:space="preserve"><value>The clinical decision requires at least one logged contact attempt.</value></data>
+  <data name="agenda.desde" xml:space="preserve"><value>From:</value></data>
+  <data name="agenda.hasta" xml:space="preserve"><value>To:</value></data>
+  <data name="agenda.actualizar" xml:space="preserve"><value>Refresh schedule</value></data>
+  <data name="agenda.agendar" xml:space="preserve"><value>Schedule appointment</value></data>
+  <data name="agenda.columna.fechaHora" xml:space="preserve"><value>Date &amp; time</value></data>
+  <data name="agenda.columna.medico" xml:space="preserve"><value>Physician</value></data>
+  <data name="agenda.columna.observaciones" xml:space="preserve"><value>Notes</value></data>
+  <data name="agenda.sinTurnos" xml:space="preserve"><value>No appointments in the selected period.</value></data>
+  <data name="agenda.sugerencias" xml:space="preserve"><value>Reassignment suggestions</value></data>
+  <data name="agenda.sugerenciasVacias" xml:space="preserve"><value>No suggestions right now.</value></data>
+  <data name="agenda.sug.columna.de" xml:space="preserve"><value>From (stable)</value></data>
+  <data name="agenda.sug.columna.a" xml:space="preserve"><value>To (critical)</value></data>
+  <data name="agenda.rechazar" xml:space="preserve"><value>Reject</value></data>
+  <data name="agenda.motivoRechazo" xml:space="preserve"><value>Rejection reason</value></data>
+  <data name="agenda.escalar" xml:space="preserve"><value>Escalate the decision to the physician? (rejection due to clinical doubt)</value></data>
+  <data name="agenda.reasignacionOk" xml:space="preserve"><value>Reassignment completed. Logged notifications:</value></data>
+  <data name="agenda.selSugerencia" xml:space="preserve"><value>Select a suggestion from the list.</value></data>
+  <data name="agenda.hora" xml:space="preserve"><value>Time</value></data>
+  <data name="agenda.sinMedicos" xml:space="preserve"><value>No enabled physicians; contact your administrator.</value></data>
+  <data name="agenda.estado.pendiente" xml:space="preserve"><value>Pending</value></data>
+  <data name="agenda.estado.confirmado" xml:space="preserve"><value>Confirmed</value></data>
+  <data name="agenda.estado.cancelado" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="agenda.estado.atendido" xml:space="preserve"><value>Attended</value></data>
+  <data name="agenda.estado.reasignacion" xml:space="preserve"><value>Under reassignment</value></data>
+  <data name="pacientes.buscar" xml:space="preserve"><value>Search:</value></data>
+  <data name="pacientes.buscarPlaceholder" xml:space="preserve"><value>Name or ID...</value></data>
+  <data name="pacientes.verInactivos" xml:space="preserve"><value>Show inactive</value></data>
+  <data name="pacientes.baja" xml:space="preserve"><value>Deactivate</value></data>
+  <data name="pacientes.historia" xml:space="preserve"><value>Clinical record</value></data>
+  <data name="pacientes.estado" xml:space="preserve"><value>Status</value></data>
+  <data name="pacientes.estadoActivo" xml:space="preserve"><value>Active</value></data>
+  <data name="pacientes.estadoInactivo" xml:space="preserve"><value>Inactive</value></data>
+  <data name="pacientes.obraSocial" xml:space="preserve"><value>Health insurance</value></data>
+  <data name="pacientes.numeroAfiliado" xml:space="preserve"><value>Member number</value></data>
+  <data name="pacientes.fechaAlta" xml:space="preserve"><value>Registered on</value></data>
+  <data name="pacientes.sinObraSocial" xml:space="preserve"><value>(No insurance)</value></data>
+  <data name="pacientes.sinSeleccion" xml:space="preserve"><value>Select a patient from the list.</value></data>
+  <data name="pacientes.resultados" xml:space="preserve"><value>{0} patient(s) found</value></data>
+  <data name="pacientes.cred.titulo" xml:space="preserve"><value>Portal credentials generated</value></data>
+  <data name="pacientes.cred.aviso" xml:space="preserve"><value>Give these credentials to the patient. The temporary password will not be shown again.</value></data>
+  <data name="pacientes.cred.copiar" xml:space="preserve"><value>Copy password</value></data>
+  <data name="pacientes.cred.copiado" xml:space="preserve"><value>Password copied to clipboard.</value></data>
+  <data name="pacientes.baja.motivo" xml:space="preserve"><value>Deactivation reason</value></data>
+  <data name="pacientes.baja.confirmar" xml:space="preserve"><value>Confirm deactivation of '{0}'? Portal credentials will be disabled (clinical history is preserved).</value></data>
+  <data name="hc.titulo" xml:space="preserve"><value>Hematology Clinical Record</value></data>
+  <data name="hc.diagnostico" xml:space="preserve"><value>Diagnosis / indication</value></data>
+  <data name="hc.sinDiagnostico" xml:space="preserve"><value>(No diagnosis)</value></data>
+  <data name="hc.limiteInferior" xml:space="preserve"><value>INR lower limit</value></data>
+  <data name="hc.limiteSuperior" xml:space="preserve"><value>INR upper limit</value></data>
+  <data name="hc.medicamento" xml:space="preserve"><value>Medication</value></data>
+  <data name="hc.dosis" xml:space="preserve"><value>Dosage</value></data>
+  <data name="hc.periodicidad" xml:space="preserve"><value>Reporting interval (days)</value></data>
+  <data name="hc.proximoControl" xml:space="preserve"><value>Schedule next visit</value></data>
+  <data name="hc.sinConfigurar" xml:space="preserve"><value>No clinical record configured yet.</value></data>
+  <data name="hc.soloLectura" xml:space="preserve"><value>Read-only view: your profile cannot edit the clinical record.</value></data>
+  <data name="rin.identificacion" xml:space="preserve"><value>Patient identification (ID):</value></data>
+  <data name="rin.pacienteNoEncontrado" xml:space="preserve"><value>No patient found with that ID.</value></data>
+  <data name="rin.pacienteInactivo" xml:space="preserve"><value>The patient is deactivated; no new reports allowed.</value></data>
+  <data name="rin.sinHistoria" xml:space="preserve"><value>The patient has no clinical record configured (required for triage).</value></data>
+  <data name="rin.ultimaMedicion" xml:space="preserve"><value>Last measurement</value></data>
+  <data name="rin.sinMediciones" xml:space="preserve"><value>No previous measurements.</value></data>
+  <data name="rin.canal" xml:space="preserve"><value>Report channel</value></data>
+  <data name="rin.canal.digital" xml:space="preserve"><value>Digital (portal)</value></data>
+  <data name="rin.canal.telefonico" xml:space="preserve"><value>Phone (manual entry)</value></data>
+  <data name="rin.resultado" xml:space="preserve"><value>Triage result</value></data>
+  <data name="rin.resultadoSinDatos" xml:space="preserve"><value>Search a patient and enter an INR value.</value></data>
+  <data name="rin.alertaGenerada" xml:space="preserve"><value>🔔 Urgent alert generated and notified (physician and administrative staff).</value></data>
+  <data name="rin.tendencia" xml:space="preserve"><value>⚠ Reclassified due to dangerous trend (±0.1 in two consecutive reports).</value></data>
+  <data name="rin.historial" xml:space="preserve"><value>Recent measurements</value></data>
+  <data name="rin.columna.fecha" xml:space="preserve"><value>Date</value></data>
+  <data name="rin.columna.valor" xml:space="preserve"><value>Value</value></data>
+  <data name="rin.columna.canal" xml:space="preserve"><value>Channel</value></data>
+  <data name="rin.rango" xml:space="preserve"><value>Therapeutic range</value></data>
+  <data name="rin.reportar" xml:space="preserve"><value>Report INR</value></data>
+  <data name="rin.valor" xml:space="preserve"><value>INR value</value></data>
+  <data name="rin.fecha" xml:space="preserve"><value>Measurement date</value></data>
+  <data name="rin.enviado" xml:space="preserve"><value>Your INR was reported successfully.</value></data>
+  <data name="error.titulo" xml:space="preserve"><value>Error</value></data>
+  <data name="error.generico" xml:space="preserve"><value>An unexpected error occurred. The operation could not be completed.</value></data>
+  <data name="error.contacto" xml:space="preserve"><value>If the problem persists, contact your system administrator.</value></data>
+  <data name="integridad.vulnerada.titulo" xml:space="preserve"><value>Database compromised</value></data>
+  <data name="integridad.vulnerada.mensaje" xml:space="preserve"><value>The integrity check detected alterations to the database made from outside the system. Access has been blocked and the administrator must be contacted urgently.</value></data>
+  <data name="integridad.vulnerada.detalle" xml:space="preserve"><value>Technical detail of the verification:</value></data>
+  <data name="integridad.vulnerada.salir" xml:space="preserve"><value>Exit</value></data>
+  <data name="integridad.vulnerada.sinConexion" xml:space="preserve"><value>The integrity check could not be executed (database unreachable?). Contact the administrator.</value></data>
+  <data name="sistema.cambios" xml:space="preserve"><value>Change control</value></data>
+  <data name="sistema.cambios.todas" xml:space="preserve"><value>All entities</value></data>
+  <data name="sistema.cambios.entidad" xml:space="preserve"><value>Entity:</value></data>
+  <data name="sistema.cambios.idRegistro" xml:space="preserve"><value>Record no.:</value></data>
+  <data name="sistema.cambios.buscar" xml:space="preserve"><value>Search history</value></data>
+  <data name="sistema.cambios.columna.tipo" xml:space="preserve"><value>Type</value></data>
+  <data name="sistema.cambios.columna.entidad" xml:space="preserve"><value>Entity</value></data>
+  <data name="sistema.cambios.columna.registro" xml:space="preserve"><value>Record</value></data>
+  <data name="sistema.cambios.anterior" xml:space="preserve"><value>Previous state (JSON)</value></data>
+  <data name="sistema.cambios.nuevo" xml:space="preserve"><value>New state (JSON)</value></data>
+  <data name="sistema.cambios.restaurar" xml:space="preserve"><value>Restore previous state</value></data>
+  <data name="sistema.cambios.selCambio" xml:space="preserve"><value>Select a change from the history.</value></data>
+  <data name="sistema.cambios.confirmar" xml:space="preserve"><value>Restore the previous state of the selected record?</value></data>
+  <data name="sistema.cambios.sinId" xml:space="preserve"><value>The record number must be numeric.</value></data>
+  <data name="sistema.idiomas" xml:space="preserve"><value>Languages</value></data>
+  <data name="idiomas.nuevo" xml:space="preserve"><value>New language</value></data>
+  <data name="idiomas.eliminar" xml:space="preserve"><value>Delete language</value></data>
+  <data name="idiomas.codigo" xml:space="preserve"><value>Code:</value></data>
+  <data name="idiomas.nombre" xml:space="preserve"><value>Name:</value></data>
+  <data name="idiomas.guardar" xml:space="preserve"><value>Save changes</value></data>
+  <data name="idiomas.agregar" xml:space="preserve"><value>Add entry</value></data>
+  <data name="idiomas.clave" xml:space="preserve"><value>Key</value></data>
+  <data name="idiomas.valor" xml:space="preserve"><value>Value</value></data>
+  <data name="idiomas.confirmarEliminar" xml:space="preserve"><value>Delete the selected language and all of its entries?</value></data>
+  <data name="idiomas.guardadoOk" xml:space="preserve"><value>Changes saved. Views were refreshed live.</value></data>
+  <data name="idiomas.sinSeleccion" xml:space="preserve"><value>Select a language.</value></data>
+  <data name="idiomas.claveObligatoria" xml:space="preserve"><value>Enter the entry key.</value></data>
+  <data name="sistema.perfiles" xml:space="preserve"><value>Profiles &amp; permissions</value></data>
+  <data name="perfiles.guardar" xml:space="preserve"><value>Save permissions</value></data>
+  <data name="perfiles.marcarTodo" xml:space="preserve"><value>Check all</value></data>
+  <data name="perfiles.desmarcarTodo" xml:space="preserve"><value>Uncheck all</value></data>
+  <data name="perfiles.sinPerfil" xml:space="preserve"><value>Select a profile.</value></data>
+  <data name="perfiles.guardado" xml:space="preserve"><value>Permissions saved successfully.</value></data>
+</root>
