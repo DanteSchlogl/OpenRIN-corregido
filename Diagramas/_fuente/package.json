@@ -1,0 +1,9 @@
+{
+  "name": "openrin-diagramas",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@hpcc-js/wasm": "2.36.0",
+    "@resvg/resvg-js": "2.6.2"
+  }
+}

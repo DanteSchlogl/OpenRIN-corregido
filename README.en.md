@@ -29,6 +29,7 @@ The solution is built in **C# / .NET 8 (Windows Forms)** on **SQL Server**, with
 - `Documentacion/` — **Project Folder (PDF)**: global description, class and data diagrams, business processes and use cases, and technical aspects.
 - `Views/` — analysis and design deliverables (historical).
 - `Propuesta Corregida/` — project proposal (TP 1).
+- `Diagramas/` — corrected diagrams (PNG and SVG) and the source to regenerate them.
 - `ops/` — scripts for the daily automatic backup (03:00): SQL, scheduled task and README.
 
 ## Architecture

@@ -29,6 +29,7 @@ La solución está construida en **C# / .NET 8 (Windows Forms)** sobre **SQL Ser
 - `Documentacion/` — **Carpeta de Proyecto (PDF)**: descripción global, diagramas de clases y de datos, procesos y casos de uso, y aspectos técnicos.
 - `Views/` — entregables de análisis y diseño (histórico).
 - `Propuesta Corregida/` — propuesta de proyecto (TP 1).
+- `Diagramas/` — diagramas corregidos (PNG y SVG) y su fuente para regenerarlos.
 - `ops/` — scripts del respaldo automático diario (03:00): SQL, tarea programada y LEEME.
 
 ## Arquitectura
