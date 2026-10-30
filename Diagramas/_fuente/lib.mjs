@@ -140,7 +140,7 @@ export async function dot(src, relName, extra = '') {
   for (const o of j.objects || []) {
     if (o.bb && String(o.name).startsWith('cluster')) {
       const [a, b, c, d] = o.bb.split(',').map(Number);
-      mx.vertex(o.label || '', `rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=none;strokeColor=${o.color || '#888888'};${o.style && o.style.includes('dashed') ? 'dashed=1;' : ''}verticalAlign=top;fontFamily=Arial;fontSize=12;`, X(a), Y(d), c - a, d - b);
+      mx.vertex(o.label || '', `rounded=1;arcSize=3;whiteSpace=wrap;html=1;fillColor=none;strokeColor=${o.color || '#888888'};${o.style && o.style.includes('dashed') ? 'dashed=1;' : ''}verticalAlign=top;fontFamily=Arial;fontSize=12;`, X(a) - 8, Y(d) - 4, c - a + 16, d - b + 18);
     }
   }
   for (const o of j.objects || []) {
@@ -186,13 +186,14 @@ export async function dot(src, relName, extra = '') {
 // ---------- Secuencia ----------
 const FS = 12;
 const tw = (s) => s.length * 6.3 + 14;
+const wrapT = (t, n = 42) => { const w = String(t).split(' '); const out = []; let cur = ''; for (const x of w) { if ((cur + ' ' + x).trim().length > n && cur) { out.push(cur); cur = x; } else cur = (cur + ' ' + x).trim(); } if (cur) out.push(cur); return out; };
 const TXT = 'text;html=1;strokeColor=none;fillColor=none;fontFamily=Arial;whiteSpace=nowrap;';
 
 export function seq(spec, relName) {
   const { title, parts, steps } = spec;
   const mx = new Mx();
   const idx = Object.fromEntries(parts.map((p, i) => [p.id, i]));
-  const gap = Math.max(210, ...steps.flatMap(function f(s) { return s.alt ? s.alt.flatMap((o) => o.steps.flatMap(f)) : [s.text ? tw(s.text) + 20 : 0]; }));
+  const gap = Math.max(200, ...steps.flatMap(function f(s) { return s.alt ? s.alt.flatMap((o) => o.steps.flatMap(f)) : [s.text && s.from !== s.to ? Math.max(...wrapT(s.text).map((l) => l.length)) * 6.3 + 44 : 0]; }));
   const X0 = 110;
   const xs = parts.map((_, i) => X0 + i * gap);
   const W = X0 + (parts.length - 1) * gap + 260;
@@ -216,7 +217,7 @@ export function seq(spec, relName) {
         const dividers = [];
         st.alt.forEach((o, oi) => {
           if (oi > 0) { dividers.push([y, o.guard]); y += 8; } else dividers.push([top, o.guard]);
-          y += 34;
+          { const f0 = o.steps[0]; const nl = f0 && !f0.alt && f0.text ? wrapT(f0.text, f0.from === f0.to ? 44 : 42).length : 1; y += 34 + (f0 && f0.from !== f0.to ? (nl - 1) * 14 : 0); }
           run(o.steps, depth + 1);
           y += 6;
         });
@@ -225,7 +226,7 @@ export function seq(spec, relName) {
           mx.vertex(st.kind || 'alt', 'shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=44;height=20;fillColor=none;strokeColor=#888888;fontFamily=Arial;fontSize=11;fontStyle=1;', x1, top, x2 - x1, bottom - top);
           dividers.forEach(([dy, g], i) => {
             if (i > 0) mx.edge('', 'endArrow=none;dashed=1;strokeColor=#888888;html=1;', { from: [x1, dy], to: [x2, dy] });
-            mx.vertex(`[${g}]`, TXT + 'fontSize=11;align=left;', x1 + 50, dy + 3, tw(g) + 20, 18);
+            mx.vertex(`[${esc(g)}]`, TXT + 'fontSize=11;align=left;', x1 + 50, dy + 3, tw(g) + 20, 18);
           });
         });
         y += 14;
@@ -233,33 +234,34 @@ export function seq(spec, relName) {
       }
       const a = xs[idx[st.from]], b = xs[idx[st.to]];
       const yy = y;
+      const wl = wrapT(st.text, st.from === st.to ? 44 : 42);
       if (st.from === st.to) {
         shapes.push(() => {
           mx.edge('', `endArrow=block;endFill=1;html=1;edgeStyle=none;strokeColor=#222222;${st.ret ? 'dashed=1;' : ''}`, { from: [a, yy], to: [a, yy + 22], points: [[a + 42, yy], [a + 42, yy + 22]] });
-          mx.vertex(st.text, TXT + `fontSize=${FS};align=left;`, a + 48, yy + 2, tw(st.text), 18);
+          mx.vertex(wl.map(esc).join('<br/>'), TXT + `fontSize=${FS};align=left;`, a + 48, yy + 2, 280, 18 + (wl.length - 1) * 14);
         });
-        y += 44;
+        y += 44 + (wl.length - 1) * 14;
       } else {
         shapes.push(() => {
-          mx.edge(st.text, `html=1;edgeStyle=none;strokeColor=#222222;fontFamily=Arial;fontSize=${FS};verticalLabelPosition=top;verticalAlign=bottom;labelBackgroundColor=none;${st.ret ? 'endArrow=open;endFill=0;dashed=1;' : 'endArrow=block;endFill=1;'}`, { from: [a, yy], to: [b, yy] });
+          mx.edge(wl.map(esc).join('<br/>'), `html=1;edgeStyle=none;strokeColor=#222222;fontFamily=Arial;fontSize=${FS};verticalLabelPosition=top;verticalAlign=bottom;labelBackgroundColor=none;${st.ret ? 'endArrow=open;endFill=0;dashed=1;' : 'endArrow=block;endFill=1;'}`, { from: [a, yy], to: [b, yy] });
         });
-        y += 40;
+        y += 40 + (wl.length - 1) * 14;
       }
     }
   }
   run(steps, 0);
   const H = y + 30;
-  mx.vertex(title, TXT + 'fontSize=17;fontStyle=1;fontColor=#1F3864;align=center;whiteSpace=wrap;', 20, 6, W - 140, 28);
+  mx.vertex(esc(title), TXT + 'fontSize=17;fontStyle=1;fontColor=#1F3864;align=center;whiteSpace=wrap;', 20, 6, W - 140, 28);
   parts.forEach((p, i) => {
     const lines = p.label.split('\n');
     if (p.actor) {
       mx.vertex('', 'shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#222222;fillColor=none;', xs[i] - 15, 46, 30, 58);
-      mx.vertex(lines.join('<br/>'), TXT + 'fontSize=12;fontStyle=1;align=center;whiteSpace=wrap;', xs[i] - 70, 106, 140, 30);
+      mx.vertex(lines.map(esc).join('<br/>'), TXT + 'fontSize=12;fontStyle=1;align=center;whiteSpace=wrap;', xs[i] - 70, 106, 140, 30);
       mx.edge('', 'endArrow=none;dashed=1;strokeColor=#999999;html=1;', { from: [xs[i], 138], to: [xs[i], H - 20] });
     } else {
       const w = Math.max(120, tw(p.label.replace(/\n/g, '')));
       const h = 24 + lines.length * 16;
-      mx.vertex(lines.join('<br/>'), 'rounded=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#555555;fontFamily=Arial;fontSize=12;fontStyle=1;', xs[i] - w / 2, 46, w, h);
+      mx.vertex(lines.map(esc).join('<br/>'), 'rounded=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#555555;fontFamily=Arial;fontSize=12;fontStyle=1;', xs[i] - w / 2, 46, w, h);
       mx.edge('', 'endArrow=none;dashed=1;strokeColor=#999999;html=1;', { from: [xs[i], 46 + h], to: [xs[i], H - 20] });
     }
   });
@@ -276,14 +278,14 @@ export function ucg(spec, relName) {
   const cy = 100 + (Math.max(left.length, right.length, 1) - 1) * 60 + 20;
   const rx = Math.max(150, tw(main) / 2 + 10), ry = 40, cx = W / 2;
   const relY = cy + 175;
-  mx.vertex(title, TXT + 'fontSize=17;fontStyle=1;fontColor=#1F3864;align=center;', 20, 6, W - 40, 28);
-  const mainId = mx.vertex(main, 'ellipse;whiteSpace=wrap;html=1;fillColor=#FFF6E5;strokeColor=#C9922E;strokeWidth=1.5;fontFamily=Arial;fontSize=13;', cx - rx, cy - ry, rx * 2, ry * 2);
+  mx.vertex(esc(title), TXT + 'fontSize=17;fontStyle=1;fontColor=#1F3864;align=center;', 20, 6, W - 40, 28);
+  const mainId = mx.vertex(esc(main), 'ellipse;whiteSpace=wrap;html=1;fillColor=#FFF6E5;strokeColor=#C9922E;strokeWidth=1.5;fontFamily=Arial;fontSize=13;', cx - rx, cy - ry, rx * 2, ry * 2);
   const place = (list, x) => {
     const step = 120;
     const y0 = cy - ((list.length - 1) * step) / 2;
     list.forEach((a, i) => {
       const y = y0 + i * step;
-      const id = mx.vertex(a, 'shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#222222;fillColor=none;fontFamily=Arial;fontSize=12;', x - 15, y - 35, 30, 60);
+      const id = mx.vertex(esc(a), 'shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;strokeColor=#222222;fillColor=none;fontFamily=Arial;fontSize=12;', x - 15, y - 35, 30, 60);
       mx.edge('', 'endArrow=none;html=1;strokeColor=#444444;', { source: id, target: mainId });
     });
   };
@@ -292,8 +294,8 @@ export function ucg(spec, relName) {
   rel.forEach((q, i) => {
     const x = (W / (n + 1)) * (i + 1);
     const rrx = Math.max(110, tw(q.text) / 2 + 8), rry = 30;
-    const id = mx.vertex(q.text, `ellipse;whiteSpace=wrap;html=1;fillColor=${q.fill || '#F1EBFA'};strokeColor=#7D5BB0;strokeWidth=1.3;fontFamily=Arial;fontSize=12;`, x - rrx, relY - rry, rrx * 2, rry * 2);
-    const lab = `«${q.rel}»${q.cond ? ' ' + q.cond : ''}`;
+    const id = mx.vertex(esc(q.text), `ellipse;whiteSpace=wrap;html=1;fillColor=${q.fill || '#F1EBFA'};strokeColor=#7D5BB0;strokeWidth=1.3;fontFamily=Arial;fontSize=12;`, x - rrx, relY - rry, rrx * 2, rry * 2);
+    const lab = esc(`«${q.rel}»${q.cond ? ' ' + q.cond : ''}`);
     const st = 'html=1;dashed=1;endArrow=open;endFill=0;strokeColor=#444444;fontFamily=Arial;fontSize=11;labelBackgroundColor=#FFFFFF;';
     if (q.rel === 'include') mx.edge(lab, st, { source: mainId, target: id });
     else mx.edge(lab, st, { source: id, target: mainId });

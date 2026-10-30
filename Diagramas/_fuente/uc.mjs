@@ -15,9 +15,9 @@ const cu = async (n, name, body, extra = '') =>
 const file = (n, kind) => `UC-${n}/UC-${n} - ${kind}`;
 
 const ent = (id, name, m) => cls(id, 'ent', 'entidad', name, m);
-const ctxNode = cls('ctx', 'infra', 'EF Core', 'NegocioDbContext', ['+ SaveChanges() : int', '  (firma DVH/DVV y audita)']);
-const ctxRead = cls('ctx', 'infra', 'EF Core', 'NegocioDbContext', ['(consultas de lectura)']);
-const rejNode = cls('rej', 'infra', 'static', 'ReglasNegocio', ['+ Rechazar(errores, contexto, usuario)']);
+const ctxNode = () => cls('ctx', 'infra', 'EF Core', 'NegocioDbContext', ['+ SaveChanges() : int', '  (firma DVH/DVV y audita)']);
+const ctxRead = () => cls('ctx', 'infra', 'EF Core', 'NegocioDbContext', ['(consultas de lectura)']);
+const rejNode = () => cls('rej', 'infra', 'static', 'ReglasNegocio', ['+ Rechazar(errores, contexto, usuario)']);
 
 // ============ UC-01 ============
 ucg({ title: 'UC-01 — Registrar, Modificar y Dar de Baja Paciente: gráfico', left: ['Administrativo'], right: ['Médico'], main: 'UC-01 Registrar, Modificar y Dar de Baja Paciente', rel: [{ text: 'Generar credenciales del portal', rel: 'extend', cond: '(en el alta)' }] }, file('01', 'Gráfico'));
@@ -26,7 +26,7 @@ await cu('01', '', [
   cls('logic', 'logic', 'BLL', 'PacienteLogic', ['+ Buscar(filtro, incluirInactivos) : List<Paciente>', '+ BuscarPorDNI(dni) : Paciente?', '+ RegistrarPaciente(paciente, usuario) : CredencialesPortal', '+ ModificarPaciente(paciente, usuario) : void', '+ DarDeBajaPaciente(id, motivo, usuario) : void']),
   cls('irepo', 'infra', 'interface', 'IPacienteRepositorio', ['+ BuscarActivos() : List<Paciente>', '+ BuscarPorDNI(dni) : Paciente?', '+ ExisteDNIActivo(dni, idExcluir) : bool']),
   cls('repo', 'infra', 'DAL', 'PacienteRepositorio', ['(implementa la interfaz)']),
-  ctxNode, rejNode,
+  ctxNode(), rejNode(),
   ent('pac', 'Paciente', ['- NombreCompleto, DNI «UQ»', '- Estado, MotivoBaja', '- FechaAlta, FechaBaja']),
   ent('os', 'ObraSocial', ['- Nombre, Activo']),
   'form -> logic [label="invoca" style=dashed arrowhead=open]; logic -> irepo [label="valida DNI / busca" style=dashed arrowhead=open]; repo -> irepo [arrowhead=empty style=dashed label="implementa"]; repo -> ctx [style=dashed arrowhead=open label="persiste"]; logic -> rej [style=dashed arrowhead=open label="rechaza"]; logic -> pac [style=dashed arrowhead=open label="crea/modifica/baja"]; pac -> os [arrowhead=none taillabel="*" headlabel="0..1"];',
@@ -55,7 +55,7 @@ ucg({ title: 'UC-02 — Configurar Historia Clínica Hematológica: gráfico', l
 await cu('02', '', [
   cls('form', 'ui', 'Form', 'HistoriaClinicaForm', ['(configuración clínica)']),
   cls('logic', 'logic', 'BLL', 'HistoriaClinicaLogic', ['+ Configurar(configuracion, usuario) : HistoriaClinica', '+ ObtenerPorPaciente(idPaciente) : HistoriaClinica?', '+ ActualizarPeriodicidad(idPaciente, dias, usuario) : void']),
-  ctxNode, rejNode,
+  ctxNode(), rejNode(),
   ent('hc', 'HistoriaClinica', ['- IdPaciente «UQ», IdDiagnostico', '- LimiteInferiorRIN, LimiteSuperiorRIN', '- Medicamento, Dosis', '- PeriodicidadDias, ProximaFechaControl']),
   ent('dx', 'Diagnostico', ['- Nombre, Descripcion, Activo']),
   'form -> logic [label="invoca" style=dashed arrowhead=open]; logic -> ctx [label="persiste" style=dashed arrowhead=open]; logic -> rej [label="rechaza" style=dashed arrowhead=open]; logic -> hc [label="configura" style=dashed arrowhead=open]; hc -> dx [arrowhead=none taillabel="*" headlabel="0..1" label="clasifica"];',
@@ -84,7 +84,7 @@ await cu('03', '', [
   cls('form', 'ui', 'Form', 'EventoAdversoForm', ['(registro de eventos)']),
   cls('ctl', 'ui', 'UserControl', 'EventosAdversosControl', ['(listado; colorea por gravedad)']),
   cls('logic', 'logic', 'BLL', 'EventoAdversoLogic', ['+ Registrar(evento, usuario) : EventoAdverso', '+ ObtenerPorPaciente(idPaciente) : List<EventoAdverso>']),
-  ctxNode, rejNode,
+  ctxNode(), rejNode(),
   ent('ev', 'EventoAdverso', ['- Fecha, Tipo, Descripcion', '- Gravedad (Leve / Moderada / Grave)', '- AccionTomada']),
   ent('pac', 'Paciente', ['- NombreCompleto, Estado']),
   'form -> logic [label="invoca" style=dashed arrowhead=open]; ctl -> form [label="abre" style=dashed arrowhead=open]; logic -> ctx [label="persiste" style=dashed arrowhead=open]; logic -> rej [label="rechaza" style=dashed arrowhead=open]; logic -> ev [label="crea" style=dashed arrowhead=open]; ev -> pac [arrowhead=none taillabel="*" headlabel="1" label="de"];',
@@ -120,7 +120,7 @@ await cu('04', '', [
   cls('ui1', 'ui', 'UserControl', 'RecepcionRINControl', ['(recepción)']),
   cls('ui2', 'ui', 'UserControl', 'PortalControl', ['(portal del paciente)']),
   cls('logic', 'logic', 'BLL', 'MedicionRINLogic', ['+ Reportar(medicion, usuario) : ResultadoReporteRIN', '+ CalcularCriticidad(valor, limInf, limSup) : NivelCriticidad', '+ ObtenerUltima(idPaciente) : MedicionRIN?', '+ ObtenerHistorial(idPaciente) : List<MedicionRIN>']),
-  ctxNode, rejNode,
+  ctxNode(), rejNode(),
   ent('med', 'MedicionRIN', ['- ValorRIN (0,1 – 20,0), FechaMedicion', '- Canal, NivelCriticidad', '- PorTendenciaPeligrosa']),
   ent('hc', 'HistoriaClinica', ['- LimiteInferiorRIN, LimiteSuperiorRIN']),
   ent('al', 'Alerta', ['- Tipo, NivelCriticidad, Estado', '- NotificadaMedico / Administrativo']),
@@ -154,7 +154,7 @@ ${cls('logic', 'logic', 'BLL', 'MedicionRINLogic', ['+ CalcularCriticidad(valor,
 ${cls('enum', 'rec', 'enum', 'NivelCriticidad', ['Baja  (dentro del rango)', 'Media (fuera por menos de 0,5)', 'Alta  (fuera por 0,5 o más, o por tendencia)'])}
 ${ent('hc', 'HistoriaClinica', ['- LimiteInferiorRIN', '- LimiteSuperiorRIN'])}
 ${ent('med', 'MedicionRIN', ['- ValorRIN, NivelCriticidad', '- PorTendenciaPeligrosa'])}
-${ctxNode}
+${ctxNode()}
 logic -> hc [label="lee límites" style=dashed arrowhead=open]; logic -> med [label="clasifica y marca" style=dashed arrowhead=open]; logic -> enum [label="devuelve" style=dashed arrowhead=open]; logic -> ctx [label="persiste" style=dashed arrowhead=open];`, 'UC-05/UC-05 - Clases afectadas');
 seq({ title: 'UC-05 — Calcular Criticidad: diagrama de secuencia', parts: [P('s', 'Reportar()\n(UC-04)'), P('l', ':MedicionRINLogic\n(BLL)'), CTX], steps: [
   { from: 's', to: 'l', text: '1: nueva medición validada' },
@@ -175,7 +175,7 @@ await cu('06', '', [
   cls('ui', 'ui', 'UserControl', 'PanelTriajeControl', ['+ Pausar() : void', '+ Reanudar() : void', '+ RefrescarTextos() : void']),
   cls('logic', 'logic', 'BLL', 'PanelMonitoreoLogic', ['+ ObtenerPanel() : PanelMonitoreo']),
   cls('al', 'logic', 'BLL', 'AlertaLogic', ['+ ObtenerActivas() : List<Alerta>', '+ ObtenerPorPaciente(idPaciente) : List<Alerta>', '+ Resolver(idAlerta, accion, usuario) : void']),
-  ctxRead,
+  ctxRead(),
   ent('pac', 'Paciente', ['- NombreCompleto, Estado']),
   ent('med', 'MedicionRIN', ['- ValorRIN, NivelCriticidad']),
   ent('alr', 'Alerta', ['- Tipo, Estado, NivelCriticidad']),
@@ -201,7 +201,7 @@ await cu('07', '', [
   cls('sl', 'logic', 'BLL', 'SeguimientoLogic', ['+ RegistrarIntentoContacto(intento, ...)', 'UmbralIntentosFallidos = 3', '  → EscaladaAMedico = true']),
   cls('al', 'logic', 'BLL', 'AlertaLogic', ['+ ObtenerActivas() : List<Alerta>', '+ Resolver(idAlerta, accion, usuario)']),
   cls('ui', 'ui', 'UserControl', 'PanelTriajeControl', ['(muestra el aviso urgente)']),
-  ctxNode,
+  ctxNode(),
   ent('alr', 'Alerta', ['- NotificadaMedico, NotificadaAdministrativo', '- EscaladaAMedico, FechaEscalada', '- Estado, FechaResolucion']),
   'ml -> alr [label="crea y notifica" style=dashed arrowhead=open]; sl -> alr [label="escala" style=dashed arrowhead=open]; al -> alr [label="consulta/resuelve" style=dashed arrowhead=open]; ml -> ctx [style=dashed arrowhead=open label="persiste"]; sl -> ctx [style=dashed arrowhead=open]; ui -> al [label="consulta" style=dashed arrowhead=open];',
 ].join('\n'));
@@ -224,7 +224,7 @@ await dot(`rankdir=LR; nodesep=0.5; ranksep=0.9;
 ${cls('logic', 'logic', 'BLL', 'MedicionRINLogic', ['+ Reportar(medicion, usuario) : ResultadoReporteRIN', '# EnBordeDelRango(valor, hc) : bool', 'MargenBorde = ±0,1'])}
 ${ent('med', 'MedicionRIN', ['- ValorRIN, NivelCriticidad', '- PorTendenciaPeligrosa : bool'])}
 ${ent('al', 'Alerta', ['- Tipo = TendenciaPeligrosa', '- NivelCriticidad = Alta'])}
-${ctxNode}
+${ctxNode()}
 logic -> med [label="marca y sube a Alta" style=dashed arrowhead=open]; logic -> al [label="genera" style=dashed arrowhead=open]; logic -> ctx [label="lee anterior y persiste" style=dashed arrowhead=open];`, 'UC-08/UC-08 - Clases afectadas');
 seq({ title: 'UC-08 — Reclasificar por Tendencia Peligrosa: diagrama de secuencia', parts: [P('s', 'Reportar()\n(UC-04)'), P('l', ':MedicionRINLogic\n(BLL)'), CTX], steps: [
   { from: 's', to: 'l', text: '1: medición nueva (valor y límites del paciente)' },
@@ -248,7 +248,7 @@ await cu('09', '', [
   cls('ui', 'ui', 'UserControl', 'AgendaControl', ['(agenda y sugerencias)']),
   cls('logic', 'logic', 'BLL', 'TurnoLogic', ['+ ObtenerAgenda(desde, hasta) : List<Turno>', '+ AgendarTurno(turno, usuario) : Turno', '+ GenerarSugerencias() : List<SugerenciaReasignacion>', '+ AceptarSugerencia(sugerencia, usuario) : ResultadoReasignacion', '+ RechazarSugerencia(sugerencia, motivo, escalar, usuario) : Alerta?']),
   cls('sug', 'rec', 'record', 'SugerenciaReasignacion', ['TurnoLiberado, PacienteCandidato, Motivo']),
-  ctxNode,
+  ctxNode(),
   ent('tu', 'Turno', ['- FechaHora, Estado, Observaciones', '- IdPaciente, IdUsuarioMedico']),
   ent('al', 'Alerta', ['- Tipo, Estado (escalada al médico)']),
   'ui -> logic [label="invoca" style=dashed arrowhead=open]; logic -> sug [label="genera" style=dashed arrowhead=open]; logic -> tu [label="reasigna" style=dashed arrowhead=open]; logic -> al [label="crea si escala" style=dashed arrowhead=open]; logic -> ctx [label="persiste" style=dashed arrowhead=open];',
@@ -284,7 +284,7 @@ ucg({ title: 'UC-10 — Monitorear Plazos y Gestionar Seguimiento: gráfico', le
 await cu('10', '', [
   cls('ui', 'ui', 'UserControl', 'SeguimientoControl', ['(lista de contactos y registro)']),
   cls('logic', 'logic', 'BLL', 'SeguimientoLogic', ['+ DetectarPlazosVencidos() : List<Alerta>', '+ RegistrarIntentoContacto(intento, usuario) : ResultadoIntentoContacto', '+ ObtenerSeguimientos(idPaciente) : List<Seguimiento>', 'UmbralIntentosFallidos = 3']),
-  ctxNode,
+  ctxNode(),
   ent('seg', 'Seguimiento', ['- TipoContacto, Resultado, Observaciones', '- DecisionClinica, DetalleDecision']),
   ent('al', 'Alerta', ['- Tipo (ReporteAusente), Estado', '- EscaladaAMedico, FechaEscalada']),
   ent('hc', 'HistoriaClinica', ['- PeriodicidadDias, ProximaFechaControl']),
@@ -316,7 +316,7 @@ await cu('11', '', [
   cls('ui', 'ui', 'UserControl', 'ReportesControl', ['(generación y visualización)']),
   cls('logic', 'logic', 'BLL', 'ReporteLogic', ['+ GenerarReporteMensual(anio, mes, usuario) : ReporteEstadistico', '+ Clasificar(porcentajeEnRango) : ClasificacionControl', 'UmbralOptimo = 80 %   UmbralSuboptimo = 50 %']),
   cls('enum', 'rec', 'enum', 'ClasificacionControl', ['Optimo (≥ 80 %)', 'Suboptimo (≥ 50 % y < 80 %)', 'Deficiente (< 50 %)']),
-  ctxNode,
+  ctxNode(),
   ent('rep', 'ReporteEstadistico', ['- Anio, Mes', '- IndicadorGlobalEficacia', '- CantidadOptimos / Suboptimos / Deficientes', '- DetalleJson']),
   ent('med', 'MedicionRIN', ['- ValorRIN, FechaMedicion']),
   'ui -> logic [label="invoca" style=dashed arrowhead=open]; logic -> med [label="consolida" style=dashed arrowhead=open]; logic -> enum [label="clasifica" style=dashed arrowhead=open]; logic -> rep [label="genera / regenera" style=dashed arrowhead=open]; logic -> ctx [label="persiste" style=dashed arrowhead=open];',
@@ -346,7 +346,7 @@ await cu('12', '', [
   cls('ui', 'ui', 'UserControl', 'ReportesControl', ['(reporte por diagnóstico)']),
   cls('logic', 'logic', 'BLL', 'ReporteLogic', ['+ GenerarReportePorDiagnostico(anio, mes, idDiagnostico?, usuario) : List<FilaReporteDiagnostico>']),
   cls('fila', 'rec', 'record', 'FilaReporteDiagnostico', ['Diagnostico, Indicador', 'Cantidades (óptimos / subóptimos / deficientes)']),
-  ctxNode,
+  ctxNode(),
   ent('dx', 'Diagnostico', ['- Nombre, Descripcion, Activo']),
   ent('hc', 'HistoriaClinica', ['- IdDiagnostico']),
   ent('med', 'MedicionRIN', ['- ValorRIN, FechaMedicion']),
@@ -374,7 +374,7 @@ await cu('13', '', [
   cls('exp', 'infra', 'static', 'Exportadores', ['+ CarpetaExportacion() : string', '+ EscribirHistorial(exportacion, paciente, formato) : string']),
   cls('it', 'rec', 'record', 'ItemHistorial', ['Fecha, Tipo, Descripcion']),
   cls('eh', 'rec', 'record', 'ExportacionHistorial', ['NombreArchivoSugerido, Items']),
-  ctxRead,
+  ctxRead(),
   'ui -> logic [label="invoca" style=dashed arrowhead=open]; ui -> exp [label="escribe el archivo" style=dashed arrowhead=open]; logic -> ctx [label="consulta" style=dashed arrowhead=open]; logic -> it [label="compone" style=dashed arrowhead=open]; logic -> eh [label="devuelve" style=dashed arrowhead=open]; exp -> eh [label="usa" style=dashed arrowhead=open];',
 ].join('\n'));
 seq({ title: 'UC-13 — Consultar Historial y Exportar Reportes: diagrama de secuencia', parts: [P('a', 'Médico /\nAdministrativo', true), P('f', ':ReportesControl\n(UI)'), P('l', ':ReporteLogic\n(BLL)'), CTX, P('x', ':Exportadores\n(static)')], steps: [
