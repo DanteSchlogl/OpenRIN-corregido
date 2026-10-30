@@ -723,3 +723,145 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_Turnos_IdUsuarioMedico] ON [Turnos] ([IdUsuarioMedico]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_Seguimientos_IdUsuarioDecision] ON [Seguimientos] ([IdUsuarioDecision]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_Seguimientos_IdUsuarioRegistro] ON [Seguimientos] ([IdUsuarioRegistro]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_Pacientes_IdUsuarioPortal] ON [Pacientes] ([IdUsuarioPortal]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_MedicionesRIN_IdUsuarioRegistro] ON [MedicionesRIN] ([IdUsuarioRegistro]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_EventosAdversos_IdUsuarioRegistro] ON [EventosAdversos] ([IdUsuarioRegistro]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    CREATE INDEX [IX_Alertas_IdUsuarioResolucion] ON [Alertas] ([IdUsuarioResolucion]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [Alertas] ADD CONSTRAINT [FK_Alertas_Usuarios_IdUsuarioResolucion] FOREIGN KEY ([IdUsuarioResolucion]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [EventosAdversos] ADD CONSTRAINT [FK_EventosAdversos_Usuarios_IdUsuarioRegistro] FOREIGN KEY ([IdUsuarioRegistro]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [MedicionesRIN] ADD CONSTRAINT [FK_MedicionesRIN_Usuarios_IdUsuarioRegistro] FOREIGN KEY ([IdUsuarioRegistro]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [Pacientes] ADD CONSTRAINT [FK_Pacientes_Usuarios_IdUsuarioPortal] FOREIGN KEY ([IdUsuarioPortal]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [Seguimientos] ADD CONSTRAINT [FK_Seguimientos_Usuarios_IdUsuarioDecision] FOREIGN KEY ([IdUsuarioDecision]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [Seguimientos] ADD CONSTRAINT [FK_Seguimientos_Usuarios_IdUsuarioRegistro] FOREIGN KEY ([IdUsuarioRegistro]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    ALTER TABLE [Turnos] ADD CONSTRAINT [FK_Turnos_Usuarios_IdUsuarioMedico] FOREIGN KEY ([IdUsuarioMedico]) REFERENCES [Usuarios] ([Id]) ON DELETE NO ACTION;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20261030133110_ReferenciasAUsuarios'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20261030133110_ReferenciasAUsuarios', N'8.0.31');
+END;
+GO
+
+COMMIT;
+GO
+

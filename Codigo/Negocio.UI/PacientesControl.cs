@@ -69,7 +69,7 @@ namespace Negocio.UI
             _lblBuscar.ForeColor = Color.FromArgb(60, 85, 115);
 
             _txtBusqueda.Location = new Point(62, 14);
-            _txtBusqueda.Size = new Size(220, 28);
+            _txtBusqueda.Size = new Size(170, 28);
             _txtBusqueda.Font = new Font("Segoe UI", 10F);
             _txtBusqueda.KeyDown += (s, e) =>
             {
@@ -80,8 +80,8 @@ namespace Negocio.UI
                 }
             };
 
-            _btnBuscar.Location = new Point(290, 13);
-            _btnBuscar.Size = new Size(90, 30);
+            _btnBuscar.Location = new Point(240, 13);
+            _btnBuscar.Size = new Size(80, 30);
             _btnBuscar.FlatStyle = FlatStyle.Flat;
             _btnBuscar.BackColor = Color.FromArgb(45, 108, 223);
             _btnBuscar.ForeColor = Color.White;
@@ -90,15 +90,15 @@ namespace Negocio.UI
             _btnBuscar.Cursor = Cursors.Hand;
             _btnBuscar.Click += (s, e) => CargarDatos();
 
-            _chkInactivos.Location = new Point(392, 17);
-            _chkInactivos.Size = new Size(150, 22);
+            _chkInactivos.Location = new Point(330, 17);
+            _chkInactivos.Size = new Size(115, 22);
             _chkInactivos.Font = new Font("Segoe UI", 9.5F);
             _chkInactivos.CheckedChanged += (s, e) => CargarDatos();
 
             var flowAcciones = new FlowLayoutPanel
             {
                 Dock = DockStyle.Right,
-                Width = 600,
+                Width = 560,
                 FlowDirection = FlowDirection.RightToLeft,
                 WrapContents = false,
                 BackColor = BackColor,

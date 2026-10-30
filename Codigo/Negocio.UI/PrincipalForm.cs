@@ -24,6 +24,7 @@ namespace Negocio.UI
         private readonly Label _lblSesion = new();
         private readonly Label _lblIntegridad = new();
         private readonly Button _btnCerrarSesion = new();
+        private readonly Button _btnAyuda = new();
         private readonly ComboBox _cmbIdioma = new();
         private readonly Panel _panelMenu = new();
         private readonly Label _lblMenuTitulo = new();
@@ -104,7 +105,7 @@ namespace Negocio.UI
             _lblSesion.ForeColor = Color.FromArgb(214, 232, 250);
 
             _flowCabecera.Dock = DockStyle.Right;
-            _flowCabecera.Width = 560;
+            _flowCabecera.Width = 670;
             _flowCabecera.FlowDirection = FlowDirection.RightToLeft;
             _flowCabecera.Padding = new Padding(0, 18, 16, 0);
             _flowCabecera.BackColor = Color.FromArgb(41, 98, 176);
@@ -119,6 +120,17 @@ namespace Negocio.UI
             _btnCerrarSesion.Cursor = Cursors.Hand;
             _btnCerrarSesion.Click += BtnCerrarSesion_Click;
 
+            _btnAyuda.Size = new Size(90, 36);
+            _btnAyuda.FlatStyle = FlatStyle.Flat;
+            _btnAyuda.FlatAppearance.BorderColor = Color.FromArgb(160, 195, 232);
+            _btnAyuda.BackColor = Color.FromArgb(57, 120, 198);
+            _btnAyuda.ForeColor = Color.White;
+            _btnAyuda.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            _btnAyuda.Cursor = Cursors.Hand;
+            _btnAyuda.Margin = new Padding(3, 3, 8, 3);
+            _btnAyuda.Click += (s, e) => MostrarAyuda();
+            HelpRequested += (s, e) => { MostrarAyuda(); e.Handled = true; };
+
             _cmbIdioma.Size = new Size(170, 28);
             _cmbIdioma.DropDownStyle = ComboBoxStyle.DropDownList;
             _cmbIdioma.Font = new Font("Segoe UI", 9.5F);
@@ -132,6 +144,7 @@ namespace Negocio.UI
             _lblIntegridad.ForeColor = Color.FromArgb(214, 232, 250);
 
             _flowCabecera.Controls.Add(_btnCerrarSesion);
+            _flowCabecera.Controls.Add(_btnAyuda);
             _flowCabecera.Controls.Add(_cmbIdioma);
             _flowCabecera.Controls.Add(_lblIntegridad);
 
@@ -381,12 +394,39 @@ namespace Negocio.UI
             }
         }
 
+        /// <summary>D02 - Ayuda en línea: abre el archivo OpenRIN-Ayuda.chm en el tema del módulo activo (también con F1).</summary>
+        private void MostrarAyuda()
+        {
+            string archivo = Path.Combine(AppContext.BaseDirectory, "OpenRIN-Ayuda.chm");
+            if (!File.Exists(archivo))
+            {
+                MessageBox.Show(Texto("ayuda.noEncontrada"), Texto("app.nombre"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string tema = _claveModuloActual switch
+            {
+                "mod.pacientes" => "pacientes.htm",
+                "panel.titulo" => "panel.htm",
+                "mod.rin" => "rin.htm",
+                "mod.agenda" => "agenda.htm",
+                "mod.seguimiento" => "seguimiento.htm",
+                "mod.eventos" => "eventos.htm",
+                "mod.reportes" => "reportes.htm",
+                "mod.portal" => "portal.htm",
+                "mod.sistema" => "sistema.htm",
+                _ => "inicio.htm"
+            };
+            Help.ShowHelp(this, archivo, HelpNavigator.Topic, tema);
+        }
+
         private void AplicarTextos()
         {
             Text = $"{Texto("app.nombre")} — {Texto("shell.titulo")}";
             _lblSesion.Text = $"{Texto("shell.sesion")} {_sesion.NombreCompleto} ({_sesion.Perfil})";
             _lblMenuTitulo.Text = Texto("shell.modulos");
             _btnCerrarSesion.Text = Texto("shell.cerrarSesion");
+            _btnAyuda.Text = Texto("shell.ayuda");
 
             foreach ((Button boton, string clave) in _botonesModulo)
             {

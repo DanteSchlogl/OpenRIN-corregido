@@ -109,7 +109,7 @@ export function cls(id, kind, st, name, members = []) {
 export function tbl(id, name, rows, color = ['#FFF6E5', '#C9922E']) {
   REG.set(id, { er: true, name, rows, color });
   const [bg, bd] = color;
-  return `${id} [shape=plain label=<<TABLE BORDER="1" COLOR="${bd}" CELLBORDER="0" CELLSPACING="0" CELLPADDING="${CP}" BGCOLOR="${bg}"><TR><TD BGCOLOR="#F5E2B8"><B>${esc(name)}</B></TD></TR><HR/>${rows.map((x) => `<TR><TD ALIGN="LEFT">${esc(x)}</TD></TR>`).join('')}</TABLE>>];`;
+  return `${id} [shape=plain label=<<TABLE BORDER="1" COLOR="${bd}" CELLBORDER="0" CELLSPACING="0" CELLPADDING="${CP}" BGCOLOR="${bg}"><TR><TD BGCOLOR="#F5E2B8"><B>${esc(name)}</B></TD></TR><HR/>${rows.map((x) => `<TR><TD ALIGN="LEFT">${esc(x)}</TD></TR>`).join('')}<TR><TD> </TD></TR></TABLE>>];`;
 }
 
 const HF = 'font-family:Arial;font-size:11px;';
@@ -128,6 +128,7 @@ function arrowStyle(a) {
   const map = { open: 'endArrow=open;endFill=0;', empty: 'endArrow=block;endFill=0;', none: 'endArrow=none;', normal: 'endArrow=block;endFill=1;', crowodot: 'endArrow=ERzeroToMany;endFill=0;', teetee: 'endArrow=ERmandOne;endFill=0;', teeodot: 'endArrow=ERzeroToOne;endFill=0;', odiamond: 'endArrow=diamondThin;endFill=0;' };
   const smap = { empty: 'startArrow=block;startFill=0;', odiamond: 'startArrow=diamondThin;startFill=0;', crowodot: 'startArrow=ERzeroToMany;startFill=0;', teetee: 'startArrow=ERmandOne;startFill=0;', teeodot: 'startArrow=ERzeroToOne;startFill=0;', none: 'startArrow=none;' };
   const dir = a.dir || 'forward';
+  if (dir === 'none') return `html=1;rounded=0;curved=1;edgeStyle=none;strokeColor=#444444;fontSize=10;fontFamily=Arial;labelBackgroundColor=#FFFFFF;${dash}endArrow=none;startArrow=none;`;
   const head = a.arrowhead || 'normal';
   const tail = a.arrowtail || 'none';
   let s = '';
@@ -148,6 +149,7 @@ export async function dot(src, relName, extra = '') {
   const Y = (y) => H - (y - by0);
   const mx = new Mx();
   const gid = new Map();
+  const geo = new Map();
   for (const o of j.objects || []) {
     if (o.bb && String(o.name).startsWith('cluster')) {
       const [a, b, c, d] = o.bb.split(',').map(Number);
@@ -173,6 +175,7 @@ export async function dot(src, relName, extra = '') {
       id = mx.vertex(label, 'shape=note;whiteSpace=wrap;html=1;fillColor=#FFFBE6;strokeColor=#C9B24A;fontFamily=Arial;fontSize=11;size=12;', X(px) - w / 2, Y(py) - h / 2, w, h);
     }
     gid.set(o._gvid, id);
+    geo.set(o._gvid, { x: X(px) - w / 2, y: Y(py) - h / 2, w, h });
   }
   for (const e of j.edges || []) {
     if (e.style && String(e.style).includes("invis")) continue;
@@ -184,7 +187,13 @@ export async function dot(src, relName, extra = '') {
       from = p[0]; to = p[p.length - 1];
       for (let i = 3; i < p.length - 1; i += 3) pts.push(p[i]);
     }
-    const style = arrowStyle({ style: e.style, arrowhead: e.arrowhead, arrowtail: e.arrowtail, dir: e.dir });
+    let style = arrowStyle({ style: e.style, arrowhead: e.arrowhead, arrowtail: e.arrowtail, dir: e.dir });
+    if (e.tail === e.head && geo.get(e.tail)) {
+      const g = geo.get(e.tail);
+      style += "edgeStyle=orthogonalEdgeStyle;curved=0;exitX=1;exitY=0.25;entryX=1;entryY=0.6;";
+      pts.length = 0; pts.push([g.x + g.w + 45, g.y + g.h * 0.25], [g.x + g.w + 45, g.y + g.h * 0.6]);
+      from = undefined; to = undefined;
+    }
     mx.edge(e.label || '', style, { source: gid.get(e.tail), target: gid.get(e.head), points: pts, from, to });
     for (const key of ['_tldraw_', '_hldraw_']) {
       const t = (e[key] || []).find((d) => d.op === 'T');

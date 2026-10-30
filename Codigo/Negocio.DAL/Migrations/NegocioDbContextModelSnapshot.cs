@@ -89,6 +89,8 @@ namespace Negocio.DAL.Migrations
 
                     b.HasIndex("IdPaciente");
 
+                    b.HasIndex("IdUsuarioResolucion");
+
                     b.ToTable("Alertas", (string)null);
                 });
 
@@ -278,6 +280,8 @@ namespace Negocio.DAL.Migrations
 
                     b.HasIndex("IdPaciente");
 
+                    b.HasIndex("IdUsuarioRegistro");
+
                     b.ToTable("EventosAdversos", (string)null);
                 });
 
@@ -382,6 +386,8 @@ namespace Negocio.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdPaciente");
+
+                    b.HasIndex("IdUsuarioRegistro");
 
                     b.ToTable("MedicionesRIN", (string)null);
                 });
@@ -511,6 +517,8 @@ namespace Negocio.DAL.Migrations
 
                     b.HasIndex("IdObraSocial");
 
+                    b.HasIndex("IdUsuarioPortal");
+
                     b.ToTable("Pacientes", (string)null);
                 });
 
@@ -610,6 +618,10 @@ namespace Negocio.DAL.Migrations
 
                     b.HasIndex("IdPaciente");
 
+                    b.HasIndex("IdUsuarioDecision");
+
+                    b.HasIndex("IdUsuarioRegistro");
+
                     b.ToTable("Seguimientos", (string)null);
                 });
 
@@ -649,6 +661,8 @@ namespace Negocio.DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdPaciente");
+
+                    b.HasIndex("IdUsuarioMedico");
 
                     b.ToTable("Turnos", (string)null);
                 });
@@ -726,6 +740,11 @@ namespace Negocio.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioResolucion")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Medicion");
 
                     b.Navigation("Paciente");
@@ -738,6 +757,11 @@ namespace Negocio.DAL.Migrations
                         .HasForeignKey("IdPaciente")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioRegistro")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Paciente");
                 });
@@ -768,6 +792,11 @@ namespace Negocio.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioRegistro")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Paciente");
                 });
 
@@ -776,6 +805,11 @@ namespace Negocio.DAL.Migrations
                     b.HasOne("Negocio.DomainModel.ObraSocial", "ObraSocial")
                         .WithMany()
                         .HasForeignKey("IdObraSocial")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioPortal")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ObraSocial");
@@ -789,6 +823,16 @@ namespace Negocio.DAL.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioDecision")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioRegistro")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.Navigation("Paciente");
                 });
 
@@ -797,6 +841,12 @@ namespace Negocio.DAL.Migrations
                     b.HasOne("Negocio.DomainModel.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("IdPaciente")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Negocio.DomainModel.Usuario", null)
+                        .WithMany()
+                        .HasForeignKey("IdUsuarioMedico")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

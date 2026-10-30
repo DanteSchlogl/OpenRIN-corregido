@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const SRC = process.env.SRC_PDF || 'original.pdf';
 const OUTPDF = process.argv[2] || 'Carpeta de Proyecto - OpenRIN (diagramas corregidos).pdf';
-const D = 'OpenRIN-corregido/Diagramas';
+const D = process.env.DIAG_DIR || 'OpenRIN-corregido/Diagramas';
 const only = process.argv.slice(3).map(Number);
 
 const map = [
@@ -12,7 +12,10 @@ const map = [
   [15, 'Arquitectura/G06 - Presentacion (clases)'],
   [16, 'Arquitectura/G06 - Servicios seguridad y localizacion (clases)'],
   [14, 'Arquitectura/G06 - Acceso a datos (clases)'],
+  [19, 'Arquitectura/G07 - DER hoja A (nucleo clinico)'],
   [20, 'Arquitectura/G07 - DER hoja B (operacion y sistema)'],
+  [21, 'Arquitectura/G07 - DER hoja C (servicios)'],
+  ...Object.entries({ '01': 38, '02': 45, '03': 52, '04': 60, '05': 69, '06': 76, '07': 83, '08': 90, '09': 97, '10': 104, '11': 111, '12': 118, '13': 125 }).map(([n, p]) => [p, `UC-${n}/UC-${n} - DER parcial`]),
   [24, 'Procesos/P01 - Actividad'], [25, 'Procesos/P02 - Actividad'], [26, 'Procesos/P03 - Actividad'], [27, 'Procesos/P04 - Actividad'], [28, 'Procesos/P05 - Actividad'],
   [133, 'Tecnicos/T02 - Secuencia integridad al iniciar'], [134, 'Tecnicos/T02 - Secuencia inicio de sesion'],
 ];

@@ -19,7 +19,7 @@ T Try<T>(string nombre, Func<T> f)
 void Titulo(string t) => Console.WriteLine("\n== " + t);
 
 string clave = "Ort" + Guid.NewGuid().ToString("N")[..10] + "!1";
-string uSys = "sysadmin";
+string uSys = "pruebas_auto"; // usuario propio de la prueba: no toca los usuarios de demostración
 const string U = "prueba";
 
 // ---------------------------------------------------------------- SERVICIOS
@@ -59,7 +59,7 @@ for (int i = 0; i < 5; i++) { try { SeguridadService.Autenticar(uSys, "xxxxxx");
 bool bloqueado = false; try { SeguridadService.Autenticar(uSys, clave); } catch (Exception) { bloqueado = true; }
 Check("5 intentos fallidos bloquean la cuenta", bloqueado);
 using (var c0 = new Microsoft.Data.SqlClient.SqlConnection(@"Server=.\SQLEXPRESS;Database=OpenRIN_Services;Integrated Security=True;TrustServerCertificate=True;"))
-{ c0.Open(); using var cmd = c0.CreateCommand(); cmd.CommandText = "UPDATE Usuarios SET IntentosFallidos=0, BloqueadoHasta=NULL WHERE NombreUsuario='sysadmin'"; cmd.ExecuteNonQuery(); }
+{ c0.Open(); using var cmd = c0.CreateCommand(); cmd.CommandText = "UPDATE Usuarios SET IntentosFallidos=0, BloqueadoHasta=NULL WHERE NombreUsuario='pruebas_auto'"; cmd.ExecuteNonQuery(); }
 Check("desbloqueo y login", Try("login", () => SeguridadService.Autenticar(uSys, clave)) != null);
 Check("cifrado AES ida y vuelta", CryptographyService.Desencriptar(CryptographyService.Encriptar("dato clínico")) == "dato clínico");
 var h = CryptographyService.Hashear("abc");

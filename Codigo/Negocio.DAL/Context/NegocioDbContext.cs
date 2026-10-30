@@ -404,6 +404,17 @@ namespace Negocio.DAL.Context
             });
 
             // ---------- Datos semilla ----------
+            // ---------- Referencias a Usuarios (integridad referencial) ----------
+            // Las columnas que identifican a la persona que operó (médico asignado, usuario del portal,
+            // quien registra o resuelve) son claves foráneas hacia Usuarios, con borrado restringido.
+            modelBuilder.Entity<Paciente>().HasOne<Usuario>().WithMany().HasForeignKey(p => p.IdUsuarioPortal).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<MedicionRIN>().HasOne<Usuario>().WithMany().HasForeignKey(m => m.IdUsuarioRegistro).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Alerta>().HasOne<Usuario>().WithMany().HasForeignKey(a => a.IdUsuarioResolucion).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Turno>().HasOne<Usuario>().WithMany().HasForeignKey(t => t.IdUsuarioMedico).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Seguimiento>().HasOne<Usuario>().WithMany().HasForeignKey(x => x.IdUsuarioRegistro).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Seguimiento>().HasOne<Usuario>().WithMany().HasForeignKey(x => x.IdUsuarioDecision).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<EventoAdverso>().HasOne<Usuario>().WithMany().HasForeignKey(e => e.IdUsuarioRegistro).OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<ObraSocial>().HasData(
                 new ObraSocial { Id = 1, Nombre = "OSDE", Activo = true },
                 new ObraSocial { Id = 2, Nombre = "Swiss Medical", Activo = true },
