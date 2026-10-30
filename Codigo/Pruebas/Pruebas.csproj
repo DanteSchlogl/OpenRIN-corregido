@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0-windows</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Services/Services.csproj" />
+    <ProjectReference Include="../Negocio.BLL/Negocio.BLL.csproj" />
+    <ProjectReference Include="../Negocio.DAL/Negocio.DAL.csproj" />
+  </ItemGroup>
+  <ItemGroup><None Include="App.config" Condition="Exists('App.config')" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

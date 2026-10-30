@@ -24,3 +24,5 @@ Desktop.ini
 SECRETS*
 appsettings.*.local.json
 Codigo/Negocio.UI/App.config
+credenciales_prueba.txt
+Codigo/Pruebas/App.config

@@ -419,3 +419,307 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Usuarios] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Turnos] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Seguimientos] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [ReportesEstadisticos] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Pacientes] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [ObrasSociales] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [MedicionesRIN] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [HistoriasClinicas] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [EventosAdversos] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Diagnosticos] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    ALTER TABLE [Alertas] ADD [DVH] nvarchar(128) NULL;
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    CREATE TABLE [DigitosVerificadores] (
+        [Id] int NOT NULL IDENTITY,
+        [NombreTabla] nvarchar(100) NOT NULL,
+        [DVV] nvarchar(128) NOT NULL,
+        [FechaCalculo] datetime2 NOT NULL,
+        CONSTRAINT [PK_DigitosVerificadores] PRIMARY KEY ([Id])
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Diagnosticos] SET [DVH] = NULL
+    WHERE [Id] = 1;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Diagnosticos] SET [DVH] = NULL
+    WHERE [Id] = 2;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Diagnosticos] SET [DVH] = NULL
+    WHERE [Id] = 3;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Diagnosticos] SET [DVH] = NULL
+    WHERE [Id] = 4;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Diagnosticos] SET [DVH] = NULL
+    WHERE [Id] = 5;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [ObrasSociales] SET [DVH] = NULL
+    WHERE [Id] = 1;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [ObrasSociales] SET [DVH] = NULL
+    WHERE [Id] = 2;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [ObrasSociales] SET [DVH] = NULL
+    WHERE [Id] = 3;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [ObrasSociales] SET [DVH] = NULL
+    WHERE [Id] = 4;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [ObrasSociales] SET [DVH] = NULL
+    WHERE [Id] = 5;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    EXEC(N'UPDATE [Usuarios] SET [DVH] = NULL
+    WHERE [Id] = 1;
+    SELECT @@ROWCOUNT');
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    CREATE UNIQUE INDEX [IX_DigitosVerificadores_NombreTabla] ON [DigitosVerificadores] ([NombreTabla]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260915200148_IntegridadDVH'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20260915200148_IntegridadDVH', N'8.0.31');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260919104547_ControlDeCambios'
+)
+BEGIN
+    CREATE TABLE [AuditoriaCambios] (
+        [Id] int NOT NULL IDENTITY,
+        [Entidad] nvarchar(100) NOT NULL,
+        [IdRegistro] int NOT NULL,
+        [FechaCambio] datetime2 NOT NULL,
+        [Usuario] nvarchar(100) NOT NULL,
+        [TipoCambio] nvarchar(30) NOT NULL,
+        [DatosAnteriores] nvarchar(max) NULL,
+        [DatosNuevos] nvarchar(max) NULL,
+        CONSTRAINT [PK_AuditoriaCambios] PRIMARY KEY ([Id])
+    );
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260919104547_ControlDeCambios'
+)
+BEGIN
+    CREATE INDEX [IX_AuditoriaCambios_Entidad_IdRegistro] ON [AuditoriaCambios] ([Entidad], [IdRegistro]);
+END;
+GO
+
+IF NOT EXISTS (
+    SELECT * FROM [__EFMigrationsHistory]
+    WHERE [MigrationId] = N'20260919104547_ControlDeCambios'
+)
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20260919104547_ControlDeCambios', N'8.0.31');
+END;
+GO
+
+COMMIT;
+GO
+

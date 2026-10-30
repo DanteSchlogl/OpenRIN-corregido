@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <connectionStrings>
+    <add name="ServicesDB" connectionString="Server=.\SQLEXPRESS;Database=OpenRIN_Services;Integrated Security=True;TrustServerCertificate=True;" providerName="Microsoft.Data.SqlClient" />
+    <add name="NegocioDB" connectionString="Server=.\SQLEXPRESS;Database=OpenRIN_Negocio;Integrated Security=True;TrustServerCertificate=True;" providerName="Microsoft.Data.SqlClient" />
+    <add name="BackupString" connectionString="Server=.\SQLEXPRESS;Database=master;Integrated Security=True;TrustServerCertificate=True;" providerName="Microsoft.Data.SqlClient" />
+  </connectionStrings>
+  <appSettings>
+    <add key="MinimalLogLevel" value="Info" />
+  </appSettings>
+</configuration>
