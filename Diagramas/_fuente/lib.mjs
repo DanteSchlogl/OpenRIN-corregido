@@ -24,7 +24,7 @@ export const COL = {
 };
 
 // ---------- XML mxGraph ----------
-class Mx {
+export class Mx {
   constructor() { this.cells = []; this.n = 2; }
   id() { return 'c' + this.n++; }
   vertex(value, style, x, y, w, h, id) {
@@ -39,6 +39,17 @@ class Mx {
     const tp = o.to && !o.target ? `<mxPoint x="${r(o.to[0])}" y="${r(o.to[1])}" as="targetPoint"/>` : '';
     this.cells.push(`<mxCell id="${id}" value="${xa(value || '')}" style="${xa(style)}" edge="1" parent="1"${o.source ? ` source="${o.source}"` : ''}${o.target ? ` target="${o.target}"` : ''}><mxGeometry relative="1" as="geometry">${sp}${tp}${pts ? `<Array as="points">${pts}</Array>` : ''}</mxGeometry></mxCell>`);
     return id;
+  }
+  rotulo(x, y, name, w = 680) {
+    const td = (t, b) => `<td style="border:1px solid #1F3864;padding:3px 6px;${b ? 'font-weight:bold;background:#E8EEF8;white-space:nowrap;' : ''}">${t}</td>`;
+    const h = `<table style="border-collapse:collapse;font-family:Arial;font-size:10px;width:${w}px;table-layout:auto;">` +
+      `<tr><td colspan="4" style="background:#1F3864;color:#FFFFFF;font-weight:bold;padding:4px 6px;">UNIVERSIDAD ABIERTA INTERAMERICANA — Facultad de Tecnología Informática</td></tr>` +
+      `<tr>${td('Materia', 1)}${td('Prácticas Profesionalizantes III')}${td('Docente', 1)}${td('Weingand, Gastón Matías')}</tr>` +
+      `<tr>${td('Alumno', 1)}${td('Muñiz Cortés, Carlos Santiago')}${td('Legajo', 1)}${td('B00000955-VCO')}</tr>` +
+      `<tr>${td('Localización', 1)}${td('Colegio Leonardo Da Vinci, Curso Noche')}${td('Comisión', 1)}${td('VCO-21-23 · Turno Noche · Año 2026')}</tr>` +
+      `<tr>${td('Sistema', 1)}${td('OpenRIN · Versión 1.0 · Carpeta de Proyecto')}${td('Fecha', 1)}${td('19/09/2026')}</tr>` +
+      `<tr>${td('Diagrama', 1)}<td colspan="3" style="border:1px solid #1F3864;padding:3px 6px;font-weight:bold;">${esc(name)}</td></tr></table>`;
+    return this.vertex(h, 'html=1;whiteSpace=wrap;overflow=hidden;align=left;verticalAlign=top;fillColor=#FFFFFF;strokeColor=none;spacing=0;', x, y, w, 136);
   }
   xml(name) {
     return `<mxfile host="app.diagrams.net"><diagram name="${xa(name)}" id="d1"><mxGraphModel dx="1000" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/>${this.cells.join('')}</root></mxGraphModel></diagram></mxfile>`;
@@ -131,7 +142,7 @@ export async function dot(src, relName, extra = '') {
   const gv = await gvp;
   const full = `digraph G { graph [fontname="Arial" pad=0.3 ${extra}]; node [fontname="Arial" fontsize=11]; edge [fontname="Arial" fontsize=10 color="#444444" fontcolor="#333333"]; ${src} }`;
   const j = JSON.parse(gv.dot(full, 'json'));
-  const [bx0, by0, , by1] = j.bb.split(',').map(Number);
+  const [bx0, by0, bx1, by1] = j.bb.split(',').map(Number);
   const H = by1 - by0;
   const X = (x) => x - bx0;
   const Y = (y) => H - (y - by0);
@@ -180,6 +191,7 @@ export async function dot(src, relName, extra = '') {
       if (t) mx.vertex(t.text, 'text;html=1;strokeColor=none;fillColor=none;fontFamily=Arial;fontSize=10;align=center;verticalAlign=middle;', X(t.pt[0]) - 16, Y(t.pt[1]) - 8, 32, 16);
     }
   }
+  { const GW = bx1 - bx0; const rw = Math.max(620, Math.min(700, GW)); mx.rotulo(Math.max(0, GW - rw), H + 28, path.basename(relName), rw); }
   save(relName, mx);
 }
 
@@ -266,6 +278,7 @@ export function seq(spec, relName) {
     }
   });
   shapes.forEach((f) => f());
+  mx.rotulo(Math.max(20, W - 700), H + 10, path.basename(relName), 680);
   save(relName, mx, title);
 }
 
@@ -300,5 +313,6 @@ export function ucg(spec, relName) {
     if (q.rel === 'include') mx.edge(lab, st, { source: mainId, target: id });
     else mx.edge(lab, st, { source: id, target: mainId });
   });
+  mx.rotulo(Math.max(20, W - 700), (n ? relY + 70 : cy + 110), path.basename(relName), 680);
   save(relName, mx, title);
 }

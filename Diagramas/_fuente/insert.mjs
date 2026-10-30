@@ -1,9 +1,9 @@
 import * as mupdf from 'mupdf';
 import fs from 'fs';
 
-const SRC = '../../Documentacion/Carpeta de Proyecto - OpenRIN.pdf';
+const SRC = process.env.SRC_PDF || 'original.pdf';
 const OUTPDF = process.argv[2] || 'Carpeta de Proyecto - OpenRIN (diagramas corregidos).pdf';
-const D = '..';
+const D = 'OpenRIN-corregido/Diagramas';
 const only = process.argv.slice(3).map(Number);
 
 const map = [
@@ -11,7 +11,10 @@ const map = [
   [13, 'Arquitectura/G06 - Logica de negocio (clases)'],
   [15, 'Arquitectura/G06 - Presentacion (clases)'],
   [16, 'Arquitectura/G06 - Servicios seguridad y localizacion (clases)'],
+  [14, 'Arquitectura/G06 - Acceso a datos (clases)'],
   [20, 'Arquitectura/G07 - DER hoja B (operacion y sistema)'],
+  [24, 'Procesos/P01 - Actividad'], [25, 'Procesos/P02 - Actividad'], [26, 'Procesos/P03 - Actividad'], [27, 'Procesos/P04 - Actividad'], [28, 'Procesos/P05 - Actividad'],
+  [133, 'Tecnicos/T02 - Secuencia integridad al iniciar'], [134, 'Tecnicos/T02 - Secuencia inicio de sesion'],
 ];
 const ucPages = { '01': [35, 36, 37], '02': [42, 43, 44], '03': [49, 50, 51], '04': [57, 58, 59], '05': [66, 67, 68], '06': [73, 74, 75], '07': [80, 81, 82], '08': [87, 88, 89], '09': [94, 95, 96], '10': [101, 102, 103], '11': [108, 109, 110], '12': [115, 116, 117], '13': [122, 123, 124] };
 for (const [n, pg] of Object.entries(ucPages)) {

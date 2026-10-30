@@ -6,8 +6,12 @@ Diagramas redibujados a partir del código fuente, que es la referencia de las r
 
 - `UC-01` … `UC-13`: gráfico del caso de uso, clases afectadas y diagrama de secuencia de cada uno.
 - `Arquitectura/`:
-  - Clases de dominio, de lógica de negocio, de presentación y de servicios (seguridad y localización).
+  - Clases de dominio, lógica de negocio, presentación, acceso a datos y servicios (seguridad y localización).
   - DER hoja B (operación y sistema).
+- `Procesos/`: diagramas de actividad P01 a P05.
+- `Tecnicos/`: secuencias T02 (integridad al iniciar e inicio de sesión).
+
+Todos llevan el rótulo institucional (materia, docente, alumno, legajo, comisión, sistema, fecha y nombre del diagrama).
 
 ## Cambios respecto de los diagramas del PDF
 
@@ -22,7 +26,7 @@ Diagramas redibujados a partir del código fuente, que es la referencia de las r
 
 ## No incluidos (sin cambios en el PDF)
 
-Clases de acceso a datos e infraestructura, DER hojas A y C, diagramas de actividad P01–P05, T01 y las secuencias T02–T08.
+Clases de infraestructura, DER hojas A y C, diagrama de componentes y mapa de navegación (T01) y las secuencias T03 a T08.
 
 ## Cómo editarlos
 
@@ -35,9 +39,9 @@ Abrir el `.drawio`, modificarlo y exportar a PNG (Archivo → Exportar como → 
 ```bash
 cd Diagramas/_fuente
 npm install
-node uc.mjs && node arch.mjs && node arch2.mjs   # genera los .drawio
+node uc.mjs && node arch.mjs && node arch2.mjs && node extra.mjs && node proc.mjs   # genera los .drawio
 node export.mjs                                  # exporta los PNG con draw.io
 node insert.mjs "Carpeta de Proyecto - OpenRIN.pdf"   # inserta los diagramas en una copia del PDF
 ```
 
-`insert.mjs` reemplaza, en una copia del PDF, la zona de cada diagrama (44 páginas) por la imagen nueva, y conserva cabecera, pie de figura y numeración de las 150 páginas.
+`fix.mjs` corrige en el PDF los textos con errores (línea por línea). `insert.mjs` reemplaza, en una copia del PDF, la zona de cada diagrama (52 páginas) por la imagen nueva, y conserva cabecera, pie de figura y numeración de las 150 páginas.
