@@ -1,4 +1,4 @@
-import { dot, cls, esc } from './lib.mjs';
+import { dot, cls, esc, tbl } from './lib.mjs';
 
 const E = 'style=dashed arrowhead=open';
 const ent = (id, name, m) => cls(id, 'ent', 'entidad', name, m);
@@ -15,7 +15,7 @@ ${ent('tu', 'Turno', ['- Id «PK»', '- IdPaciente, IdUsuarioMedico «FK»', '- 
 ${ent('seg', 'Seguimiento', ['- Id «PK»', '- IdPaciente «FK»', '- TipoContacto, Resultado', '- DecisionClinica, DetalleDecision', '- IdUsuarioRegistro, IdUsuarioDecision «FK»'])}
 ${ent('ev', 'EventoAdverso', ['- Id «PK»', '- IdPaciente «FK»', '- Fecha : DateTime', '- Tipo : TipoEventoAdverso', '- Gravedad : GravedadEvento', '- Descripcion, AccionTomada', '- IdUsuarioRegistro «FK»'])}
 ${ent('us', 'Usuario', ['- Id «PK»', '- NombreUsuario, NombreCompleto', '- Perfil : PerfilUsuario', '- Email, Telefono, Activo'])}
-subgraph cluster_solo { label="Sin asociaciones directas"; style=dashed; color="#999999"; fontname="Arial"; fontsize=11;
+subgraph cluster_solo { margin=22; label="Sin asociaciones directas"; style=dashed; color="#999999"; fontname="Arial"; fontsize=11;
 ${ent('rep', 'ReporteEstadistico', ['- Anio, Mes : int', '- IndicadorGlobalEficacia : decimal', '- CantidadOptimos / Suboptimos / Deficientes', '- DetalleJson : string'])}
 ${cls('dv', 'infra', 'static', 'DigitoVerificador', ['+ CalcularDVH(cadena) : string', '+ CalcularDVV(filas) : string'])} }
 pac -> os [arrowhead=none taillabel="*" headlabel="0..1" label="cobertura"];
@@ -101,14 +101,14 @@ pm -> pa [arrowhead=none arrowtail=empty dir=back]; pm -> pc [arrowhead=none arr
 lf -> ll [${E} label="delega"]; ll -> r3 [${E}]; ll -> id [${E}];`, 'Arquitectura/G06 - Servicios seguridad y localizacion (clases)');
 
 // ---------- DER hoja B ----------
-const T = (id, name, rows) => `${id} [shape=plain label=<<TABLE BORDER="1" COLOR="#C9922E" CELLBORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#FFF6E5"><TR><TD BGCOLOR="#F5E2B8"><B>${esc(name)}</B></TD></TR><HR/>${rows.map((r) => `<TR><TD ALIGN="LEFT">${esc(r)}</TD></TR>`).join('')}</TABLE>>];`;
+const T = (id, name, rows) => tbl(id, name, rows);
 await dot(`rankdir=LR; nodesep=0.5; ranksep=1.3; splines=true;
 ${T('p', 'Pacientes', ['PK Id : int', 'NombreCompleto : nvarchar', 'DNI : nvarchar (UQ activos)', 'FK IdObraSocial : int', 'FK IdUsuarioPortal : int', 'Estado, MotivoBaja, FechaAlta, FechaBaja', 'DVH : nvarchar'])}
 ${T('u', 'Usuarios', ['PK Id : int', 'NombreUsuario, NombreCompleto', 'Perfil, Email, Telefono', 'Activo : bit', 'FechaAlta : datetime2', 'DVH : nvarchar'])}
 ${T('t', 'Turnos', ['PK Id : int', 'FK IdPaciente : int', 'FK IdUsuarioMedico : int', 'FechaHora : datetime2', 'Estado, Observaciones, FechaCreacion', 'DVH : nvarchar'])}
 ${T('s', 'Seguimientos', ['PK Id : int', 'FK IdPaciente : int', 'TipoContacto, Resultado, Observaciones', 'FK IdUsuarioRegistro : int', 'DecisionClinica, DetalleDecision', 'FK IdUsuarioDecision : int', 'FechaRegistro, FechaDecision', 'DVH : nvarchar'])}
 ${T('e', 'EventosAdversos', ['PK Id : int', 'FK IdPaciente : int', 'Fecha, Tipo, Gravedad', 'Descripcion, AccionTomada', 'FK IdUsuarioRegistro : int', 'FechaRegistro : datetime2', 'DVH : nvarchar'])}
-subgraph cluster_ctl { label="Tablas de control y reportes (sin FK)"; style=dashed; color="#999999"; fontname="Arial"; fontsize=11;
+subgraph cluster_ctl { margin=22; label="Tablas de control y reportes (sin FK)"; style=dashed; color="#999999"; fontname="Arial"; fontsize=11;
 ${T('r', 'ReportesEstadisticos', ['PK Id : int', 'Anio, Mes : int', 'FechaGeneracion : datetime2', 'IndicadorGlobalEficacia : decimal', 'CantidadOptimos / Suboptimos / Deficientes', 'DetalleJson : nvarchar', 'DVH : nvarchar'])}
 ${T('dv', 'DigitosVerificadores', ['PK Id : int', 'NombreTabla : nvarchar', 'DVV : nvarchar', 'FechaCalculo : datetime2'])}
 ${T('a', 'AuditoriaCambios', ['PK Id : int', 'Entidad, IdRegistro', 'FechaCambio : datetime2', 'Usuario, TipoCambio', 'DatosAnteriores / DatosNuevos : JSON'])} }

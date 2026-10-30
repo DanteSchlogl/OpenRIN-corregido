@@ -1,12 +1,12 @@
 import { dot, cls } from './lib.mjs';
 const E = 'style=dashed arrowhead=open';
 const L = (id, name, m) => cls(id, 'logic', 'BLL', name, m);
-const cl = (n, label, body) => `subgraph cluster_${n} { label="${label}"; style=rounded; color="#4F8F5A"; fontname="Arial"; fontsize=12; ${body} }`;
+const cl = (n, label, body) => `subgraph cluster_${n} { label="${label}"; style=rounded; color="#4F8F5A"; fontname="Arial"; fontsize=12; margin=22; ${body} }`;
 
-// ---------- Lógica de negocio (columna vertical, destinos a la derecha) ----------
-await dot(`rankdir=LR; nodesep=0.35; ranksep=1.6; compound=true;
+// ---------- Lógica de negocio (cuadrícula 2x2) ----------
+await dot(`rankdir=TB; nodesep=0.5; ranksep=0.5; compound=true; newrank=true;
 ${cl('a', 'Pacientes e historia clínica', [
-  L('pl', 'PacienteLogic', ['+ Buscar(filtro, incluirInactivos)', '+ BuscarPorDNI(dni) : Paciente?', '+ RegistrarPaciente(paciente, usuario) : CredencialesPortal', '+ ModificarPaciente(paciente, usuario)', '+ DarDeBajaPaciente(id, motivo, usuario)']),
+  L('pl', 'PacienteLogic', ['+ Buscar(filtro, incluirInactivos)', '+ BuscarPorDNI(dni) : Paciente?', '+ RegistrarPaciente(paciente, usuario) : CredencialesPortal', '+ ModificarPaciente(paciente, usuario)', '+ DarDeBajaPaciente(id, motivo, usuario)', '(accede vía IPacienteRepositorio)']),
   L('hl', 'HistoriaClinicaLogic', ['+ Configurar(configuracion, usuario) : HistoriaClinica', '+ ObtenerPorPaciente(idPaciente)', '+ ActualizarPeriodicidad(idPaciente, dias, usuario)']),
   L('el', 'EventoAdversoLogic', ['+ Registrar(evento, usuario) : EventoAdverso', '+ ObtenerPorPaciente(idPaciente)'])].join('\n'))}
 ${cl('b', 'Triaje y alertas', [
@@ -20,13 +20,10 @@ ${cl('d', 'Reportes e integridad', [
   L('rl', 'ReporteLogic', ['+ GenerarReporteMensual(anio, mes, usuario)', '+ GenerarReportePorDiagnostico(anio, mes, idDiagnostico, usuario)', '+ ObtenerHistorialPaciente(idPaciente)', '+ ExportarHistorialPaciente(idPaciente, formato, usuario)', '+ Clasificar(porcentajeEnRango) : ClasificacionControl']),
   L('au', 'AuditoriaLogic', ['+ ObtenerHistorial(entidad, idRegistro, maximo)']),
   L('il', 'IntegridadLogic', ['+ Auditar() : ResultadoAuditoria', '+ RecalcularTodo() : ResultadoAuditoria'])].join('\n'))}
-${cls('irepo', 'infra', 'interface', 'IPacienteRepositorio', ['+ BuscarActivos() / BuscarPorDNI(dni)', '+ ExisteDNIActivo(dni, idExcluir)'])}
-${cls('ctx', 'infra', 'EF Core', 'NegocioDbContext', ['(punto único de guardado:', ' firma DVH/DVV y audita)'])}
-${cls('rn', 'infra', 'static', 'ReglasNegocio', ['+ Rechazar(errores, contexto, usuario)', '(rechazo auditado, usado por las', ' clases de lógica al validar)'])}
-pl -> irepo [${E} label="accede vía"];
-hl -> ctx [${E} ltail=cluster_a label="persisten"]; ml -> ctx [${E} ltail=cluster_b]; tl -> ctx [${E} ltail=cluster_c]; rl -> ctx [${E} ltail=cluster_d];
-irepo -> ctx [${E}];
-ctx -> rn [style=invis];`, 'Arquitectura/G06 - Logica de negocio (clases)');
+nota [shape=note style=filled fillcolor="#FFFBE6" color="#C9B24A" fontsize=11 label="Todas las clases de lógica usan NegocioDbContext\n(punto único de guardado: firma DVH/DVV y audita)\ny ReglasNegocio.Rechazar(errores, contexto, usuario)\npara los rechazos auditados."];
+pl -> hl -> el [style=invis]; ml -> al -> pm [style=invis]; tl -> sl [style=invis]; rl -> au -> il [style=invis];
+el -> tl [style=invis]; pm -> rl [style=invis]; pl -> ml [style=invis constraint=false]; { rank=same; pl; ml; } { rank=same; tl; rl; }
+sl -> nota [style=invis];`, 'Arquitectura/G06 - Logica de negocio (clases)');
 
 // ---------- Presentación ----------
 const U = (id, name, m = []) => cls(id, 'ui', 'UserControl', name, m);

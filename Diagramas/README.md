@@ -1,6 +1,6 @@
 # Diagramas corregidos – OpenRIN
 
-Diagramas redibujados a partir del código fuente, que es la referencia de las reglas de negocio. Cada uno está en **PNG** (para insertar en la Carpeta) y en **SVG** (vectorial).
+Diagramas redibujados a partir del código fuente, que es la referencia de las reglas de negocio. Están hechos en **draw.io**: cada uno es un archivo `.drawio` editable (se abre en <https://app.diagrams.net> o en draw.io Desktop) y su exportación en **PNG**, que se inserta en la Carpeta de Proyecto.
 
 ## Contenido
 
@@ -24,14 +24,20 @@ Diagramas redibujados a partir del código fuente, que es la referencia de las r
 
 Clases de acceso a datos e infraestructura, DER hojas A y C, diagramas de actividad P01–P05, T01 y las secuencias T02–T08.
 
-## Regenerarlos
+## Cómo editarlos
 
-Los diagramas se generan con Graphviz (WASM) y resvg desde `_fuente/`. Se necesita Node.js 18 o superior.
+Abrir el `.drawio`, modificarlo y exportar a PNG (Archivo → Exportar como → PNG, escala 2). Luego reemplazar la imagen en la Carpeta.
+
+## Regenerarlos desde la fuente
+
+`_fuente/` genera los `.drawio` y los exporta con draw.io Desktop (instalado en `C:\Program Files\draw.io`). Se necesita Node.js 18 o superior.
 
 ```bash
 cd Diagramas/_fuente
 npm install
-node uc.mjs && node arch.mjs && node arch2.mjs
+node uc.mjs && node arch.mjs && node arch2.mjs   # genera los .drawio
+node export.mjs                                  # exporta los PNG con draw.io
+node insert.mjs "Carpeta de Proyecto - OpenRIN.pdf"   # inserta los diagramas en una copia del PDF
 ```
 
-Para cambiar un diagrama se edita el dato correspondiente en `uc.mjs`, `arch.mjs` o `arch2.mjs` y se vuelve a ejecutar.
+`insert.mjs` reemplaza, en una copia del PDF, la zona de cada diagrama (44 páginas) por la imagen nueva, y conserva cabecera, pie de figura y numeración de las 150 páginas.
