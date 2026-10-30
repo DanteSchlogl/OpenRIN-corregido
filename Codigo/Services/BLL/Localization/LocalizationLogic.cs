@@ -74,6 +74,16 @@ namespace Services.BLL.Localization
         public static void EstablecerIdioma(string codigoIdioma)
         {
             AsegurarCarga();
+            if (!_cargado && string.Equals(codigoIdioma, IdiomaBase, StringComparison.Ordinal))
+            {
+                // Sin base de datos disponible el idioma base se acepta igual: los textos se
+                // muestran con su clave y la carga se reintenta en la próxima consulta.
+                lock (Candado)
+                {
+                    _idiomaActual = IdiomaBase;
+                }
+                return;
+            }
             if (string.IsNullOrWhiteSpace(codigoIdioma) || !_idiomas.Any(i => i.Codigo == codigoIdioma))
             {
                 throw new ArgumentException(
