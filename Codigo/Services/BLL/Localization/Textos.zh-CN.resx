@@ -321,4 +321,66 @@
   <data name="perfiles.desmarcarTodo" xml:space="preserve"><value>全部取消</value></data>
   <data name="perfiles.sinPerfil" xml:space="preserve"><value>请选择配置。</value></data>
   <data name="perfiles.guardado" xml:space="preserve"><value>权限已成功保存。</value></data>
+  <data name="shell.ayuda" xml:space="preserve"><value>帮助</value></data>
+  <data name="ayuda.noEncontrada" xml:space="preserve"><value>在应用程序文件夹中找不到帮助文件 (OpenRIN-Ayuda.chm)。</value></data>
+  <data name="integridad.vulnerada.registros" xml:space="preserve"><value>被篡改的记录：</value></data>
+  <data name="integridad.col.tabla" xml:space="preserve"><value>表</value></data>
+  <data name="integridad.col.id" xml:space="preserve"><value>编号</value></data>
+  <data name="integridad.col.motivo" xml:space="preserve"><value>原因</value></data>
+  <data name="integridad.rec.titulo" xml:space="preserve"><value>数据库恢复</value></data>
+  <data name="integridad.rec.explicacion" xml:space="preserve"><value>要恢复数据库，请使用具有备份权限的用户登录。</value></data>
+  <data name="integridad.rec.usuario" xml:space="preserve"><value>用户</value></data>
+  <data name="integridad.rec.clave" xml:space="preserve"><value>密码</value></data>
+  <data name="integridad.rec.entrar" xml:space="preserve"><value>登录</value></data>
+  <data name="integridad.rec.sinPermiso" xml:space="preserve"><value>该用户没有管理备份的权限。</value></data>
+  <data name="integridad.rec.sesionDe" xml:space="preserve"><value>已以 {0} 登录。请选择恢复方式。</value></data>
+  <data name="integridad.rec.listaRespaldos" xml:space="preserve"><value>业务数据库备份：</value></data>
+  <data name="integridad.rec.col.fecha" xml:space="preserve"><value>日期</value></data>
+  <data name="integridad.rec.col.origen" xml:space="preserve"><value>来源</value></data>
+  <data name="integridad.rec.col.estado" xml:space="preserve"><value>状态</value></data>
+  <data name="integridad.rec.col.tamano" xml:space="preserve"><value>大小</value></data>
+  <data name="integridad.rec.col.archivo" xml:space="preserve"><value>文件</value></data>
+  <data name="integridad.rec.sano" xml:space="preserve"><value>正常</value></data>
+  <data name="integridad.rec.noSano" xml:space="preserve"><value>异常</value></data>
+  <data name="integridad.rec.noExiste" xml:space="preserve"><value>未找到文件</value></data>
+  <data name="integridad.rec.restaurarSel" xml:space="preserve"><value>恢复所选备份</value></data>
+  <data name="integridad.rec.restaurarArchivo" xml:space="preserve"><value>从其他 .bak 恢复…</value></data>
+  <data name="integridad.rec.recalcular" xml:space="preserve"><value>重新计算校验位</value></data>
+  <data name="integridad.rec.elegirArchivo" xml:space="preserve"><value>备份文件 (*.bak)|*.bak</value></data>
+  <data name="integridad.rec.confirmarRestaurar" xml:space="preserve"><value>将从以下文件恢复业务数据库：
+{0}
+
+恢复前会先备份当前状态。是否继续？</value></data>
+  <data name="integridad.rec.confirmarRecalcular" xml:space="preserve"><value>重新计算校验位会把当前数据（包括被篡改的部分）视为有效。仅在确认修改合法时执行。是否继续？</value></data>
+  <data name="integridad.rec.restaurada" xml:space="preserve"><value>数据库已恢复并校验：完整性正常。</value></data>
+  <data name="integridad.rec.recalculada" xml:space="preserve"><value>已重新计算校验位（{0} 行）：完整性正常。</value></data>
+  <data name="integridad.rec.sigueVulnerada" xml:space="preserve"><value>数据库仍存在篡改，请尝试其他备份。</value></data>
+  <data name="integridad.rec.soloNegocio" xml:space="preserve"><value>所选文件不是业务数据库 (OpenRIN_Negocio) 的备份。</value></data>
+  <data name="integridad.rec.error" xml:space="preserve"><value>无法完成操作：{0}</value></data>
+  <data name="integridad.rec.sinRespaldos" xml:space="preserve"><value>没有已登记的备份。请使用“从其他 .bak 恢复…”。</value></data>
+  <data name="sistema.respaldos" xml:space="preserve"><value>备份</value></data>
+  <data name="sistema.respaldos.carpeta" xml:space="preserve"><value>备份文件夹：</value></data>
+  <data name="sistema.respaldos.elegir" xml:space="preserve"><value>选择…</value></data>
+  <data name="sistema.respaldos.ahora" xml:space="preserve"><value>立即备份</value></data>
+  <data name="sistema.respaldos.verificar" xml:space="preserve"><value>验证文件</value></data>
+  <data name="sistema.respaldos.restaurar" xml:space="preserve"><value>恢复所选备份</value></data>
+  <data name="sistema.respaldos.restaurarArchivo" xml:space="preserve"><value>从文件恢复…</value></data>
+  <data name="sistema.respaldos.actualizar" xml:space="preserve"><value>刷新</value></data>
+  <data name="sistema.respaldos.generado" xml:space="preserve"><value>已生成备份：
+{0}</value></data>
+  <data name="sistema.respaldos.verificado" xml:space="preserve"><value>文件通过验证 (RESTORE VERIFYONLY 与 CHECKSUM)。</value></data>
+  <data name="sistema.respaldos.noVerificado" xml:space="preserve"><value>文件未通过验证。</value></data>
+  <data name="sistema.respaldos.restaurado" xml:space="preserve"><value>数据库已恢复。请关闭并重新打开程序。</value></data>
+  <data name="sistema.respaldos.confirmarRestaurar" xml:space="preserve"><value>将从以下文件恢复 {0}：
+{1}
+
+恢复前会先备份当前状态并关闭其他连接。是否继续？</value></data>
+  <data name="sistema.respaldos.col.fecha" xml:space="preserve"><value>日期</value></data>
+  <data name="sistema.respaldos.col.base" xml:space="preserve"><value>数据库</value></data>
+  <data name="sistema.respaldos.col.origen" xml:space="preserve"><value>来源</value></data>
+  <data name="sistema.respaldos.col.estado" xml:space="preserve"><value>状态</value></data>
+  <data name="sistema.respaldos.col.tamano" xml:space="preserve"><value>大小 (MB)</value></data>
+  <data name="sistema.respaldos.col.usuario" xml:space="preserve"><value>用户</value></data>
+  <data name="sistema.respaldos.col.archivo" xml:space="preserve"><value>文件</value></data>
+  <data name="sistema.respaldos.seleccione" xml:space="preserve"><value>请从列表中选择一个备份。</value></data>
 </root>

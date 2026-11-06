@@ -1,3 +1,4 @@
+using Services.DAL.Factory;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +27,12 @@ namespace Negocio.BLL
         private static readonly Regex FormatoEmail = new(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 
         private readonly NegocioDbContext _contexto;
-        private readonly PacienteRepositorio _repositorio;
+        private readonly IPacienteRepositorio _repositorio;
 
         public PacienteLogic(NegocioDbContext contexto)
         {
             _contexto = contexto;
-            _repositorio = new PacienteRepositorio(contexto);
+            _repositorio = RepositorioFactory.Crear<IPacienteRepositorio>(null, contexto);
         }
 
         /// <summary>Pacientes activos ordenados por nombre.</summary>

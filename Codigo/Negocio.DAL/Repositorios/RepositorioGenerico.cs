@@ -8,7 +8,7 @@ namespace Negocio.DAL.Repositorios
     /// persiste de inmediato (SaveChanges). Los repositorios específicos heredan de esta
     /// clase y agregan consultas propias del dominio.
     /// </summary>
-    public class RepositorioGenerico<T> : IRepositorioGenerico<T> where T : class
+    internal class RepositorioGenerico<T> : IRepositorioGenerico<T> where T : class
     {
         protected readonly NegocioDbContext Contexto;
 

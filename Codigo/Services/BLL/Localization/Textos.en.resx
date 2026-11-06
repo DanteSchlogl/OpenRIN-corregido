@@ -321,4 +321,66 @@
   <data name="perfiles.desmarcarTodo" xml:space="preserve"><value>Uncheck all</value></data>
   <data name="perfiles.sinPerfil" xml:space="preserve"><value>Select a profile.</value></data>
   <data name="perfiles.guardado" xml:space="preserve"><value>Permissions saved successfully.</value></data>
+  <data name="shell.ayuda" xml:space="preserve"><value>Help</value></data>
+  <data name="ayuda.noEncontrada" xml:space="preserve"><value>The help file (OpenRIN-Ayuda.chm) was not found in the application folder.</value></data>
+  <data name="integridad.vulnerada.registros" xml:space="preserve"><value>Altered records:</value></data>
+  <data name="integridad.col.tabla" xml:space="preserve"><value>Table</value></data>
+  <data name="integridad.col.id" xml:space="preserve"><value>Id</value></data>
+  <data name="integridad.col.motivo" xml:space="preserve"><value>Reason</value></data>
+  <data name="integridad.rec.titulo" xml:space="preserve"><value>Database recovery</value></data>
+  <data name="integridad.rec.explicacion" xml:space="preserve"><value>To recover the database, sign in with a user that has the backups permission.</value></data>
+  <data name="integridad.rec.usuario" xml:space="preserve"><value>User</value></data>
+  <data name="integridad.rec.clave" xml:space="preserve"><value>Password</value></data>
+  <data name="integridad.rec.entrar" xml:space="preserve"><value>Sign in</value></data>
+  <data name="integridad.rec.sinPermiso" xml:space="preserve"><value>That user does not have permission to manage backups.</value></data>
+  <data name="integridad.rec.sesionDe" xml:space="preserve"><value>Signed in as {0}. Choose how to recover the database.</value></data>
+  <data name="integridad.rec.listaRespaldos" xml:space="preserve"><value>Business database backups:</value></data>
+  <data name="integridad.rec.col.fecha" xml:space="preserve"><value>Date</value></data>
+  <data name="integridad.rec.col.origen" xml:space="preserve"><value>Origin</value></data>
+  <data name="integridad.rec.col.estado" xml:space="preserve"><value>Status</value></data>
+  <data name="integridad.rec.col.tamano" xml:space="preserve"><value>Size</value></data>
+  <data name="integridad.rec.col.archivo" xml:space="preserve"><value>File</value></data>
+  <data name="integridad.rec.sano" xml:space="preserve"><value>Healthy</value></data>
+  <data name="integridad.rec.noSano" xml:space="preserve"><value>Not healthy</value></data>
+  <data name="integridad.rec.noExiste" xml:space="preserve"><value>File not found</value></data>
+  <data name="integridad.rec.restaurarSel" xml:space="preserve"><value>Restore the selected one</value></data>
+  <data name="integridad.rec.restaurarArchivo" xml:space="preserve"><value>Restore from another .bak…</value></data>
+  <data name="integridad.rec.recalcular" xml:space="preserve"><value>Recalculate digits</value></data>
+  <data name="integridad.rec.elegirArchivo" xml:space="preserve"><value>Backup file (*.bak)|*.bak</value></data>
+  <data name="integridad.rec.confirmarRestaurar" xml:space="preserve"><value>The business database will be restored from:
+{0}
+
+A backup of the current state is made first. Continue?</value></data>
+  <data name="integridad.rec.confirmarRecalcular" xml:space="preserve"><value>Recalculating the digits accepts the current data as valid, including any tampering. Do it only if you know the changes were legitimate. Continue?</value></data>
+  <data name="integridad.rec.restaurada" xml:space="preserve"><value>Database restored and checked: integrity is correct.</value></data>
+  <data name="integridad.rec.recalculada" xml:space="preserve"><value>Digits recalculated ({0} rows): integrity is correct.</value></data>
+  <data name="integridad.rec.sigueVulnerada" xml:space="preserve"><value>The database still has alterations. Try another backup.</value></data>
+  <data name="integridad.rec.soloNegocio" xml:space="preserve"><value>The chosen file is not a backup of the business database (OpenRIN_Negocio).</value></data>
+  <data name="integridad.rec.error" xml:space="preserve"><value>The operation could not be completed: {0}</value></data>
+  <data name="integridad.rec.sinRespaldos" xml:space="preserve"><value>No backups are registered. Use "Restore from another .bak…".</value></data>
+  <data name="sistema.respaldos" xml:space="preserve"><value>Backups</value></data>
+  <data name="sistema.respaldos.carpeta" xml:space="preserve"><value>Backup folder:</value></data>
+  <data name="sistema.respaldos.elegir" xml:space="preserve"><value>Choose…</value></data>
+  <data name="sistema.respaldos.ahora" xml:space="preserve"><value>Back up now</value></data>
+  <data name="sistema.respaldos.verificar" xml:space="preserve"><value>Verify file</value></data>
+  <data name="sistema.respaldos.restaurar" xml:space="preserve"><value>Restore the selected one</value></data>
+  <data name="sistema.respaldos.restaurarArchivo" xml:space="preserve"><value>Restore from file…</value></data>
+  <data name="sistema.respaldos.actualizar" xml:space="preserve"><value>Refresh</value></data>
+  <data name="sistema.respaldos.generado" xml:space="preserve"><value>Backup created:
+{0}</value></data>
+  <data name="sistema.respaldos.verificado" xml:space="preserve"><value>The file passed verification (RESTORE VERIFYONLY with CHECKSUM).</value></data>
+  <data name="sistema.respaldos.noVerificado" xml:space="preserve"><value>The file did NOT pass verification.</value></data>
+  <data name="sistema.respaldos.restaurado" xml:space="preserve"><value>Database restored. Close and reopen the program to continue.</value></data>
+  <data name="sistema.respaldos.confirmarRestaurar" xml:space="preserve"><value>{0} will be restored from:
+{1}
+
+A backup of the current state is made first and other connections are closed. Continue?</value></data>
+  <data name="sistema.respaldos.col.fecha" xml:space="preserve"><value>Date</value></data>
+  <data name="sistema.respaldos.col.base" xml:space="preserve"><value>Database</value></data>
+  <data name="sistema.respaldos.col.origen" xml:space="preserve"><value>Origin</value></data>
+  <data name="sistema.respaldos.col.estado" xml:space="preserve"><value>Status</value></data>
+  <data name="sistema.respaldos.col.tamano" xml:space="preserve"><value>Size (MB)</value></data>
+  <data name="sistema.respaldos.col.usuario" xml:space="preserve"><value>User</value></data>
+  <data name="sistema.respaldos.col.archivo" xml:space="preserve"><value>File</value></data>
+  <data name="sistema.respaldos.seleccione" xml:space="preserve"><value>Select a backup from the list.</value></data>
 </root>

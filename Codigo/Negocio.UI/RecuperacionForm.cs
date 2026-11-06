@@ -167,7 +167,7 @@ namespace Negocio.UI
             {
                 _lblAviso.Text = ex.Message;
             }
-            catch (ArgumentException ex)
+            catch (Services.DomainModel.Exceptions.ReglaNegocioException ex)
             {
                 _lblAviso.Text = ex.Message;
             }

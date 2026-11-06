@@ -4,7 +4,7 @@ namespace Negocio.DomainModel.Exceptions
     /// Error de validación del negocio: agrupa los mensajes que explican por qué una
     /// operación fue rechazada (para mostrar al usuario y auditar en bitácora).
     /// </summary>
-    public class ValidacionNegocioException : Exception
+    public class ValidacionNegocioException : Services.DomainModel.Exceptions.ReglaNegocioException
     {
         /// <summary>Mensajes de validación que originaron el rechazo.</summary>
         public List<string> Errores { get; }

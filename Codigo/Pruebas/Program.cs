@@ -4,6 +4,7 @@ using Negocio.DAL.Context;
 using Negocio.DomainModel;
 using Negocio.DomainModel.Enums;
 using Services.Facade;
+using Negocio.DomainModel.Exceptions;
 
 int ok = 0, fail = 0;
 void Check(string nombre, bool cond, string detalle = "")
@@ -31,7 +32,7 @@ Check("idioma en-US cambia el texto", LocalizationService.ObtenerTexto("agenda.a
 LocalizationService.EstablecerIdioma("zh-CN");
 Check("idioma zh-CN cambia el texto", LocalizationService.ObtenerTexto("agenda.agendar") != "agenda.agendar");
 LocalizationService.EstablecerIdioma("es");
-bool lanzo = false; try { LocalizationService.EstablecerIdioma("xx"); } catch (ArgumentException) { lanzo = true; }
+bool lanzo = false; try { LocalizationService.EstablecerIdioma("xx"); } catch (Services.DomainModel.Exceptions.DatoInvalidoException) { lanzo = true; }
 Check("idioma inexistente se rechaza", lanzo);
 Check("clave inexistente devuelve la clave", LocalizationService.ObtenerTexto("no.existe.clave") == "no.existe.clave");
 int notif = 0; Action obs = () => notif++;
@@ -195,6 +196,122 @@ string? ruta = Try("backup completo", () => BackupService.RealizarBackup(Service
 Check("archivo de respaldo existe", ruta != null && File.Exists(ruta), ruta ?? "");
 Check("respaldo verificable", ruta != null && BackupService.VerificarIntegridadBackup(ruta));
 
+
+// ---------------------------------------------------------------- CORRECCIONES DEL PROFESOR
+Titulo("Excepciones de negocio");
+Check("DatoInvalido es una ReglaNegocio", typeof(Services.DomainModel.Exceptions.DatoInvalidoException).IsSubclassOf(typeof(Services.DomainModel.Exceptions.ReglaNegocioException)));
+Check("ValidacionNegocio es una ReglaNegocio", typeof(Negocio.DomainModel.Exceptions.ValidacionNegocioException).IsSubclassOf(typeof(Services.DomainModel.Exceptions.ReglaNegocioException)));
+Check("AccesoADatos, Respaldo, ConfiguracionInvalida, IntegridadVulnerada, RegistroNoEncontrado y RegistroDuplicado son ReglaNegocio",
+    new[] { typeof(Services.DomainModel.Exceptions.AccesoADatosException), typeof(Services.DomainModel.Exceptions.RespaldoException),
+            typeof(Services.DomainModel.Exceptions.ConfiguracionInvalidaException), typeof(Services.DomainModel.Exceptions.IntegridadVulneradaException),
+            typeof(Services.DomainModel.Exceptions.RegistroNoEncontradoException), typeof(Services.DomainModel.Exceptions.RegistroDuplicadoException) }
+        .All(t => t.IsSubclassOf(typeof(Services.DomainModel.Exceptions.ReglaNegocioException))));
+bool dato = false; try { SeguridadService.RegistrarUsuario("", "x", "Abcdef1!", "medico", "a@b.c", "p", "r"); } catch (Services.DomainModel.Exceptions.DatoInvalidoException) { dato = true; } catch (Exception) { }
+Check("usuario vacío lanza DatoInvalido", dato);
+bool usuarioRepetido = false; try { SeguridadService.RegistrarUsuario(uSys, "x", "Abcdef1!", "medico", "a@b.c", "p", "r"); } catch (Services.DomainModel.Exceptions.RegistroDuplicadoException) { usuarioRepetido = true; } catch (Exception) { }
+Check("usuario repetido lanza RegistroDuplicado", usuarioRepetido);
+bool noExiste = false; try { SeguridadService.CambiarEstadoUsuario("no_existe_xyz", true); } catch (Services.DomainModel.Exceptions.RegistroNoEncontradoException) { noExiste = true; } catch (Exception) { }
+Check("usuario inexistente lanza RegistroNoEncontrado", noExiste);
+
+Titulo("Factory con reflexión");
+Check("crea un repositorio configurado", Try("crear IUsuarioRepository", () => Services.DAL.Factory.RepositorioFactory.Crear<Services.DAL.Interfaces.IUsuarioRepository>()) != null);
+Check("repositorio con constructor con argumentos", Try("crear IPacienteRepositorio", () => { using var cx = new NegocioDbContext(); return Services.DAL.Factory.RepositorioFactory.Crear<Negocio.DAL.Repositorios.IPacienteRepositorio>(null, cx); }) != null);
+bool Falla(string? nombre, object[]? args = null) { try { Services.DAL.Factory.RepositorioFactory.CrearDesdeNombre<IDisposable>("Repositorio.IDisposable", nombre, args ?? Array.Empty<object>()); return false; } catch (Services.DomainModel.Exceptions.ConfiguracionInvalidaException) { return true; } }
+Check("clave ausente lanza ConfiguracionInvalida", Falla(null));
+Check("clase inexistente lanza ConfiguracionInvalida", Falla("No.Existe.Clase"));
+Check("clase abstracta lanza ConfiguracionInvalida", Falla("System.IO.Stream"));
+Check("clase que no implementa la interfaz lanza ConfiguracionInvalida", Falla("System.Text.StringBuilder"));
+Check("clase sin el constructor pedido lanza ConfiguracionInvalida", Falla("System.IO.StringWriter", new object[] { 1, 2, 3 }));
+Check("clase válida con constructor sin parámetros", !Falla("System.IO.StringWriter"));
+bool sinCtor = false; try { Services.DAL.Factory.RepositorioFactory.Crear<Negocio.DAL.Repositorios.IPacienteRepositorio>(); } catch (Services.DomainModel.Exceptions.ConfiguracionInvalidaException) { sinCtor = true; }
+Check("pedir un repositorio sin su argumento lanza ConfiguracionInvalida", sinCtor);
+
+Titulo("Respaldos (COPY_ONLY, CHECKSUM, tabla Respaldos)");
+string carpetaPrueba = Path.Combine(Path.GetTempPath(), "openrin_resp_" + Guid.NewGuid().ToString("N")[..8]);
+Directory.CreateDirectory(carpetaPrueba);
+string? rutaA = Try("respaldo A", () => BackupService.RealizarBackup(Services.DomainModel.TipoBackup.Completo, "OpenRIN_Negocio", carpetaPrueba, uSys));
+string? rutaB = Try("respaldo B", () => BackupService.RealizarBackup(Services.DomainModel.TipoBackup.Completo, "OpenRIN_Negocio", carpetaPrueba, uSys));
+Check("dos respaldos seguidos no se pisan", rutaA != null && rutaB != null && rutaA != rutaB && File.Exists(rutaA) && File.Exists(rutaB));
+Check("el nombre lleva milisegundos", rutaA != null && System.Text.RegularExpressions.Regex.IsMatch(Path.GetFileName(rutaA), @"_\d{8}_\d{9}_FULL\.bak$"));
+using (var cMsdb = new Microsoft.Data.SqlClient.SqlConnection(@"Server=.\SQLEXPRESS;Database=msdb;Integrated Security=True;TrustServerCertificate=True;"))
+{
+    cMsdb.Open(); using var cmd = cMsdb.CreateCommand();
+    cmd.CommandText = "SELECT TOP 1 CAST(s.is_copy_only AS INT) FROM msdb.dbo.backupset s JOIN msdb.dbo.backupmediafamily m ON m.media_set_id=s.media_set_id WHERE m.physical_device_name LIKE '%' + @r ORDER BY s.backup_set_id DESC";
+    cmd.Parameters.AddWithValue("@r", Path.GetFileName(rutaB ?? "x"));
+    object? copyOnly = cmd.ExecuteScalar();
+    Check("el respaldo completo es COPY_ONLY", copyOnly != null && Convert.ToInt32(copyOnly) == 1);
+    cmd.CommandText = "SELECT TOP 1 CAST(s.has_backup_checksums AS INT) FROM msdb.dbo.backupset s JOIN msdb.dbo.backupmediafamily m ON m.media_set_id=s.media_set_id WHERE m.physical_device_name LIKE '%' + @r ORDER BY s.backup_set_id DESC";
+    object? chk = cmd.ExecuteScalar();
+    Check("el respaldo lleva CHECKSUM", chk != null && Convert.ToInt32(chk) == 1);
+}
+var registrados = Try("listar respaldos", () => BackupService.ListarRespaldos(50)) ?? new();
+var filaA = registrados.FirstOrDefault(r => r.Archivo == rutaA);
+Check("el respaldo queda en la tabla Respaldos (origen, sano, tamaño, usuario)",
+    filaA != null && filaA.Origen == "Manual" && filaA.Sano && filaA.TamanoBytes > 0 && filaA.Usuario == uSys && filaA.BaseDatos == "OpenRIN_Negocio");
+bool noSanoLanza = false;
+string falso = Path.Combine(carpetaPrueba, "falso.bak"); File.WriteAllText(falso, "no es un respaldo");
+try { BackupService.RestaurarBackup(falso, uSys); } catch (Services.DomainModel.Exceptions.RespaldoException) { noSanoLanza = true; } catch (Exception) { }
+Check("un archivo que no es respaldo no se restaura (RespaldoException)", noSanoLanza);
+Check("la verificación rechaza el archivo falso", !BackupService.VerificarIntegridadBackup(falso));
+
+Titulo("Respaldo automático diario");
+bool sanos = false;
+var generados1 = Try("diario con datos no sanos", () => BackupService.RespaldoDiarioSiCorresponde(() => sanos, "prueba", carpetaPrueba));
+Check("con datos no sanos no se respalda", generados1 != null && generados1.Count == 0);
+sanos = true;
+var generados2 = Try("diario con datos sanos", () => BackupService.RespaldoDiarioSiCorresponde(() => sanos, "prueba", carpetaPrueba));
+Check("con datos sanos genera un respaldo por base", generados2 != null && generados2.Count == 2 && generados2.All(File.Exists));
+var generados3 = Try("diario repetido", () => BackupService.RespaldoDiarioSiCorresponde(() => sanos, "prueba", carpetaPrueba));
+Check("una sola vez por día", generados3 != null && generados3.Count == 0);
+for (int i = 0; i < 11; i++)
+{
+    Services.BLL.Backups.BackupLogic.RealizarBackup(Services.DomainModel.TipoBackup.Completo, "OpenRIN_Negocio", carpetaPrueba, "Automatico", "prueba");
+}
+var automaticos = BackupService.ListarRespaldos(500).Where(r => r.BaseDatos == "OpenRIN_Negocio" && r.Origen == "Automatico").ToList();
+Check("se conservan solo los 10 últimos automáticos", automaticos.Count == 10, "automáticos=" + automaticos.Count);
+Check("los archivos de los automáticos viejos se borran", Directory.GetFiles(carpetaPrueba, "OpenRIN_Negocio_*_FULL.bak").Length == 10 + 2 /* los dos manuales */);
+
+Titulo("Recuperación con dígitos verificadores");
+using (var ctxR = new NegocioDbContext()) { new IntegridadLogic(ctxR).RecalcularTodo(); }
+string respaldoSano = BackupService.RealizarBackup(Services.DomainModel.TipoBackup.Completo, "OpenRIN_Negocio", carpetaPrueba, uSys);
+using (var c1 = new Microsoft.Data.SqlClient.SqlConnection(@"Server=.\SQLEXPRESS;Database=OpenRIN_Negocio;Integrated Security=True;TrustServerCertificate=True;"))
+{ c1.Open(); using var cmd = c1.CreateCommand(); cmd.CommandText = $"UPDATE Pacientes SET Telefono='VIOLADO' WHERE Id={p.Id}"; cmd.ExecuteNonQuery(); }
+ResultadoAuditoria audVul; using (var ctxV = new NegocioDbContext()) { audVul = new IntegridadLogic(ctxV).Auditar(); }
+Check("la auditoría lista el registro alterado (tabla e Id)", audVul.Alterados.Any(r => r.Tabla == "Pacientes" && r.Id == p.Id), string.Join(" | ", audVul.Alterados.Take(3).Select(r => r.Tabla + "#" + r.Id)));
+Try("restaurar desde el respaldo sano", () => { BackupService.RestaurarBackup(respaldoSano, uSys); return true; });
+ResultadoAuditoria audOk; using (var ctxO = new NegocioDbContext()) { audOk = new IntegridadLogic(ctxO).Auditar(); }
+Check("tras restaurar, la integridad vuelve a estar correcta", audOk.Problemas.Count == 0, string.Join(" | ", audOk.Problemas.Take(2)));
+var previos = BackupService.ListarRespaldos(500).Where(r => r.Origen == "Previo" && r.BaseDatos == "OpenRIN_Negocio").ToList();
+Check("antes de restaurar se hizo una copia previa de seguridad", previos.Count > 0 && previos[0].Sano);
+Check("el dato alterado volvió a su valor", Try("leer paciente", () => { using var cx = new NegocioDbContext(); return cx.Pacientes.AsNoTracking().First(x => x.Id == p.Id).Telefono; }) != "VIOLADO");
+Check("la restauración queda en la bitácora", BitacoraService.ObtenerUltimos(80).Any(l => l.Mensaje.Contains("restaurada desde")));
+try { Directory.Delete(carpetaPrueba, true); } catch (Exception) { }
+
+
+Titulo("Idiomas con .resx (ensamblados satélite)");
+Check("existe el ensamblado satélite de en", File.Exists(Path.Combine(AppContext.BaseDirectory, "en", "Services.resources.dll")));
+Check("existe el ensamblado satélite de zh-CN", File.Exists(Path.Combine(AppContext.BaseDirectory, "zh-CN", "Services.resources.dll")));
+int textosEnLaBase;
+using (var cTx = new Microsoft.Data.SqlClient.SqlConnection(@"Server=.\SQLEXPRESS;Database=OpenRIN_Services;Integrated Security=True;TrustServerCertificate=True;"))
+{ cTx.Open(); using var cmd = cTx.CreateCommand(); cmd.CommandText = "SELECT COUNT(*) FROM Textos WHERE CodigoIdioma IN ('es','en','zh-CN')"; textosEnLaBase = Convert.ToInt32(cmd.ExecuteScalar()); }
+LocalizationService.EstablecerIdioma("es");
+Check("los textos del idioma base salen del .resx, no de la base", textosEnLaBase == 0 && LocalizationService.ObtenerTexto("agenda.agendar") == "Agendar turno", "filas en la base=" + textosEnLaBase);
+LocalizationService.EstablecerIdioma("en");
+Check("el idioma en sale del ensamblado satélite", LocalizationService.ObtenerTexto("comun.guardar") == "Save");
+LocalizationService.EstablecerIdioma("zh-CN");
+Check("el idioma zh-CN sale del ensamblado satélite", LocalizationService.ObtenerTexto("comun.guardar") == "保存");
+LocalizationService.EstablecerIdioma("es");
+Check("los 3 idiomas tienen las mismas claves", new[] { "es", "en", "zh-CN" }.Select(i => LocalizationService.ObtenerTextosDe(i).Count).Distinct().Count() == 1);
+LocalizationService.GuardarTexto("es", "comun.guardar", "Guardar!!");
+Check("una leyenda corregida en la base pisa a la del .resx", LocalizationService.ObtenerTexto("comun.guardar") == "Guardar!!");
+LocalizationService.EliminarTexto("es", "comun.guardar");
+Check("al quitar la corrección vuelve el texto del .resx", LocalizationService.ObtenerTexto("comun.guardar") == "Guardar");
+LocalizationService.RegistrarIdioma("pt", "Português (prueba)");
+LocalizationService.GuardarTexto("pt", "comun.guardar", "Salvar");
+LocalizationService.EstablecerIdioma("pt");
+Check("un idioma nuevo funciona solo con leyendas de la base", LocalizationService.ObtenerTexto("comun.guardar") == "Salvar" && LocalizationService.ObtenerTexto("comun.cancelar") == "comun.cancelar");
+LocalizationService.EstablecerIdioma("es");
+LocalizationService.EliminarIdioma("pt");
+
 Console.WriteLine($"\n===== RESULTADO: {ok} correctas, {fail} con falla =====");
-File.WriteAllText(@"credenciales_prueba.txt", "usuario: sysadmin\r\ncontraseña de prueba: " + clave + "\r\n");
 return fail == 0 ? 0 : 1;

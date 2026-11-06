@@ -321,4 +321,66 @@
   <data name="perfiles.desmarcarTodo" xml:space="preserve"><value>Desmarcar todo</value></data>
   <data name="perfiles.sinPerfil" xml:space="preserve"><value>Seleccione un perfil.</value></data>
   <data name="perfiles.guardado" xml:space="preserve"><value>Permisos guardados correctamente.</value></data>
+  <data name="shell.ayuda" xml:space="preserve"><value>Ayuda</value></data>
+  <data name="ayuda.noEncontrada" xml:space="preserve"><value>No se encontró el archivo de ayuda (OpenRIN-Ayuda.chm) en la carpeta de la aplicación.</value></data>
+  <data name="integridad.vulnerada.registros" xml:space="preserve"><value>Registros alterados:</value></data>
+  <data name="integridad.col.tabla" xml:space="preserve"><value>Tabla</value></data>
+  <data name="integridad.col.id" xml:space="preserve"><value>Id</value></data>
+  <data name="integridad.col.motivo" xml:space="preserve"><value>Motivo</value></data>
+  <data name="integridad.rec.titulo" xml:space="preserve"><value>Recuperación de la base</value></data>
+  <data name="integridad.rec.explicacion" xml:space="preserve"><value>Para recuperar la base, inicie sesión con un usuario que tenga permiso de respaldos.</value></data>
+  <data name="integridad.rec.usuario" xml:space="preserve"><value>Usuario</value></data>
+  <data name="integridad.rec.clave" xml:space="preserve"><value>Contraseña</value></data>
+  <data name="integridad.rec.entrar" xml:space="preserve"><value>Iniciar sesión</value></data>
+  <data name="integridad.rec.sinPermiso" xml:space="preserve"><value>Ese usuario no tiene permiso para administrar respaldos.</value></data>
+  <data name="integridad.rec.sesionDe" xml:space="preserve"><value>Sesión de {0}. Elija cómo recuperar la base.</value></data>
+  <data name="integridad.rec.listaRespaldos" xml:space="preserve"><value>Respaldos de la base de negocio:</value></data>
+  <data name="integridad.rec.col.fecha" xml:space="preserve"><value>Fecha</value></data>
+  <data name="integridad.rec.col.origen" xml:space="preserve"><value>Origen</value></data>
+  <data name="integridad.rec.col.estado" xml:space="preserve"><value>Estado</value></data>
+  <data name="integridad.rec.col.tamano" xml:space="preserve"><value>Tamaño</value></data>
+  <data name="integridad.rec.col.archivo" xml:space="preserve"><value>Archivo</value></data>
+  <data name="integridad.rec.sano" xml:space="preserve"><value>Sano</value></data>
+  <data name="integridad.rec.noSano" xml:space="preserve"><value>No sano</value></data>
+  <data name="integridad.rec.noExiste" xml:space="preserve"><value>Archivo no encontrado</value></data>
+  <data name="integridad.rec.restaurarSel" xml:space="preserve"><value>Restaurar el seleccionado</value></data>
+  <data name="integridad.rec.restaurarArchivo" xml:space="preserve"><value>Restaurar desde otro .bak…</value></data>
+  <data name="integridad.rec.recalcular" xml:space="preserve"><value>Recalcular dígitos</value></data>
+  <data name="integridad.rec.elegirArchivo" xml:space="preserve"><value>Archivo de respaldo (*.bak)|*.bak</value></data>
+  <data name="integridad.rec.confirmarRestaurar" xml:space="preserve"><value>Se restaurará la base de negocio desde:
+{0}
+
+Antes se hace una copia de seguridad del estado actual. ¿Continuar?</value></data>
+  <data name="integridad.rec.confirmarRecalcular" xml:space="preserve"><value>Recalcular los dígitos da por válido el estado actual de los datos, incluidas las alteraciones. Hágalo solo si sabe que los cambios fueron legítimos. ¿Continuar?</value></data>
+  <data name="integridad.rec.restaurada" xml:space="preserve"><value>Base restaurada y verificada: la integridad está correcta.</value></data>
+  <data name="integridad.rec.recalculada" xml:space="preserve"><value>Dígitos recalculados ({0} filas): la integridad está correcta.</value></data>
+  <data name="integridad.rec.sigueVulnerada" xml:space="preserve"><value>La base sigue con alteraciones. Pruebe con otro respaldo.</value></data>
+  <data name="integridad.rec.soloNegocio" xml:space="preserve"><value>El archivo elegido no es un respaldo de la base de negocio (OpenRIN_Negocio).</value></data>
+  <data name="integridad.rec.error" xml:space="preserve"><value>No se pudo completar la operación: {0}</value></data>
+  <data name="integridad.rec.sinRespaldos" xml:space="preserve"><value>No hay respaldos registrados. Use «Restaurar desde otro .bak…».</value></data>
+  <data name="sistema.respaldos" xml:space="preserve"><value>Respaldos</value></data>
+  <data name="sistema.respaldos.carpeta" xml:space="preserve"><value>Carpeta de respaldos:</value></data>
+  <data name="sistema.respaldos.elegir" xml:space="preserve"><value>Elegir…</value></data>
+  <data name="sistema.respaldos.ahora" xml:space="preserve"><value>Respaldar ahora</value></data>
+  <data name="sistema.respaldos.verificar" xml:space="preserve"><value>Verificar archivo</value></data>
+  <data name="sistema.respaldos.restaurar" xml:space="preserve"><value>Restaurar el seleccionado</value></data>
+  <data name="sistema.respaldos.restaurarArchivo" xml:space="preserve"><value>Restaurar desde archivo…</value></data>
+  <data name="sistema.respaldos.actualizar" xml:space="preserve"><value>Actualizar</value></data>
+  <data name="sistema.respaldos.generado" xml:space="preserve"><value>Respaldo generado:
+{0}</value></data>
+  <data name="sistema.respaldos.verificado" xml:space="preserve"><value>El archivo pasó la verificación (RESTORE VERIFYONLY con CHECKSUM).</value></data>
+  <data name="sistema.respaldos.noVerificado" xml:space="preserve"><value>El archivo NO pasó la verificación.</value></data>
+  <data name="sistema.respaldos.restaurado" xml:space="preserve"><value>Base restaurada. Cierre y vuelva a abrir el programa para continuar.</value></data>
+  <data name="sistema.respaldos.confirmarRestaurar" xml:space="preserve"><value>Se restaurará {0} desde:
+{1}
+
+Antes se hace una copia de seguridad del estado actual y se cierran las demás conexiones. ¿Continuar?</value></data>
+  <data name="sistema.respaldos.col.fecha" xml:space="preserve"><value>Fecha</value></data>
+  <data name="sistema.respaldos.col.base" xml:space="preserve"><value>Base</value></data>
+  <data name="sistema.respaldos.col.origen" xml:space="preserve"><value>Origen</value></data>
+  <data name="sistema.respaldos.col.estado" xml:space="preserve"><value>Estado</value></data>
+  <data name="sistema.respaldos.col.tamano" xml:space="preserve"><value>Tamaño (MB)</value></data>
+  <data name="sistema.respaldos.col.usuario" xml:space="preserve"><value>Usuario</value></data>
+  <data name="sistema.respaldos.col.archivo" xml:space="preserve"><value>Archivo</value></data>
+  <data name="sistema.respaldos.seleccione" xml:space="preserve"><value>Seleccione un respaldo de la lista.</value></data>
 </root>

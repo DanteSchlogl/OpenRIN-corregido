@@ -1,3 +1,4 @@
+using Services.DAL.Factory;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,8 +16,8 @@ namespace Services.BLL
     /// </summary>
     internal static class BitacoraLogic
     {
-        private static readonly SqlLoggerRepository RepositorioSql = new SqlLoggerRepository();
-        private static readonly ILoggerRepository RepositorioArchivo = new FileLoggerRepository();
+        private static readonly ILoggerConsultaRepository RepositorioSql = RepositorioFactory.Crear<ILoggerConsultaRepository>();
+        private static readonly ILoggerRepository RepositorioArchivo = RepositorioFactory.Crear<ILoggerRepository>("Archivo");
         private static readonly object Candado = new object();
 
         public static void Registrar(LogLevel nivel, string mensaje, Exception? ex = null, string usuario = "", string capa = "Services")

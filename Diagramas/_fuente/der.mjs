@@ -68,8 +68,8 @@ console.log('Esquema leído: negocio', neg.tablas.size, 'tablas /', neg.fks.leng
 
 await der(neg, ['ObrasSociales', 'Pacientes', 'Usuarios', 'HistoriasClinicas', 'Diagnosticos', 'MedicionesRIN', 'Alertas'], 'Arquitectura/G07 - DER hoja A (nucleo clinico)');
 await der(neg, ['Pacientes', 'Usuarios', 'Turnos', 'Seguimientos', 'EventosAdversos', 'ReportesEstadisticos', 'DigitosVerificadores', 'AuditoriaCambios'], 'Arquitectura/G07 - DER hoja B (operacion y sistema)');
-await der(srv, ['Usuarios', 'Idiomas', 'Textos', 'Permisos', 'PerfilesPermisos', 'Logs'], 'Arquitectura/G07 - DER hoja C (servicios)',
-  "t_Usuarios -> t_PerfilesPermisos [dir=none style=dashed label=\"perfil (ref. lógica, sin FK)\"]; t_Permisos -> t_PerfilesPermisos [dir=none style=dashed label=\"permiso (ref. lógica, sin FK)\"]; t_Idiomas -> t_Usuarios [dir=none style=dashed label=\"idioma preferido (ref. lógica, sin FK)\"]; t_Usuarios -> t_Logs [style=invis];");
+await der(srv, ['Usuarios', 'Idiomas', 'Textos', 'Permisos', 'PerfilesPermisos', 'Logs', 'Respaldos'], 'Arquitectura/G07 - DER hoja C (servicios)',
+  "t_Usuarios -> t_PerfilesPermisos [dir=none style=dashed label=\"perfil (ref. lógica, sin FK)\"]; t_Permisos -> t_PerfilesPermisos [dir=none style=dashed label=\"permiso (ref. lógica, sin FK)\"]; t_Idiomas -> t_Usuarios [dir=none style=dashed label=\"idioma preferido (ref. lógica, sin FK)\"]; t_Usuarios -> t_Logs [style=invis]; t_Logs -> t_Respaldos [style=invis];");
 
 // ------------------------------------------------------------------ DER parciales de los casos de uso
 const UC = {

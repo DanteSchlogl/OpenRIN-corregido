@@ -32,13 +32,13 @@ namespace Services.DAL.Tools
             {
                 if (Activa)
                 {
-                    throw new InvalidOperationException("Ya existe una transacción activa.");
+                    throw new Services.DomainModel.Exceptions.AccesoADatosException("Ya existe una transacción activa.");
                 }
 
                 string? cadena = ConfigurationManager.ConnectionStrings[nombreConexion]?.ConnectionString;
                 if (string.IsNullOrWhiteSpace(cadena))
                 {
-                    throw new InvalidOperationException(
+                    throw new Services.DomainModel.Exceptions.AccesoADatosException(
                         $"Falta la cadena de conexión '{nombreConexion}' en la configuración de la aplicación.");
                 }
 
@@ -57,7 +57,7 @@ namespace Services.DAL.Tools
             {
                 if (!Activa)
                 {
-                    throw new InvalidOperationException("No hay una transacción activa para confirmar.");
+                    throw new Services.DomainModel.Exceptions.AccesoADatosException("No hay una transacción activa para confirmar.");
                 }
 
                 try
@@ -78,7 +78,7 @@ namespace Services.DAL.Tools
             {
                 if (!Activa)
                 {
-                    throw new InvalidOperationException("No hay una transacción activa para revertir.");
+                    throw new Services.DomainModel.Exceptions.AccesoADatosException("No hay una transacción activa para revertir.");
                 }
 
                 try

@@ -20,6 +20,8 @@ namespace Negocio.UI
         private readonly Button _btnVistaCambios = new();
         private readonly Button _btnVistaIdiomas = new();
         private readonly Button _btnVistaPerfiles = new();
+        private readonly Button _btnVistaRespaldos = new();
+        private readonly RespaldosPanel _panelRespaldos = new();
 
         private readonly Panel _panelUsuarios = new();
         private readonly Button _btnNuevoUsuario = new();
@@ -107,6 +109,9 @@ namespace Negocio.UI
                 case 4:
                     CargarPerfiles();
                     break;
+                case 5:
+                    _panelRespaldos.Recargar();
+                    break;
             }
         }
 
@@ -130,11 +135,13 @@ namespace Negocio.UI
             ConfigurarBotonVista(_btnVistaCambios, 352, 2);
             ConfigurarBotonVista(_btnVistaIdiomas, 528, 3);
             ConfigurarBotonVista(_btnVistaPerfiles, 704, 4);
+            ConfigurarBotonVista(_btnVistaRespaldos, 880, 5);
             panelBarra.Controls.Add(_btnVistaUsuarios);
             panelBarra.Controls.Add(_btnVistaBitacora);
             panelBarra.Controls.Add(_btnVistaCambios);
             panelBarra.Controls.Add(_btnVistaIdiomas);
             panelBarra.Controls.Add(_btnVistaPerfiles);
+            panelBarra.Controls.Add(_btnVistaRespaldos);
 
             // ---- Vista 1: usuarios ----
             _panelUsuarios.Dock = DockStyle.Fill;
@@ -464,6 +471,7 @@ namespace Negocio.UI
             Controls.Add(_panelCambios);
             Controls.Add(_panelIdiomas);
             Controls.Add(_panelPerfiles);
+            Controls.Add(_panelRespaldos);
             Controls.Add(panelBarra);
         }
 
@@ -533,11 +541,13 @@ namespace Negocio.UI
             _panelCambios.Visible = vista == 2;
             _panelIdiomas.Visible = vista == 3;
             _panelPerfiles.Visible = vista == 4;
+            _panelRespaldos.Visible = vista == 5;
             EstiloBotonVista(_btnVistaUsuarios, vista == 0);
             EstiloBotonVista(_btnVistaBitacora, vista == 1);
             EstiloBotonVista(_btnVistaCambios, vista == 2);
             EstiloBotonVista(_btnVistaIdiomas, vista == 3);
             EstiloBotonVista(_btnVistaPerfiles, vista == 4);
+            EstiloBotonVista(_btnVistaRespaldos, vista == 5);
             Recargar();
         }
 
@@ -551,6 +561,8 @@ namespace Negocio.UI
         {
             _btnVistaUsuarios.Text = Localizacion("sistema.usuarios");
             _btnVistaBitacora.Text = Localizacion("sistema.bitacora");
+            _btnVistaRespaldos.Text = Localizacion("sistema.respaldos");
+            _panelRespaldos.AplicarTextos();
             _btnNuevoUsuario.Text = Localizacion("sistema.nuevoUsuario");
             _btnHabilitar.Text = Localizacion("sistema.habilitar");
             _btnDeshabilitar.Text = Localizacion("sistema.deshabilitar");

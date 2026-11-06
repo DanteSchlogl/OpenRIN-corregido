@@ -9,7 +9,7 @@ namespace Negocio.DAL.Repositorios
     /// Repositorio de pacientes sobre EF Core (REQ-FUNC-001): altas, búsquedas por
     /// documento y verificación de unicidad entre pacientes activos.
     /// </summary>
-    public class PacienteRepositorio : RepositorioGenerico<Paciente>, IPacienteRepositorio
+    internal class PacienteRepositorio : RepositorioGenerico<Paciente>, IPacienteRepositorio
     {
         public PacienteRepositorio(NegocioDbContext contexto) : base(contexto)
         {

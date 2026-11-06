@@ -160,7 +160,7 @@ namespace Negocio.UI
                 DialogResult = DialogResult.OK;
                 Close();
             }
-            catch (ArgumentException ex)
+            catch (Services.DomainModel.Exceptions.ReglaNegocioException ex)
             {
                 _lblAviso.Text = ex.Message;
             }

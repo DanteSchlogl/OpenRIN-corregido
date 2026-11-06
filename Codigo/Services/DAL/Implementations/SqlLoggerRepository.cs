@@ -10,10 +10,10 @@ namespace Services.DAL.Implementations
 {
     /// <summary>
     /// Persiste entradas de bitácora en la tabla Logs de la base Services (ADO.NET, REQ-ARQ-003).
-    /// En caso de error técnico lanza <see cref="Services.DomainModel.Exceptions.DataAccessException"/>.
+    /// En caso de error técnico lanza <see cref="Services.DomainModel.Exceptions.AccesoADatosException"/>.
     /// Expone también la consulta de las últimas entradas (pantalla de administración).
     /// </summary>
-    public class SqlLoggerRepository : ILoggerRepository
+    internal class SqlLoggerRepository : ILoggerConsultaRepository
     {
         private const string InsertarSql = @"
             INSERT INTO dbo.Logs (Fecha, Nivel, Mensaje, Excepcion, Usuario, Capa)

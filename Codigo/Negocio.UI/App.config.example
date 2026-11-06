@@ -17,5 +17,14 @@
   <appSettings>
     <!-- Nivel mínimo de bitácora: Debug | Info | Warning | Error | Fatal -->
     <add key="MinimalLogLevel" value="Info" />
+    <!-- Clase que implementa cada repositorio (la fábrica la crea por reflexión) -->
+    <add key="Repositorio.IUsuarioRepository" value="Services.DAL.Implementations.SqlUsuarioRepository" />
+    <add key="Repositorio.IPermisoRepository" value="Services.DAL.Implementations.SqlPermisoRepository" />
+    <add key="Repositorio.ILocalizacionRepository" value="Services.DAL.Implementations.SqlLocalizacionRepository" />
+    <add key="Repositorio.ILoggerConsultaRepository" value="Services.DAL.Implementations.SqlLoggerRepository" />
+    <add key="Repositorio.ILoggerRepository.Archivo" value="Services.DAL.Implementations.FileLoggerRepository" />
+    <add key="Repositorio.IBackupRepository" value="Services.DAL.Implementations.SqlBackupRepository" />
+    <add key="Repositorio.IRespaldoRegistroRepository" value="Services.DAL.Implementations.SqlRespaldoRegistroRepository" />
+    <add key="Repositorio.IPacienteRepositorio" value="Negocio.DAL.Repositorios.PacienteRepositorio" />
   </appSettings>
 </configuration>

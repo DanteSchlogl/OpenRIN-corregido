@@ -35,7 +35,8 @@ USING (VALUES
     ('GE070', N'Administración del sistema',    'C', NULL),
     ('SI001', N'Gestionar usuarios y bitácora', 'A', 'GE070'),
     ('SI002', N'Ver control de cambios',        'A', 'GE070'),
-    ('SI003', N'Administrar idiomas y leyendas','A', 'GE070')
+    ('SI003', N'Administrar idiomas y leyendas','A', 'GE070'),
+    ('SI004', N'Administrar respaldos y restauración','A', 'GE070')
 ) AS origen(Codigo, Nombre, Tipo, CodigoPadre)
 ON destino.Codigo = origen.Codigo
 WHEN MATCHED THEN
@@ -62,5 +63,5 @@ INSERT INTO dbo.PerfilesPermisos (Perfil, Permiso) VALUES
     ('familiar_autorizado','PO001'), ('familiar_autorizado','PO002'),
     ('sysadmin','PA001'), ('sysadmin','PA002'), ('sysadmin','PA003'), ('sysadmin','PA004'),
     ('sysadmin','PA005'), ('sysadmin','PA006'), ('sysadmin','PA007'), ('sysadmin','PA008'),
-    ('sysadmin','PO001'), ('sysadmin','PO002'), ('sysadmin','SI001'), ('sysadmin','SI002'), ('sysadmin','SI003');
+    ('sysadmin','PO001'), ('sysadmin','PO002'), ('sysadmin','SI001'), ('sysadmin','SI002'), ('sysadmin','SI003'), ('sysadmin','SI004');
 GO

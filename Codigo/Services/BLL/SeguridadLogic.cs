@@ -1,3 +1,4 @@
+using Services.DAL.Factory;
 using System;
 using System.Collections.Generic;
 using Services.BLL.Infrastructure;
@@ -19,8 +20,8 @@ namespace Services.BLL
         private const int MinutosBloqueo = 15;     // REQ-ARQ-006
         private const int LargoMinimoContrasena = 8;
 
-        private static readonly IUsuarioRepository RepositorioUsuarios = new SqlUsuarioRepository();
-        private static readonly IPermisoRepository RepositorioPermisos = new SqlPermisoRepository();
+        private static readonly IUsuarioRepository RepositorioUsuarios = RepositorioFactory.Crear<IUsuarioRepository>();
+        private static readonly IPermisoRepository RepositorioPermisos = RepositorioFactory.Crear<IPermisoRepository>();
 
         public static UsuarioAutenticado Autenticar(string nombreUsuario, string contrasena)
         {
@@ -157,7 +158,7 @@ namespace Services.BLL
         {
             if (string.IsNullOrWhiteSpace(perfil))
             {
-                throw new ArgumentException("El perfil es obligatorio.");
+                throw new DatoInvalidoException("El perfil es obligatorio.");
             }
             RepositorioPermisos.ReemplazarAsignaciones(perfil, codigos ?? new List<string>());
             BitacoraLogic.Registrar(LogLevel.Info,
@@ -200,23 +201,23 @@ namespace Services.BLL
         {
             if (string.IsNullOrWhiteSpace(nombreUsuario))
             {
-                throw new ArgumentException("El nombre de usuario es obligatorio.");
+                throw new DatoInvalidoException("El nombre de usuario es obligatorio.");
             }
             if (string.IsNullOrWhiteSpace(nombreCompleto))
             {
-                throw new ArgumentException("El nombre completo es obligatorio.");
+                throw new DatoInvalidoException("El nombre completo es obligatorio.");
             }
             if (string.IsNullOrWhiteSpace(perfil))
             {
-                throw new ArgumentException("El perfil es obligatorio.");
+                throw new DatoInvalidoException("El perfil es obligatorio.");
             }
             if (string.IsNullOrWhiteSpace(contrasena) || contrasena.Length < LargoMinimoContrasena)
             {
-                throw new ArgumentException($"La contraseña debe tener al menos {LargoMinimoContrasena} caracteres.");
+                throw new DatoInvalidoException($"La contraseña debe tener al menos {LargoMinimoContrasena} caracteres.");
             }
             if (RepositorioUsuarios.ExisteNombreUsuario(nombreUsuario.Trim()))
             {
-                throw new ArgumentException($"Ya existe un usuario con el nombre '{nombreUsuario}'.");
+                throw new RegistroDuplicadoException($"Ya existe un usuario con el nombre '{nombreUsuario}'.");
             }
 
             Usuario usuario = new Usuario
@@ -253,13 +254,13 @@ namespace Services.BLL
         {
             if (string.IsNullOrWhiteSpace(nombreUsuario))
             {
-                throw new ArgumentException("El nombre de usuario es obligatorio.");
+                throw new DatoInvalidoException("El nombre de usuario es obligatorio.");
             }
 
             Usuario? usuario = RepositorioUsuarios.ObtenerPorNombreUsuario(nombreUsuario.Trim());
             if (usuario == null)
             {
-                throw new ArgumentException($"No existe el usuario '{nombreUsuario}'.");
+                throw new RegistroNoEncontradoException($"No existe el usuario '{nombreUsuario}'.");
             }
 
             if (usuario.Activo == activo)
@@ -328,7 +329,7 @@ namespace Services.BLL
             }
             if (string.IsNullOrWhiteSpace(nuevaContrasena) || nuevaContrasena.Length < LargoMinimoContrasena)
             {
-                throw new ArgumentException($"La contraseña debe tener al menos {LargoMinimoContrasena} caracteres.");
+                throw new DatoInvalidoException($"La contraseña debe tener al menos {LargoMinimoContrasena} caracteres.");
             }
 
             Usuario? usuario = RepositorioUsuarios.ObtenerPorNombreUsuario(nombreUsuario.Trim());

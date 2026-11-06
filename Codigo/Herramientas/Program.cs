@@ -1,6 +1,7 @@
 // OpenRIN - herramientas de línea de comandos (A01 Instalador y mantenimiento).
 //   OpenRIN.Herramientas.exe sembrar [contraseña-demo]   crea los usuarios y los datos de demostración (idempotente)
-//   OpenRIN.Herramientas.exe respaldo                    respaldo completo de ambas bases con verificación
+//   OpenRIN.Herramientas.exe respaldo                    respaldo completo de ambas bases (COPY_ONLY + CHECKSUM + verificación)
+//   OpenRIN.Herramientas.exe respaldo-auto               respaldo diario: solo con datos sanos y si hoy no hay uno; conserva los 10 últimos
 //   OpenRIN.Herramientas.exe integridad                  auditoría de dígitos verificadores (DVH/DVV)
 using Negocio.BLL;
 using Negocio.DAL.Context;
@@ -16,6 +17,17 @@ if (comando == "respaldo")
     bool todosValidos = archivos.All(BackupService.VerificarIntegridadBackup);
     foreach (string a in archivos) Console.WriteLine("respaldo: " + a);
     return todosValidos ? 0 : 3;
+}
+if (comando == "respaldo-auto")
+{
+    var generados = BackupService.RespaldoDiarioSiCorresponde(() =>
+    {
+        using var c = new NegocioDbContext();
+        return new IntegridadLogic(c).Auditar().Problemas.Count == 0;
+    }, "tarea programada");
+    foreach (string a in generados) Console.WriteLine("respaldo: " + a);
+    if (generados.Count == 0) Console.WriteLine("sin respaldo nuevo (ya hay uno de hoy, o los datos no están sanos: ver bitácora)");
+    return 0;
 }
 if (comando == "integridad")
 {

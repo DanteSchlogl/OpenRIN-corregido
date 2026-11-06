@@ -27,9 +27,21 @@ static class Program
         {
             var problemas = auditoria?.Problemas
                 ?? new List<string> { LocalizationService.ObtenerTexto("integridad.vulnerada.sinConexion") };
-            using var alerta = new IntegridadVulneradaForm(problemas);
-            alerta.ShowDialog();
-            return;
+            using var alerta = new IntegridadVulneradaForm(auditoria, problemas);
+            if (alerta.ShowDialog() != DialogResult.Retry)
+            {
+                return;
+            }
+        }
+
+        // Respaldo automático de una vez por día (solo con datos sanos; conserva los últimos 10).
+        try
+        {
+            BackupService.RespaldoDiarioSiCorresponde(() => true, "inicio de la aplicación");
+        }
+        catch (Exception ex)
+        {
+            ExceptionManager.ManejarExcepcion(ex, "Respaldo automático diario", mostrarMensaje: false);
         }
 
         using var login = new LoginForm();

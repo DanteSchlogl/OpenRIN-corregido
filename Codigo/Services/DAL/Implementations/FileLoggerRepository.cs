@@ -9,12 +9,18 @@ namespace Services.DAL.Implementations
     /// Persistencia de respaldo de bitácora en archivo de texto con rotación automática (10 MB).
     /// Se usa cuando la escritura en base de datos falla (REQ-ARQ-003).
     /// </summary>
-    public class FileLoggerRepository : ILoggerRepository
+    internal class FileLoggerRepository : ILoggerRepository
     {
         private const long TamanoMaximoBytes = 10 * 1024 * 1024; // 10 MB (REQ-ARQ-003)
         private readonly string _rutaArchivo;
 
-        public FileLoggerRepository(string rutaArchivo = "log_fallback.txt")
+        /// <summary>Crea el repositorio con el archivo por defecto (log_fallback.txt).</summary>
+        public FileLoggerRepository() : this("log_fallback.txt")
+        {
+        }
+
+        /// <summary>Crea el repositorio con el archivo indicado.</summary>
+        public FileLoggerRepository(string rutaArchivo)
         {
             _rutaArchivo = rutaArchivo;
         }

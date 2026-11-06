@@ -113,7 +113,7 @@ foreach ($bd in @("OpenRIN_Services", "OpenRIN_Negocio")) {
     $cmd = $cm.CreateCommand(); $cmd.CommandText = "IF DB_ID('$bd') IS NULL CREATE DATABASE [$bd]"; [void]$cmd.ExecuteNonQuery()
 }
 $cm.Close()
-foreach ($s in @("services_01_bitacora.sql", "services_02_seguridad.sql", "services_03_permisos.sql", "services_04_localizacion.sql", "services_05_localizacion_seed.sql")) {
+foreach ($s in @("services_01_bitacora.sql", "services_02_seguridad.sql", "services_03_permisos.sql", "services_04_localizacion.sql", "services_05_localizacion_limpiar.sql", "services_06_respaldos.sql")) {
     Write-Host "  OpenRIN_Services <- $s"; Ejecutar-Script "OpenRIN_Services" (Join-Path $aqui $s)
 }
 Write-Host "  OpenRIN_Negocio  <- negocio_esquema.sql"; Ejecutar-Script "OpenRIN_Negocio" (Join-Path $aqui "negocio_esquema.sql")
@@ -157,6 +157,15 @@ $config = @"
   <appSettings>
     <add key="MinimalLogLevel" value="Info" />
     <add key="BackupFolder" value="$respaldos" />
+    <!-- Clase que implementa cada repositorio (la fábrica la crea por reflexión) -->
+    <add key="Repositorio.IUsuarioRepository" value="Services.DAL.Implementations.SqlUsuarioRepository" />
+    <add key="Repositorio.IPermisoRepository" value="Services.DAL.Implementations.SqlPermisoRepository" />
+    <add key="Repositorio.ILocalizacionRepository" value="Services.DAL.Implementations.SqlLocalizacionRepository" />
+    <add key="Repositorio.ILoggerConsultaRepository" value="Services.DAL.Implementations.SqlLoggerRepository" />
+    <add key="Repositorio.ILoggerRepository.Archivo" value="Services.DAL.Implementations.FileLoggerRepository" />
+    <add key="Repositorio.IBackupRepository" value="Services.DAL.Implementations.SqlBackupRepository" />
+    <add key="Repositorio.IRespaldoRegistroRepository" value="Services.DAL.Implementations.SqlRespaldoRegistroRepository" />
+    <add key="Repositorio.IPacienteRepositorio" value="Negocio.DAL.Repositorios.PacienteRepositorio" />
   </appSettings>
 </configuration>
 "@
@@ -185,7 +194,7 @@ $u.TargetPath = "powershell.exe"; $u.Arguments = "-NoProfile -ExecutionPolicy By
 
 # ---- 7. respaldo automático --------------------------------------------------------------------
 Paso 7 "Programando el respaldo diario (03:00)"
-$accion = New-ScheduledTaskAction -Execute $herr -Argument "respaldo" -WorkingDirectory $datos
+$accion = New-ScheduledTaskAction -Execute $herr -Argument "respaldo-auto" -WorkingDirectory $datos
 $disparador = New-ScheduledTaskTrigger -Daily -At 3:00
 $principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
 Register-ScheduledTask -TaskName "OpenRIN - Respaldo Nocturno" -Action $accion -Trigger $disparador -Principal $principal -Force | Out-Null

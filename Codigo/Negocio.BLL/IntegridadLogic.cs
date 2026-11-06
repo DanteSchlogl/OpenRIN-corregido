@@ -5,7 +5,10 @@ using Negocio.DomainModel;
 namespace Negocio.BLL
 {
     /// <summary>Resultado de una auditoría de integridad (DVH/DVV).</summary>
-    public record ResultadoAuditoria(List<string> TablasVerificadas, List<string> Problemas, int FilasAuditadas);
+    public record ResultadoAuditoria(List<string> TablasVerificadas, List<string> Problemas, int FilasAuditadas, List<RegistroAlterado> Alterados);
+
+    /// <summary>Un registro (o una tabla completa, con Id 0) cuyos dígitos verificadores no coinciden.</summary>
+    public record RegistroAlterado(string Tabla, int Id, string Motivo);
 
     /// <summary>
     /// Auditoría y reparación de integridad (DVH/DVV): verifica que el dígito horizontal de cada
@@ -103,6 +106,7 @@ namespace Negocio.BLL
         {
             var verificadas = new List<string>();
             var problemas = new List<string>();
+            var alterados = new List<RegistroAlterado>();
             int filasAuditadas = 0;
 
             foreach ((string tabla, Func<bool, List<FilaAuditoria>> lector) in _tablas)
@@ -118,6 +122,7 @@ namespace Negocio.BLL
                     if (string.IsNullOrEmpty(fila.Dvh))
                     {
                         sinDvh++;
+                        alterados.Add(new RegistroAlterado(tabla, fila.Id, "Sin DVH (fila no firmada)"));
                         if (idsEjemplo.Count < 3)
                         {
                             idsEjemplo.Add(fila.Id);
@@ -127,6 +132,7 @@ namespace Negocio.BLL
                     if (!string.Equals(fila.Dvh, DigitoVerificador.CalcularDVH(fila.Entidad), StringComparison.Ordinal))
                     {
                         alteradas++;
+                        alterados.Add(new RegistroAlterado(tabla, fila.Id, "DVH inválido: datos modificados fuera del sistema"));
                         if (idsEjemplo.Count < 3)
                         {
                             idsEjemplo.Add(fila.Id);
@@ -149,10 +155,12 @@ namespace Negocio.BLL
                 if (registrado == null)
                 {
                     problemas.Add($"Tabla '{tabla}': sin DVV registrado (recalcular para firmarla).");
+                    alterados.Add(new RegistroAlterado(tabla, 0, "Sin DVV registrado"));
                 }
                 else if (!string.Equals(registrado, esperado, StringComparison.Ordinal))
                 {
                     problemas.Add($"Tabla '{tabla}': el DVV no coincide con el conjunto de sus filas — tabla alterada.");
+                    alterados.Add(new RegistroAlterado(tabla, 0, "DVV no coincide: filas agregadas, eliminadas o DVV modificado"));
                 }
                 else if (sinDvh == 0 && alteradas == 0)
                 {
@@ -160,7 +168,7 @@ namespace Negocio.BLL
                 }
             }
 
-            return new ResultadoAuditoria(verificadas, problemas, filasAuditadas);
+            return new ResultadoAuditoria(verificadas, problemas, filasAuditadas, alterados);
         }
 
         /// <summary>

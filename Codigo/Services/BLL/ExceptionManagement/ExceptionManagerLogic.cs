@@ -30,11 +30,14 @@ namespace Services.BLL.ExceptionManagement
                 return;
             }
 
+            string textoUsuario = ex is Services.DomainModel.Exceptions.ReglaNegocioException
+                ? ex.Message
+                : "Ocurrió un error inesperado. La operación no pudo completarse.\n" +
+                  "Si el problema persiste, contacte al administrador del sistema.";
             try
             {
                 MessageBox.Show(
-                    "Ocurrió un error inesperado. La operación no pudo completarse.\n" +
-                    "Si el problema persiste, contacte al administrador del sistema.",
+                    textoUsuario,
                     "OpenRIN",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);

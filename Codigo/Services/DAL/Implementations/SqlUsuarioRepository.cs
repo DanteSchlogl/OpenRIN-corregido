@@ -11,7 +11,7 @@ namespace Services.DAL.Implementations
     /// <summary>
     /// Persistencia de usuarios y permisos en la base Services (ADO.NET, REQ-ARQ-006).
     /// </summary>
-    public class SqlUsuarioRepository : IUsuarioRepository
+    internal class SqlUsuarioRepository : IUsuarioRepository
     {
         private const string Columnas = @"
             Id, NombreUsuario, NombreCompleto, HashPassword, Perfil, Email,

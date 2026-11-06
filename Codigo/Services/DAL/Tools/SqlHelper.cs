@@ -8,7 +8,7 @@ namespace Services.DAL.Tools
 {
     /// <summary>
     /// Helper ADO.NET del módulo Services: ejecuta comandos parametrizados contra SQL Server,
-    /// normaliza valores nulos y envuelve errores técnicos en <see cref="DataAccessException"/>
+    /// normaliza valores nulos y envuelve errores técnicos en <see cref="AccesoADatosException"/>
     /// para no filtrar detalles de conexión hacia las capas superiores (REQ-ARQ-004).
     /// Permite elegir la conexión configurada (por defecto "ServicesDB"; los respaldos usan "BackupString")
     /// y se ENLISTA automáticamente en la transacción activa (TransaccionDAL) cuando la conexión coincide (REQ-ARQ-007).
@@ -22,7 +22,7 @@ namespace Services.DAL.Tools
             string? cadena = ConfigurationManager.ConnectionStrings[nombreConexion]?.ConnectionString;
             if (string.IsNullOrWhiteSpace(cadena))
             {
-                throw new InvalidOperationException(
+                throw new Services.DomainModel.Exceptions.ConfiguracionInvalidaException(
                     $"Falta la cadena de conexión '{nombreConexion}' en la configuración de la aplicación.");
             }
             return cadena;
@@ -60,7 +60,7 @@ namespace Services.DAL.Tools
             }
             catch (SqlException ex)
             {
-                throw new DataAccessException("No se pudo completar la operación contra la base de datos.", ex);
+                throw new AccesoADatosException("No se pudo completar la operación contra la base de datos.", ex);
             }
         }
 
@@ -96,7 +96,7 @@ namespace Services.DAL.Tools
             }
             catch (SqlException ex)
             {
-                throw new DataAccessException("No se pudo completar la operación contra la base de datos.", ex);
+                throw new AccesoADatosException("No se pudo completar la operación contra la base de datos.", ex);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Services.DAL.Tools
             }
             catch (SqlException ex)
             {
-                throw new DataAccessException("No se pudo completar la operación contra la base de datos.", ex);
+                throw new AccesoADatosException("No se pudo completar la operación contra la base de datos.", ex);
             }
         }
 

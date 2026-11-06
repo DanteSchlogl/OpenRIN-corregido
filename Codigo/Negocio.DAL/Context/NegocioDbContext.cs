@@ -53,7 +53,7 @@ namespace Negocio.DAL.Context
                 string? cadena = ConfigurationManager.ConnectionStrings["NegocioDB"]?.ConnectionString;
                 if (string.IsNullOrWhiteSpace(cadena))
                 {
-                    throw new InvalidOperationException(
+                    throw new Services.DomainModel.Exceptions.ConfiguracionInvalidaException(
                         "Falta la cadena de conexión 'NegocioDB' en la configuración de la aplicación.");
                 }
                 optionsBuilder.UseSqlServer(cadena);
