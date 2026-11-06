@@ -45,3 +45,13 @@ node insert.mjs "Carpeta de Proyecto - OpenRIN.pdf"   # inserta los diagramas en
 ```
 
 `fix.mjs` corrige en el PDF los textos con errores (línea por línea). `insert.mjs` reemplaza, en una copia del PDF, la zona de cada diagrama (52 páginas) por la imagen nueva, y conserva cabecera, pie de figura y numeración de las 150 páginas.
+
+## Diagramas agregados por las correcciones del profesor
+
+En `Arquitectura/` se agregaron tres diagramas de clases (fuente: `_fuente/nuevas.mjs`), que en la Carpeta de Proyecto están como páginas 151 a 153:
+
+- `G06 - Excepciones de negocio (clases)`: ReglaNegocioException, sus derivadas y su tratamiento en ExceptionManagerLogic.
+- `G06 - Fabrica con reflexion (clases)`: RepositorioFactory, las claves Repositorio.* de App.config y los repositorios internos.
+- `G06 - Respaldos (clases)`: BackupLogic, repositorios internos, tabla Respaldos y recuperación de la base.
+
+El DER hoja C incluye además la tabla Respaldos.
